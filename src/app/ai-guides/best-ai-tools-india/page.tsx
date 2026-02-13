@@ -39,6 +39,11 @@ export default function BestAIToolsIndiaPage() {
         <div className={styles.page}>
             {/* Hero / Problem Statement */}
             <section className={styles.hero}>
+                <div className={styles.heroBg}>
+                    <div className={styles.heroOrb1} />
+                    <div className={styles.heroOrb2} />
+                    <div className={styles.heroGrid} />
+                </div>
                 <div className="container">
                     <div className={styles.heroContent}>
                         <div className={styles.badge}>

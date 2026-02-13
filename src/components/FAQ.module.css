@@ -1,12 +1,11 @@
 .faq {
-    max-width: 800px;
-    margin: 0 auto;
+    margin-top: 2rem;
 }
 
 .item {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    border-radius: 12px;
+    border-radius: 16px;
     margin-bottom: 1rem;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -14,6 +13,13 @@
 
 .item:hover {
     border-color: var(--border-accent);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+.item.open {
+    border-color: var(--border-accent);
+    background: var(--bg-card-hover);
 }
 
 .question {
@@ -21,12 +27,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 1.5rem;
+    padding: 1.5rem;
     background: transparent;
     border: none;
     text-align: left;
     cursor: pointer;
-    font-size: 1.0625rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-primary);
     transition: all 0.2s ease;
@@ -37,30 +43,41 @@
 }
 
 .icon {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     color: var(--accent-primary);
     transition: transform 0.3s ease;
     flex-shrink: 0;
     margin-left: 1rem;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.iconOpen {
+.item.open .icon {
     transform: rotate(180deg);
 }
 
+.answerWrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+}
+
+.item.open .answerWrap {
+    grid-template-rows: 1fr;
+}
+
 .answer {
-    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-}
-
-.answerOpen {
-    max-height: 500px;
-    padding: 0 1.5rem 1.25rem 1.5rem;
-}
-
-.answer p {
     color: var(--text-secondary);
     line-height: 1.7;
-    margin: 0;
+    font-size: 1rem;
+}
+
+.answerContent {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 1rem;
 }

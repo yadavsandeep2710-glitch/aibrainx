@@ -38,7 +38,9 @@ export default function FAQ({ items }: FAQProps) {
                     </button>
                     <div className={styles.answerWrap}>
                         <div className={styles.answer}>
-                            {item.answer}
+                            <div className={styles.answerContent}>
+                                {item.answer}
+                            </div>
                         </div>
                     </div>
                 </div>

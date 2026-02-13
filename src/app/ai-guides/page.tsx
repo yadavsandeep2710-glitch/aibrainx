@@ -65,13 +65,16 @@ const products = [
 ];
 
 export default function AIGuidesPage() {
-    const mainProduct = products[0];
-    const otherProducts = products.slice(1);
-
     return (
         <div className={styles.page}>
-            {/* Hero Section */}
+            {/* Compact Hero Section */}
             <section className={styles.hero}>
+                <div className={styles.heroBg}>
+                    <div className={styles.heroOrb1} />
+                    <div className={styles.heroOrb2} />
+                    <div className={styles.heroOrb3} />
+                    <div className={styles.heroGrid} />
+                </div>
                 <div className="container">
                     <div className={styles.heroContent}>
                         <div className={styles.badge}>
@@ -82,13 +85,14 @@ export default function AIGuidesPage() {
                             <span className={styles.gradient}>Without Wasting Money</span>
                         </h1>
                         <p className={styles.subtitle}>
-                            India-focused, practical guides that help you pick the perfect AI tools for your needs.
-                            Updated yearly with the latest tools and pricing in ₹.
+                            India-focused, practical guides. Updated yearly with pricing in ₹.
                         </p>
+
+                        {/* Key Stats Inline */}
                         <div className={styles.heroStats}>
                             <div className={styles.stat}>
                                 <span className={styles.statNumber}>50+</span>
-                                <span className={styles.statLabel}>Tools Reviewed</span>
+                                <span className={styles.statLabel}>Tools</span>
                             </div>
                             <div className={styles.stat}>
                                 <span className={styles.statNumber}>₹ INR</span>
@@ -96,135 +100,119 @@ export default function AIGuidesPage() {
                             </div>
                             <div className={styles.stat}>
                                 <span className={styles.statNumber}>1 Year</span>
-                                <span className={styles.statLabel}>Free Updates</span>
+                                <span className={styles.statLabel}>Updates</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Featured Product */}
-            <section className={`section ${styles.featured}`}>
+            {/* Combined Products Section */}
+            <section className="section" id="guides">
                 <div className="container">
-                    <div className={styles.featuredLabel}>
-                        ⭐ Most Popular
-                    </div>
-                    <div className={styles.featuredGrid}>
-                        <ProductCard product={mainProduct} featured={true} />
-                    </div>
-                </div>
-            </section>
-
-            {/* Other Products */}
-            <section className="section">
-                <div className="container">
-                    <div className="section-header">
-                        <h2>More Products</h2>
-                        <p>Additional resources to help you choose the right AI tools</p>
-                    </div>
                     <div className={styles.productsGrid}>
-                        {otherProducts.map((product) => (
-                            <ProductCard key={product.slug} product={product} />
+                        {products.map((product) => (
+                            <ProductCard
+                                key={product.slug}
+                                product={product}
+                                featured={true} // Highlight all products for consistent design
+                            />
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Benefits Section */}
-            <section className={`section ${styles.benefits}`}>
+            {/* Combined Info Section (Split Layout) */}
+            <section className={`section ${styles.infoSection}`}>
                 <div className="container">
-                    <div className="section-header">
-                        <h2>Why Our Guides?</h2>
-                        <p>What makes our AI guides different</p>
-                    </div>
-                    <div className={styles.benefitsGrid}>
-                        <div className={styles.benefit}>
-                            <span className={styles.benefitIcon}>🇮🇳</span>
-                            <h3>Made for India</h3>
-                            <p>All pricing in ₹, tools that work in India, and recommendations for Indian users.</p>
+                    <div className={styles.splitGrid}>
+                        {/* Benefits Column */}
+                        <div className={styles.infoColumn}>
+                            <h2 className={styles.columnTitle}>Why Our Guides?</h2>
+                            <div className={styles.compactList}>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>🇮🇳</span>
+                                    <div>
+                                        <h3>Made for India</h3>
+                                        <p>Pricing in ₹ & local context.</p>
+                                    </div>
+                                </div>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>💰</span>
+                                    <div>
+                                        <h3>Save Money</h3>
+                                        <p>Avoid useless subscriptions.</p>
+                                    </div>
+                                </div>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>⏱️</span>
+                                    <div>
+                                        <h3>Save Time</h3>
+                                        <p>Curated comparisons.</p>
+                                    </div>
+                                </div>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>🔄</span>
+                                    <div>
+                                        <h3>Always Updated</h3>
+                                        <p>Free updates for 1 year.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className={styles.benefit}>
-                            <span className={styles.benefitIcon}>💰</span>
-                            <h3>Save Money</h3>
-                            <p>Stop wasting money on tools you don't need. Get expert recommendations based on your use case.</p>
-                        </div>
-                        <div className={styles.benefit}>
-                            <span className={styles.benefitIcon}>⏱️</span>
-                            <h3>Save Time</h3>
-                            <p>No more endless research. We've done the work for you with detailed comparisons and reviews.</p>
-                        </div>
-                        <div className={styles.benefit}>
-                            <span className={styles.benefitIcon}>🔄</span>
-                            <h3>Always Updated</h3>
-                            <p>Get free updates for 1 year as new tools launch and pricing changes.</p>
-                        </div>
-                        <div className={styles.benefit}>
-                            <span className={styles.benefitIcon}>✅</span>
-                            <h3>Practical & Actionable</h3>
-                            <p>Step-by-step guides, real use cases, and clear recommendations you can implement today.</p>
-                        </div>
-                        <div className={styles.benefit}>
-                            <span className={styles.benefitIcon}>🎯</span>
-                            <h3>For Your Needs</h3>
-                            <p>Whether you're a student, creator, freelancer, or business owner, we have recommendations for you.</p>
+
+                        {/* Audience Column */}
+                        <div className={styles.infoColumn}>
+                            <h2 className={styles.columnTitle}>Who is this for?</h2>
+                            <div className={styles.compactList}>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>🎓</span>
+                                    <div>
+                                        <h3>Students</h3>
+                                        <p>Research & learning tools.</p>
+                                    </div>
+                                </div>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>🎨</span>
+                                    <div>
+                                        <h3>Creators</h3>
+                                        <p>Content creation & editing.</p>
+                                    </div>
+                                </div>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>💼</span>
+                                    <div>
+                                        <h3>Freelancers</h3>
+                                        <p>Productivity & niche tools.</p>
+                                    </div>
+                                </div>
+                                <div className={styles.compactItem}>
+                                    <span className={styles.compactIcon}>🚀</span>
+                                    <div>
+                                        <h3>Small Businesses</h3>
+                                        <p>Marketing & operations.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Who It's For */}
-            <section className={`section ${styles.whoSection}`}>
+            {/* Compact Footer: Refund + Free Guide */}
+            <section className={styles.compactFooter}>
                 <div className="container">
-                    <div className="section-header">
-                        <h2>Who Are These Guides For?</h2>
-                    </div>
-                    <div className={styles.whoGrid}>
-                        <div className={styles.whoCard}>
-                            <span className={styles.whoIcon}>🎓</span>
-                            <h3>Students</h3>
-                            <p>Boost your productivity and ace your assignments with the right AI tools for research, writing, and learning.</p>
+                    <div className={styles.footerGrid}>
+                        <div className={styles.refundBox}>
+                            <span className={styles.refundIcon}>✅</span>
+                            <span>7-Day Money-Back Guarantee</span>
                         </div>
-                        <div className={styles.whoCard}>
-                            <span className={styles.whoIcon}>🎨</span>
-                            <h3>Content Creators</h3>
-                            <p>Create better content faster with AI tools for video editing, design, writing, and social media.</p>
+                        <div className={styles.freeBox}>
+                            <span>Not ready? </span>
+                            <Link href="/free-ai-guide" className={styles.link}>
+                                Get Free Starter Guide →
+                            </Link>
                         </div>
-                        <div className={styles.whoCard}>
-                            <span className={styles.whoIcon}>💼</span>
-                            <h3>Freelancers</h3>
-                            <p>Work smarter and deliver better results with AI tools for your specific freelance niche.</p>
-                        </div>
-                        <div className={styles.whoCard}>
-                            <span className={styles.whoIcon}>🚀</span>
-                            <h3>Small Businesses</h3>
-                            <p>Grow your business with affordable AI tools for marketing, customer service, and operations.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Refund Note */}
-            <section className={styles.refund}>
-                <div className="container">
-                    <div className={styles.refundCard}>
-                        <span className={styles.refundIcon}>✅</span>
-                        <div>
-                            <h3>7-Day Money-Back Guarantee</h3>
-                            <p>Not satisfied? Get a full refund within 7 days. No questions asked.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Free Guide CTA */}
-            <section className={`section ${styles.freeCta}`}>
-                <div className="container">
-                    <div className={styles.freeCard}>
-                        <h2>Not Ready to Buy?</h2>
-                        <p>Get our free guide: "Top 25 Free AI Tools for Students & Creators"</p>
-                        <Link href="/free-ai-guide" className="btn btn-secondary btn-lg">
-                            Get Free Guide →
-                        </Link>
                     </div>
                 </div>
             </section>
