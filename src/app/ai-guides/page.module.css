@@ -1,12 +1,14 @@
 .page {
     min-height: 100vh;
+    background: var(--bg-primary);
 }
 
 .hero {
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 50%, rgba(59, 130, 246, 0.05) 100%);
     padding: 4rem 0 3rem 0;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--border-subtle);
 }
 
 .hero::before {
@@ -34,26 +36,26 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: white;
+    background: var(--accent-gradient);
     padding: 0.5rem 1rem;
     border-radius: 30px;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #3b82f6;
-    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+    color: white;
+    box-shadow: var(--accent-glow);
     margin-bottom: 1.5rem;
 }
 
 .title {
     font-size: 3rem;
     font-weight: 800;
-    color: #111827;
+    color: var(--text-primary);
     margin: 0 0 1rem 0;
     line-height: 1.2;
 }
 
 .gradient {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -61,7 +63,7 @@
 
 .subtitle {
     font-size: 1.25rem;
-    color: #4b5563;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin: 0 0 2rem 0;
 }
@@ -81,18 +83,18 @@
     display: block;
     font-size: 1.75rem;
     font-weight: 800;
-    color: #3b82f6;
+    color: var(--accent-primary);
     margin-bottom: 0.25rem;
 }
 
 .statLabel {
     display: block;
     font-size: 0.875rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
 }
 
 .featured {
-    background: white;
+    background: var(--bg-secondary);
     padding: 3rem 0;
 }
 
@@ -100,7 +102,7 @@
     text-align: center;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #f59e0b;
+    color: var(--amber);
     margin-bottom: 2rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -118,7 +120,7 @@
 }
 
 .benefits {
-    background: #f9fafb;
+    background: var(--bg-secondary);
 }
 
 .benefitsGrid {
@@ -140,18 +142,18 @@
 .benefit h3 {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--text-primary);
     margin: 0 0 0.5rem 0;
 }
 
 .benefit p {
-    color: #6b7280;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
 }
 
 .whoSection {
-    background: white;
+    background: var(--bg-primary);
 }
 
 .whoGrid {
@@ -161,8 +163,8 @@
 }
 
 .whoCard {
-    background: #f9fafb;
-    border: 1px solid #e5e7eb;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     border-radius: 12px;
     padding: 2rem;
     text-align: center;
@@ -170,8 +172,8 @@
 }
 
 .whoCard:hover {
-    border-color: #3b82f6;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-glow);
     transform: translateY(-4px);
 }
 
@@ -184,12 +186,12 @@
 .whoCard h3 {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--text-primary);
     margin: 0 0 0.5rem 0;
 }
 
 .whoCard p {
-    color: #6b7280;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
     font-size: 0.9375rem;
@@ -197,15 +199,15 @@
 
 .refund {
     padding: 2rem 0;
-    background: #f0fdf4;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
 }
 
 .refundCard {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    background: white;
-    border: 2px solid #86efac;
+    background: var(--bg-card);
+    border: 2px solid var(--green);
     border-radius: 12px;
     padding: 1.5rem 2rem;
     max-width: 700px;
@@ -220,18 +222,18 @@
 .refundCard h3 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #065f46;
+    color: var(--green);
     margin: 0 0 0.25rem 0;
 }
 
 .refundCard p {
-    color: #047857;
+    color: var(--text-secondary);
     margin: 0;
     line-height: 1.5;
 }
 
 .freeCta {
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    background: var(--bg-secondary);
 }
 
 .freeCard {
@@ -243,13 +245,13 @@
 .freeCard h2 {
     font-size: 2rem;
     font-weight: 800;
-    color: #111827;
+    color: var(--text-primary);
     margin: 0 0 1rem 0;
 }
 
 .freeCard p {
     font-size: 1.125rem;
-    color: #4b5563;
+    color: var(--text-secondary);
     margin: 0 0 1.5rem 0;
     line-height: 1.6;
 }
