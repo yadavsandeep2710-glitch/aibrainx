@@ -1,0 +1,285 @@
+.page {
+    min-height: 100vh;
+}
+
+.hero {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);
+    padding: 4rem 0 3rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #3b82f6;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+}
+
+.gradient {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0 0 2rem 0;
+}
+
+.heroStats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.statNumber {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #3b82f6;
+    margin-bottom: 0.25rem;
+}
+
+.statLabel {
+    display: block;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.featured {
+    background: white;
+    padding: 3rem 0;
+}
+
+.featuredLabel {
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #f59e0b;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.featuredGrid {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.productsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.benefits {
+    background: #f9fafb;
+}
+
+.benefitsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.benefit {
+    text-align: center;
+}
+
+.benefitIcon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.benefit h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.5rem 0;
+}
+
+.benefit p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.whoSection {
+    background: white;
+}
+
+.whoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.whoCard {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.whoCard:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    transform: translateY(-4px);
+}
+
+.whoIcon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.whoCard h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.5rem 0;
+}
+
+.whoCard p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.9375rem;
+}
+
+.refund {
+    padding: 2rem 0;
+    background: #f0fdf4;
+}
+
+.refundCard {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: white;
+    border: 2px solid #86efac;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.refundIcon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.refundCard h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #065f46;
+    margin: 0 0 0.25rem 0;
+}
+
+.refundCard p {
+    color: #047857;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.freeCta {
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+}
+
+.freeCard {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.freeCard h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 1rem 0;
+}
+
+.freeCard p {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.125rem;
+    }
+
+    .heroStats {
+        gap: 1.5rem;
+    }
+
+    .statNumber {
+        font-size: 1.5rem;
+    }
+
+    .productsGrid,
+    .benefitsGrid,
+    .whoGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .refundCard {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+}

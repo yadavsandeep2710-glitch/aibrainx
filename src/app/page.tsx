@@ -175,6 +175,62 @@ function HomeContent() {
         </div>
       </section>
 
+      {/* Premium AI Guides CTA */}
+      <section className="section" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)' }}>
+        <div className="container">
+          <div style={{
+            maxWidth: '800px',
+            margin: '0 auto',
+            textAlign: 'center',
+            padding: '3rem 2rem',
+            background: 'white',
+            borderRadius: '16px',
+            border: '2px solid #3b82f6',
+          }}>
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+              color: 'white',
+              padding: '0.5rem 1rem',
+              borderRadius: '30px',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              marginBottom: '1.5rem',
+            }}>
+              📚 Premium Guides
+            </div>
+            <h2 style={{
+              fontSize: '2rem',
+              fontWeight: '800',
+              color: '#111827',
+              margin: '0 0 1rem 0',
+              lineHeight: '1.2',
+            }}>
+              Stop Wasting Money on the Wrong AI Tools
+            </h2>
+            <p style={{
+              fontSize: '1.125rem',
+              color: '#4b5563',
+              lineHeight: '1.6',
+              margin: '0 0 2rem 0',
+            }}>
+              Get expert recommendations with pricing in ₹, detailed comparisons, and step-by-step guides.
+              Perfect for students, creators, and freelancers.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/ai-guides" className="btn btn-primary btn-lg">
+                View Premium Guides →
+              </Link>
+              <Link href="/free-ai-guide" className="btn btn-secondary btn-lg">
+                Get Free Guide
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Section */}
       <section className={`section ${styles.trustSection}`}>
         <div className="container">
