@@ -68,7 +68,7 @@ export default function ProductCard({ product, featured = false }: ProductCardPr
 
                 <Link
                     href={`/ai-guides/${product.slug}`}
-                    className={`btn ${featured ? 'btn-primary' : 'btn-secondary'} btn-lg ${styles.cta}`}
+                    className={`btn btn-primary btn-lg ${styles.cta}`}
                 >
                     View Details →
                 </Link>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './PaymentButton.module.css';
+import EmailInputModal from './EmailInputModal';
 
 interface PaymentButtonProps {
     productId: string;
@@ -26,22 +27,30 @@ export default function PaymentButton({
     className = ''
 }: PaymentButtonProps) {
     const [loading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const router = useRouter();
 
 
-    const handlePayment = async () => {
+    const handlePaymentClick = () => {
+        setShowModal(true);
+    };
+
+    const processPayment = async (email: string) => {
         setLoading(true);
+        // We can close the modal immediately or keep it open with a loading state. 
+        // For better UX, let's keep the modal open with loading state if strict, 
+        // but here the button logic was handling everything.
+        // Let's close the modal and let the button show loading state?
+        // Actually the button shows loading. 
+        // But the modal is over it.
+        // Let's close the modal and show loading on the button?
+        // Or better, let the modal show loading?
+        // The original code set loading on the button.
+
+        // Let's close modal for now to start the process on the main page context
+        setShowModal(false);
 
         try {
-            // Prompt for email
-            const email = prompt('Please enter your email address to receive the download link:');
-
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address');
-                setLoading(false);
-                return;
-            }
-
             // Create order
             const orderResponse = await fetch('/api/payment/create', {
                 method: 'POST',
@@ -108,7 +117,7 @@ export default function PaymentButton({
                     }
                 },
                 prefill: {
-                    email: '',
+                    email: email,
                     contact: ''
                 },
                 theme: {
@@ -130,21 +139,31 @@ export default function PaymentButton({
     };
 
     return (
-        <button
-            onClick={handlePayment}
-            disabled={loading}
-            className={`btn btn-primary btn-lg ${styles.paymentBtn} ${className}`}
-        >
-            {loading ? (
-                <>
-                    <span className={styles.spinner}></span>
-                    Processing...
-                </>
-            ) : (
-                <>
-                    {buttonText} — ₹{amount}
-                </>
-            )}
-        </button>
+        <>
+            <button
+                onClick={handlePaymentClick}
+                disabled={loading}
+                className={`btn btn-primary btn-lg ${styles.paymentBtn} ${className}`}
+            >
+                {loading ? (
+                    <>
+                        <span className={styles.spinner}></span>
+                        Processing...
+                    </>
+                ) : (
+                    <>
+                        {buttonText} — ₹{amount}
+                    </>
+                )}
+            </button>
+
+            <EmailInputModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                onSubmit={processPayment}
+                title="Complete Your Purchase"
+                description={`Enter your email to receive the download link for ${productTitle}`}
+            />
+        </>
     );
 }

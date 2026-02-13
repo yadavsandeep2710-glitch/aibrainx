@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import styles from './page.module.css';
+import { products } from '@/data/products';
 
 export const metadata: Metadata = {
     title: 'Premium AI Guides',
@@ -9,62 +10,10 @@ export const metadata: Metadata = {
     keywords: ['AI guides', 'AI tools India', 'AI buying guide', 'best AI tools', 'AI comparison'],
 };
 
-// Mock products data - in production, fetch from Supabase
-const products = [
-    {
-        slug: 'best-ai-tools-india',
-        title: 'Best AI Tools for Students & Creators in India (2026)',
-        subtitle: 'India-focused, practical, updated yearly',
-        description: 'Stop wasting money on wrong AI tools. Get expert recommendations for students, creators, and freelancers with pricing in ₹.',
-        price_inr: 399,
-        original_price_inr: 599,
-        product_type: 'guide' as const,
-        features: [
-            '50+ AI tools reviewed and compared',
-            'Pricing in ₹ for Indian users',
-            'Category-wise recommendations',
-            'Free vs Paid comparisons',
-            'Step-by-step setup guides',
-            'Real use cases for students & creators',
-            'Monthly updates for 1 year'
-        ]
-    },
-    {
-        slug: 'ai-tools-comparison-sheet',
-        title: 'AI Tools Comparison Sheet (50 Tools)',
-        subtitle: 'Compare features, pricing, and use cases at a glance',
-        description: 'A detailed comparison spreadsheet of 50 popular AI tools with pricing, features, pros/cons, and recommendations.',
-        price_inr: 199,
-        original_price_inr: 299,
-        product_type: 'sheet' as const,
-        features: [
-            '50 AI tools compared side-by-side',
-            'Pricing in ₹',
-            'Feature comparison matrix',
-            'Pros and cons for each tool',
-            'Best use cases',
-            'Editable Google Sheet format'
-        ]
-    },
-    {
-        slug: 'complete-ai-toolkit',
-        title: 'Complete AI Toolkit Bundle',
-        subtitle: 'Get both the guide and comparison sheet',
-        description: 'Save ₹99 when you buy both products together. Perfect for serious AI tool researchers.',
-        price_inr: 499,
-        original_price_inr: 598,
-        product_type: 'bundle' as const,
-        features: [
-            'Best AI Tools Guide (₹399 value)',
-            'AI Tools Comparison Sheet (₹199 value)',
-            'Lifetime access to both',
-            'Free updates for 1 year',
-            'Save ₹99'
-        ]
-    }
-];
-
 export default function AIGuidesPage() {
+    const guides = products.filter(p => p.product_type !== 'bundle');
+    const bundles = products.filter(p => p.product_type === 'bundle');
+
     return (
         <div className={styles.page}>
             {/* Compact Hero Section */}
@@ -107,15 +56,38 @@ export default function AIGuidesPage() {
                 </div>
             </section>
 
-            {/* Combined Products Section */}
+            {/* Individual Guides Section */}
             <section className="section" id="guides">
                 <div className="container">
+                    <div className={styles.sectionHeader}>
+                        <h2 className="section-title">Individual Guides & Reports</h2>
+                        <p className="section-subtitle">Practical playbooks for specific goals</p>
+                    </div>
                     <div className={styles.productsGrid}>
-                        {products.map((product) => (
+                        {guides.map((product) => (
                             <ProductCard
                                 key={product.slug}
                                 product={product}
-                                featured={true} // Highlight all products for consistent design
+                                featured={false}
+                            />
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Bundles Section */}
+            <section className="section" id="bundles" style={{ background: 'var(--bg-secondary)', padding: '4rem 0' }}>
+                <div className="container">
+                    <div className={styles.sectionHeader}>
+                        <h2 className="section-title">Value Bundles</h2>
+                        <p className="section-subtitle">Save up to 50% with our curated bundles</p>
+                    </div>
+                    <div className={styles.productsGrid}>
+                        {bundles.map((product) => (
+                            <ProductCard
+                                key={product.slug}
+                                product={product}
+                                featured={true}
                             />
                         ))}
                     </div>
