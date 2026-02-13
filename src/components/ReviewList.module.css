@@ -1,0 +1,151 @@
+.reviewList {
+    margin-top: var(--space-8);
+}
+
+.reviewStats {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    margin-bottom: var(--space-6);
+}
+
+.avgRating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.avgNumber {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+.reviewCount {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+}
+
+.loading,
+.error,
+.noReviews {
+    text-align: center;
+    padding: var(--space-6);
+    color: var(--text-secondary);
+}
+
+.error {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: var(--radius-md);
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.review {
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    transition: all var(--transition-fast);
+}
+
+.review:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-3);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-primary);
+}
+
+.userName {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: var(--text-base);
+}
+
+.reviewDate {
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    margin-top: 0.25rem;
+}
+
+.reviewMeta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+}
+
+.star {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+}
+
+.starFilled {
+    color: #fbbf24;
+}
+
+.comment {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    font-size: var(--text-base);
+}
+
+.deleteBtn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity var(--transition-fast);
+    padding: var(--space-1);
+}
+
+.deleteBtn:hover {
+    opacity: 1;
+}
+
+@media (max-width: 640px) {
+    .reviewHeader {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .reviewMeta {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .avgNumber {
+        font-size: 2rem;
+    }
+}

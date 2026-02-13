@@ -1,0 +1,305 @@
+.page {
+    padding-bottom: var(--space-20);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+}
+
+/* Hero Section */
+.hero {
+    padding: var(--space-20) 0 var(--space-16);
+    background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.08), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.05), transparent 40%);
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--space-16);
+}
+
+.heroContent {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.heroTitle {
+    font-size: var(--text-5xl);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+    color: var(--text-primary);
+}
+
+.gradientText {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroSubtitle {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Content Layout */
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-20);
+}
+
+/* Section Common */
+.sectionLabel {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent-primary);
+    margin-bottom: var(--space-2);
+}
+
+.sectionTitle {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    margin-bottom: var(--space-6);
+    color: var(--text-primary);
+}
+
+.sectionHeader {
+    margin-bottom: var(--space-8);
+}
+
+/* Mission Section */
+.missionGrid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: var(--space-12);
+    align-items: center;
+}
+
+.missionText p {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-6);
+}
+
+/* Stats Card */
+.statsCard {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    box-shadow: var(--shadow-lg);
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.statNumber {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: var(--space-1);
+}
+
+/* Values/Offer Grid */
+.offerGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+}
+
+.offerCard {
+    padding: var(--space-8);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.offerCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--accent-primary);
+}
+
+.offerIcon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-4);
+}
+
+.offerCard h4 {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    color: var(--text-primary);
+}
+
+.offerCard p {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Gap Section */
+.gapSection {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-12);
+    text-align: center;
+}
+
+.gapContent h3 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+    color: var(--text-primary);
+}
+
+.gapContent p {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* CTA Card */
+.ctaCard {
+    background: var(--accent-primary);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, #4f46e5 100%);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-12);
+    color: white;
+    text-align: center;
+}
+
+.ctaContent h2 {
+    font-size: var(--text-3xl);
+    font-weight: 900;
+    margin-bottom: var(--space-4);
+}
+
+.ctaContent p {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-8);
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contact Section */
+.contactSection {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-10);
+}
+
+.contactHeader {
+    margin-bottom: var(--space-8);
+}
+
+.contactHeader h2 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--space-2);
+}
+
+.contactHeader p {
+    color: var(--text-secondary);
+}
+
+.contactGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+}
+
+.contactItem {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+}
+
+.contactIcon {
+    font-size: 1.5rem;
+    background: var(--bg-elevated);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+}
+
+.contactItem strong {
+    display: block;
+    font-size: var(--text-base);
+    margin-bottom: var(--space-1);
+    color: var(--text-primary);
+}
+
+.contactItem p {
+    margin: 0;
+}
+
+.contactItem a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.contactItem a:hover {
+    color: var(--accent-primary);
+}
+
+/* Responsible */
+@media (max-width: 900px) {
+    .missionGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .statsCard {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: var(--text-3xl);
+    }
+
+    .offerGrid,
+    .contactGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .statsCard {
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+}

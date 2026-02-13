@@ -1,0 +1,104 @@
+.page {
+    padding: var(--space-8) 0 var(--space-16);
+}
+
+.pageHeader {
+    text-align: center;
+    margin-bottom: var(--space-10);
+    padding-top: var(--space-8);
+}
+
+.pageTitle {
+    font-size: var(--text-4xl);
+    font-weight: 900;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-3);
+}
+
+.pageSubtitle {
+    font-size: var(--text-xl);
+    color: var(--text-secondary);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: var(--space-8);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+}
+
+.statusMsg {
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.statusSuccess {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.statusError {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.infoSidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.infoCard {
+    padding: var(--space-5);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.infoCard h3 {
+    font-size: var(--text-base);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+}
+
+.infoCard a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-size: var(--text-sm);
+}
+
+.infoCard a:hover {
+    text-decoration: underline;
+}
+
+.infoCard p {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pageTitle {
+        font-size: var(--text-3xl);
+    }
+}
