@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import ToolCard from '@/components/ToolCard';
@@ -7,7 +8,7 @@ import BlogCard from '@/components/BlogCard';
 import { categories, tools, blogPosts, getFeaturedTools } from '@/lib/data';
 import styles from './page.module.css';
 
-export default function HomePage() {
+function HomeContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
   const featuredTools = getFeaturedTools();
@@ -202,5 +203,13 @@ export default function HomePage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div className="container" style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

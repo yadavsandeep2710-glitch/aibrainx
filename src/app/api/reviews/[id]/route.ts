@@ -24,7 +24,7 @@ async function getSupabaseClient() {
 // DELETE - Delete review (only own reviews)
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const supabase = await getSupabaseClient();
@@ -42,7 +42,7 @@ export async function DELETE(
             );
         }
 
-        const { id } = params;
+        const { id } = await params;
 
         // Delete (RLS will ensure user can only delete their own reviews)
         const { error } = await supabase
