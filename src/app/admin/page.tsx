@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
+import { createClient } from '@/lib/supabase';
+import { v4 as uuidv4 } from 'uuid';
 import RichTextEditor from '@/components/RichTextEditor';
 import {
-    getAllBlogPosts, saveBlogPost, deleteBlogPost,
+    getPosts, createPost, updatePost, deletePost,
     getAllTools, getToolSubmissions, updateSubmissionStatus,
     getContactMessages, generateId, categories,
 } from '@/lib/store';
@@ -23,6 +25,9 @@ export default function AdminDashboard() {
     const [submissions, setSubmissions] = useState<ToolSubmission[]>([]);
     const [messages, setMessages] = useState<ContactMessage[]>([]);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [isUploadingCover, setIsUploadingCover] = useState(false);
+    const coverInputRef = useRef<HTMLInputElement>(null);
+    const supabase = createClient();
     const router = useRouter();
     const { user, signOut } = useAuth();
     const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
@@ -35,24 +40,29 @@ export default function AdminDashboard() {
 
     // Load data on mount
     useEffect(() => {
-        setPosts(getAllBlogPosts());
+        const load = async () => {
+            const fetchedPosts = await getPosts();
+            setPosts(fetchedPosts);
+        };
+        load();
+
         setToolsList(getAllTools());
         setSubmissions(getToolSubmissions());
         setMessages(getContactMessages());
     }, []);
 
-    const refreshData = () => {
-        setPosts(getAllBlogPosts());
+    const refreshData = async () => {
+        const fetchedPosts = await getPosts();
+        setPosts(fetchedPosts);
         setToolsList(getAllTools());
         setSubmissions(getToolSubmissions());
         setMessages(getContactMessages());
     };
 
-    const handleSavePost = (publish: boolean) => {
-        const post: BlogPost = {
-            id: editingPost?.id || generateId(),
-            title: newPost.title,
+    const handleSavePost = async (publish: boolean) => {
+        const postData = {
             slug: newPost.slug || newPost.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+            title: newPost.title,
             excerpt: newPost.excerpt,
             content: newPost.content,
             cover_image_url: newPost.cover_image_url || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop',
@@ -60,19 +70,26 @@ export default function AdminDashboard() {
             category: newPost.category || 'General',
             tags: newPost.tags ? newPost.tags.split(',').map(t => t.trim()) : [],
             published: publish,
-            published_at: publish ? new Date().toISOString().split('T')[0] : '',
+            published_at: publish ? new Date().toISOString() : null,
             read_time: Math.max(1, Math.ceil(newPost.content.split(/\s+/).length / 200)),
             meta_title: newPost.meta_title || newPost.title + ' | AIBrainX',
             meta_description: newPost.meta_description || newPost.excerpt,
-            created_at: editingPost?.created_at || new Date().toISOString().split('T')[0],
-            updated_at: new Date().toISOString().split('T')[0],
         };
 
-        saveBlogPost(post);
-        setSaveMsg(publish ? '✅ Post published!' : '✅ Draft saved!');
-        setTimeout(() => setSaveMsg(''), 3000);
-        resetForm();
-        refreshData();
+        try {
+            if (editingPost) {
+                await updatePost(editingPost.id, postData);
+            } else {
+                await createPost(postData);
+            }
+            setSaveMsg(publish ? '✅ Post published!' : '✅ Draft saved!');
+            setTimeout(() => setSaveMsg(''), 3000);
+            resetForm();
+            refreshData();
+        } catch (error) {
+            console.error('Failed to save post:', error);
+            alert('Failed to save post. Please try again.');
+        }
     };
 
     const handleEditPost = (post: BlogPost) => {
@@ -87,9 +104,9 @@ export default function AdminDashboard() {
         setActiveTab('blog');
     };
 
-    const handleDeletePost = (id: string) => {
+    const handleDeletePost = async (id: string) => {
         if (confirm('Are you sure you want to delete this post?')) {
-            deleteBlogPost(id);
+            await deletePost(id);
             refreshData();
         }
     };
@@ -103,6 +120,27 @@ export default function AdminDashboard() {
         setEditingPost(null);
         setShowEditor(false);
         setNewPost({ title: '', slug: '', excerpt: '', content: '', category: '', cover_image_url: '', tags: '', meta_title: '', meta_description: '' });
+    };
+
+    const handleCoverImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setIsUploadingCover(true);
+        try {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `covers/${uuidv4()}.${fileExt}`;
+            const { error } = await supabase.storage.from('blog-images').upload(fileName, file);
+            if (error) throw error;
+            const { data: { publicUrl } } = supabase.storage.from('blog-images').getPublicUrl(fileName);
+            setNewPost(p => ({ ...p, cover_image_url: publicUrl }));
+        } catch (error) {
+            console.error('Error uploading cover:', error);
+            alert('Failed to upload cover image.');
+        } finally {
+            setIsUploadingCover(false);
+            if (coverInputRef.current) coverInputRef.current.value = '';
+        }
     };
 
     const handleLogout = async () => {
@@ -265,8 +303,31 @@ export default function AdminDashboard() {
                                             </select>
                                         </div>
                                         <div className="input-group">
-                                            <label>Cover Image URL</label>
-                                            <input type="text" className="input-field" placeholder="https://images.unsplash.com/..." value={newPost.cover_image_url} onChange={e => setNewPost(p => ({ ...p, cover_image_url: e.target.value }))} />
+                                            <label>Cover Image</label>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <input type="text" className="input-field" placeholder="https://images.unsplash.com/..." value={newPost.cover_image_url} onChange={e => setNewPost(p => ({ ...p, cover_image_url: e.target.value }))} style={{ flex: 1 }} />
+                                                <input
+                                                    type="file"
+                                                    ref={coverInputRef}
+                                                    className="hidden"
+                                                    accept="image/*"
+                                                    onChange={handleCoverImageUpload}
+                                                    style={{ display: 'none' }}
+                                                />
+                                                <button
+                                                    className="btn btn-secondary"
+                                                    onClick={() => coverInputRef.current?.click()}
+                                                    disabled={isUploadingCover}
+                                                    title="Upload Image"
+                                                >
+                                                    {isUploadingCover ? '⏳' : '📤 Upload'}
+                                                </button>
+                                            </div>
+                                            {newPost.cover_image_url && (
+                                                <div style={{ marginTop: '0.5rem', borderRadius: 'var(--radius)', overflow: 'hidden', border: '1px solid var(--border-color)', height: '150px', position: 'relative' }}>
+                                                    <img src={newPost.cover_image_url} alt="Cover Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
 
@@ -299,6 +360,20 @@ export default function AdminDashboard() {
                                             <div className="input-group">
                                                 <label>Meta Description</label>
                                                 <input type="text" className="input-field" placeholder="SEO description" value={newPost.meta_description} onChange={e => setNewPost(p => ({ ...p, meta_description: e.target.value }))} />
+                                            </div>
+
+                                            {/* SEO Preview Card */}
+                                            <div style={{ marginTop: '1rem', padding: '1rem', background: 'var(--surface-card)', borderRadius: 'var(--radius)', border: '1px solid var(--border-color)' }}>
+                                                <label style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', marginBottom: '0.5rem', display: 'block' }}>Search Engine Preview</label>
+                                                <div style={{ fontFamily: 'arial, sans-serif' }}>
+                                                    <div style={{ fontSize: '14px', color: '#202124', marginBottom: '4px' }}>aibrainx.in › blog › {newPost.slug || 'your-post-slug'}</div>
+                                                    <div style={{ fontSize: '20px', color: '#1a0dab', lineHeight: '1.3', marginBottom: '4px', cursor: 'pointer', textDecoration: 'hover:underline' }}>
+                                                        {newPost.meta_title || newPost.title || 'Your Post Title'}
+                                                    </div>
+                                                    <div style={{ fontSize: '14px', color: '#4d5156', lineHeight: '1.58' }}>
+                                                        {(newPost.meta_description || newPost.excerpt || 'Your post description will appear here in search results...').substring(0, 160)}...
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </details>

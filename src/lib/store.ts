@@ -1,60 +1,123 @@
-'use client';
-
+import { createClient } from './supabase';
 import { BlogPost, Tool } from './types';
-import { blogPosts as initialPosts, tools as initialTools, reviews as initialReviews, categories } from './data';
+import { tools as initialTools, reviews as initialReviews, categories } from './data';
+import { createClient as createServerClient } from '@supabase/supabase-js';
 
-// ===== Client-side Data Store =====
-// Persists admin changes to localStorage so blog posts
-// created in admin appear on the public site.
-// In production, replace with Supabase queries.
+// ===== Blog Posts (Supabase) =====
 
-const STORAGE_KEY_POSTS = 'aibrainx_blog_posts';
+// Helper to get the right client based on environment
+function getSupabaseClient() {
+    if (typeof window === 'undefined') {
+        // Server environment - use service role or anon key with standard client
+        // For public data reading, anon key is fine.
+        return createServerClient(
+            process.env.NEXT_PUBLIC_SUPABASE_URL!,
+            process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+        );
+    }
+    // Client environment
+    return createClient();
+}
+
+export async function getPosts(): Promise<BlogPost[]> {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .order('published_at', { ascending: false });
+
+    if (error) {
+        console.error('Error fetching posts:', error);
+        return [];
+    }
+    return data as BlogPost[];
+}
+
+export async function getPublishedPosts(): Promise<BlogPost[]> {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('published', true)
+        .order('published_at', { ascending: false });
+
+    if (error) {
+        console.error('Error fetching published posts:', error);
+        return [];
+    }
+    return data as BlogPost[];
+}
+
+export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+
+    if (error) {
+        // console.error('Error fetching post by slug:', error);
+        return null;
+    }
+    return data as BlogPost;
+}
+
+export async function createPost(post: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>): Promise<BlogPost | null> {
+    const supabase = createClient(); // Always client here for admin actions? Or should be server?
+    // If admin is client-side, use browser client.
+    const { data, error } = await supabase
+        .from('blog_posts')
+        .insert([post])
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Error creating post:', error);
+        throw error;
+    }
+    return data as BlogPost;
+}
+
+export async function updatePost(id: string, updates: Partial<BlogPost>): Promise<BlogPost | null> {
+    const supabase = createClient();
+    const { data, error } = await supabase
+        .from('blog_posts')
+        .update({ ...updates, updated_at: new Date().toISOString() })
+        .eq('id', id)
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Error updating post:', error);
+        throw error;
+    }
+    return data as BlogPost;
+}
+
+export async function deletePost(id: string): Promise<boolean> {
+    const supabase = createClient();
+    const { error } = await supabase
+        .from('blog_posts')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        console.error('Error deleting post:', error);
+        return false;
+    }
+    return true;
+}
+
+
+// ===== Tools (LocalStorage - unchanged for now) =====
 const STORAGE_KEY_TOOLS = 'aibrainx_tools';
+const STORAGE_KEY_POSTS = 'aibrainx_blog_posts'; // Legacy
 
 function isBrowser(): boolean {
     return typeof window !== 'undefined';
 }
 
-// ===== Blog Posts =====
-export function getAllBlogPosts(): BlogPost[] {
-    if (!isBrowser()) return initialPosts;
-    try {
-        const stored = localStorage.getItem(STORAGE_KEY_POSTS);
-        if (stored) {
-            const parsed: BlogPost[] = JSON.parse(stored);
-            return parsed.length > 0 ? parsed : initialPosts;
-        }
-    } catch { /* ignore */ }
-    return initialPosts;
-}
-
-export function getPublishedBlogPosts(): BlogPost[] {
-    return getAllBlogPosts().filter(p => p.published);
-}
-
-export function getBlogPostBySlug(slug: string): BlogPost | undefined {
-    return getAllBlogPosts().find(p => p.slug === slug);
-}
-
-export function saveBlogPost(post: BlogPost): void {
-    if (!isBrowser()) return;
-    const posts = getAllBlogPosts();
-    const idx = posts.findIndex(p => p.id === post.id);
-    if (idx >= 0) {
-        posts[idx] = post;
-    } else {
-        posts.unshift(post);
-    }
-    localStorage.setItem(STORAGE_KEY_POSTS, JSON.stringify(posts));
-}
-
-export function deleteBlogPost(id: string): void {
-    if (!isBrowser()) return;
-    const posts = getAllBlogPosts().filter(p => p.id !== id);
-    localStorage.setItem(STORAGE_KEY_POSTS, JSON.stringify(posts));
-}
-
-// ===== Tools =====
 export function getAllTools(): Tool[] {
     if (!isBrowser()) return initialTools;
     try {
@@ -87,8 +150,16 @@ export function saveTool(tool: Tool): void {
     localStorage.setItem(STORAGE_KEY_TOOLS, JSON.stringify(toolsList));
 }
 
+// ===== Legacy Functions =====
+export function getAllBlogPosts(): BlogPost[] {
+    if (!isBrowser()) return [];
+    return [];
+}
+export function saveBlogPost(post: BlogPost): void { console.warn('Deprecated'); }
+export function deleteBlogPost(id: string): void { console.warn('Deprecated'); }
+
 // ===== Re-exports =====
-export { initialPosts, initialTools, initialReviews as reviews, categories };
+export { initialTools, initialReviews as reviews, categories };
 
 // ===== Newsletter =====
 const STORAGE_KEY_NEWSLETTER = 'aibrainx_newsletter_emails';
@@ -200,7 +271,6 @@ export function updateSubmissionStatus(id: string, status: 'approved' | 'rejecte
     }
 }
 
-// ===== Generate unique ID =====
 export function generateId(): string {
     return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
 }

@@ -43,10 +43,10 @@ export interface BlogPost {
     category: string;
     tags: string[];
     published: boolean;
-    published_at: string;
+    published_at: string | null;
     read_time: number;
-    meta_title?: string;
-    meta_description?: string;
+    meta_title?: string | null;
+    meta_description?: string | null;
     created_at: string;
     updated_at: string;
 }

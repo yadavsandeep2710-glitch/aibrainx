@@ -1,17 +1,16 @@
-'use client';
-
-import { useState, useEffect } from 'react';
+import { getPublishedPosts } from '@/lib/store';
 import BlogCard from '@/components/BlogCard';
-import { getPublishedBlogPosts } from '@/lib/store';
-import type { BlogPost } from '@/lib/types';
 import styles from './page.module.css';
+import Link from 'next/link';
 
-export default function BlogPage() {
-    const [posts, setPosts] = useState<BlogPost[]>([]);
+export const metadata = {
+    title: 'AI Blog | AIBrainX',
+    description: 'Daily insights, comparisons, and tutorials on AI tools — written for Indian users 🇮🇳',
+};
 
-    useEffect(() => {
-        setPosts(getPublishedBlogPosts());
-    }, []);
+export default async function BlogPage() {
+    const posts = await getPublishedPosts();
+    const featuredPost = posts[0];
 
     return (
         <div className={styles.page}>
@@ -24,22 +23,22 @@ export default function BlogPage() {
                 </div>
 
                 {/* Featured Post */}
-                {posts[0] && (
-                    <a href={`/blog/${posts[0].slug}`} className={styles.featuredPost}>
+                {featuredPost && (
+                    <Link href={`/blog/${featuredPost.slug}`} className={styles.featuredPost}>
                         <div className={styles.featuredImage}>
-                            <img src={posts[0].cover_image_url} alt={posts[0].title} loading="lazy" />
+                            <img src={featuredPost.cover_image_url} alt={featuredPost.title} loading="lazy" />
                         </div>
                         <div className={styles.featuredContent}>
                             <span className={styles.featuredBadge}>Latest</span>
-                            <h2 className={styles.featuredTitle}>{posts[0].title}</h2>
-                            <p className={styles.featuredExcerpt}>{posts[0].excerpt}</p>
+                            <h2 className={styles.featuredTitle}>{featuredPost.title}</h2>
+                            <p className={styles.featuredExcerpt}>{featuredPost.excerpt}</p>
                             <div className={styles.featuredMeta}>
-                                <span>{new Date(posts[0].published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                                <span>{featuredPost.published_at ? new Date(featuredPost.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}</span>
                                 <span>·</span>
-                                <span>{posts[0].read_time} min read</span>
+                                <span>{featuredPost.read_time} min read</span>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 )}
 
                 {/* Posts Grid */}
