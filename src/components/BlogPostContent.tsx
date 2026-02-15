@@ -14,7 +14,25 @@ interface BlogPostContentProps {
     relatedPosts: BlogPost[];
 }
 
+/**
+ * Strips leading indentation from strings, useful for template literals
+ */
+const unindent = (str: string) => {
+    if (!str) return '';
+    const lines = str.split('\n');
+    const minIndent = lines.reduce((min, line) => {
+        if (line.trim().length === 0) return min;
+        const indent = line.match(/^\s*/)?.[0].length ?? 0;
+        return Math.min(min, indent);
+    }, Infinity);
+
+    const finalMinIndent = minIndent === Infinity ? 0 : minIndent;
+    return lines.map(line => line.slice(finalMinIndent)).join('\n').trim();
+};
+
 export default function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
+    const sanitizedContent = unindent(post.content);
+
     return (
         <div className={styles.page}>
             <BlogScrollProgress />
@@ -52,7 +70,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                 <div className={styles.contentWrapper}>
                     <article className={styles.article}>
                         <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                            {post.content}
+                            {sanitizedContent}
                         </ReactMarkdown>
                     </article>
 
@@ -110,4 +128,5 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
         </div>
     );
 }
+
 
