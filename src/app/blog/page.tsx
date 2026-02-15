@@ -4,95 +4,102 @@ import styles from './page.module.css';
 import Link from 'next/link';
 
 export const metadata = {
-    title: 'AI Blog | AIBrainX',
-    description: 'Daily insights, comparisons, and tutorials on AI tools — written for Indian users 🇮🇳',
+    title: 'AI Insider | Premium AI Insights for India',
+    description: 'Deep dives, strategic analysis, and expert reviews of the AI landscape in India. Read the future, today.',
 };
 
 export default async function BlogPage() {
     const posts = await getPublishedPosts();
     const featuredPost = posts[0];
+    const recentPosts = posts.slice(1, 7); // Next 6 posts
+    const trendingPosts = posts.slice(7, 10); // Simple "trending" mock
 
     const categories = Array.from(new Set(posts.map(p => p.category))).filter(Boolean).sort();
 
     return (
         <div className={styles.page}>
             <div className="container">
-                <div className={styles.pageHeader}>
-                    <h1 className={styles.pageTitle}>The AI Insider</h1>
-                    <p className={styles.pageSubtitle}>
-                        Premium insights, expert comparisons, and deep-dives into the future of AI.
+                <header className={styles.header}>
+                    <p className={styles.label}>The Editorial</p>
+                    <h1 className={styles.title}>AI Insider</h1>
+                    <p className={styles.subtitle}>
+                        Intelligence for the intelligent. Curated perspectives on Artificial Intelligence in India.
                     </p>
-                </div>
+                </header>
 
-                {/* Categories Bar */}
-                <div className={styles.categoriesBar}>
-                    <div className={styles.categoriesList}>
-                        <button className={styles.categoryPillActive}>All Posts</button>
-                        {categories.map(cat => (
-                            <button key={cat} className={styles.categoryPill}>{cat}</button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Featured Post Hero */}
+                {/* Featured Hero Section */}
                 {featuredPost && (
-                    <Link href={`/blog/${featuredPost.slug}`} className={styles.featuredPost}>
-                        <div className={styles.featuredImage}>
-                            <img src={featuredPost.cover_image_url} alt={featuredPost.title} loading="lazy" />
-                        </div>
-                        <div className={styles.featuredContent}>
-                            <div className={styles.featuredBadge}>
-                                <span className={styles.pulse}></span>
-                                Featured Insight
+                    <section className={styles.heroSection}>
+                        <Link href={`/blog/${featuredPost.slug}`} className={styles.heroCard}>
+                            <div className={styles.heroImageWrapper}>
+                                <img
+                                    src={featuredPost.cover_image_url}
+                                    alt={featuredPost.title}
+                                    className={styles.heroImage}
+                                />
+                                <div className={styles.heroOverlay}></div>
                             </div>
-                            <h2 className={styles.featuredTitle}>{featuredPost.title}</h2>
-                            <p className={styles.featuredExcerpt}>{featuredPost.excerpt}</p>
-                            <div className={styles.featuredMeta}>
-                                <span>{featuredPost.author}</span>
-                                <span className={styles.separator}></span>
-                                <span>{featuredPost.published_at ? new Date(featuredPost.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}</span>
-                                <span className={styles.separator}></span>
-                                <span>{featuredPost.read_time} min read</span>
+                            <div className={styles.heroContent}>
+                                <span className={styles.heroCategory}>{featuredPost.category}</span>
+                                <h2 className={styles.heroTitle}>{featuredPost.title}</h2>
+                                <p className={styles.heroExcerpt}>{featuredPost.excerpt}</p>
+                                <div className={styles.heroMeta}>
+                                    <span>{featuredPost.author}</span>
+                                    <span className={styles.dot}>•</span>
+                                    <span>{featuredPost.read_time} min read</span>
+                                </div>
                             </div>
-                        </div>
-                    </Link>
+                        </Link>
+                    </section>
                 )}
 
-                {/* Newsletter Section */}
-                <section className={styles.newsletterSection}>
-                    <div className={styles.newsletterGrid}>
-                        <div className={styles.newsletterHeader}>
-                            <h3>Join the AI Insider</h3>
-                            <p>Get curated AI news, product breakdowns, and strategic insights delivered to your inbox.</p>
-                        </div>
-                        <form className={styles.newsletterForm}>
-                            <input
-                                type="email"
-                                placeholder="name@company.com"
-                                className={styles.newsletterInput}
-                                required
-                            />
-                            <button type="submit" className={styles.newsletterButton}>
-                                Subscribe
-                            </button>
-                        </form>
-                    </div>
-                </section>
-
-                {/* Posts Grid */}
-                <div className={styles.postsGrid}>
-                    {posts.slice(1).map(post => (
-                        <BlogCard key={post.id} post={post} />
+                {/* Categories Scroll */}
+                <div className={styles.categoryScroll}>
+                    <button className={`${styles.categoryPill} ${styles.active}`}>Latest</button>
+                    {categories.map(cat => (
+                        <button key={cat} className={styles.categoryPill}>{cat}</button>
                     ))}
                 </div>
 
-                {posts.length === 0 && (
-                    <div style={{ textAlign: 'center', padding: '8rem 0', color: 'var(--text-muted)' }}>
-                        <p style={{ fontSize: '4rem', marginBottom: '1.5rem' }}>🖋️</p>
-                        <h3 className={styles.featuredTitle}>The editorial is empty</h3>
-                        <p className={styles.pageSubtitle}>Our AI insiders are currently crafting the next big story.</p>
+                <div className={styles.mainGrid}>
+                    {/* Left Column: Recent Posts Grid */}
+                    <div className={styles.contentColumn}>
+                        <h3 className={styles.sectionHeading}>Latest Stories</h3>
+                        <div className={styles.postsGrid}>
+                            {recentPosts.map(post => (
+                                <BlogCard key={post.id} post={post} />
+                            ))}
+                        </div>
                     </div>
-                )}
+
+                    {/* Right Column: Sidebar */}
+                    <aside className={styles.sidebar}>
+                        <div className={styles.newsletterWidget}>
+                            <h3 className={styles.widgetTitle}>Join the Inner Circle</h3>
+                            <p className={styles.widgetText}>Weekly strategic AI insights, directly to your inbox. No noise.</p>
+                            <form className={styles.sidebarForm}>
+                                <input type="email" placeholder="Your email address" className={styles.sidebarInput} required />
+                                <button type="submit" className={styles.sidebarButton}>Subscribe</button>
+                            </form>
+                        </div>
+
+                        {trendingPosts.length > 0 && (
+                            <div className={styles.trendingWidget}>
+                                <h3 className={styles.widgetTitle}>Trending Now</h3>
+                                <ul className={styles.trendingList}>
+                                    {trendingPosts.map((post, index) => (
+                                        <li key={post.id} className={styles.trendingItem}>
+                                            <span className={styles.trendingNumber}>0{index + 1}</span>
+                                            <Link href={`/blog/${post.slug}`} className={styles.trendingLink}>
+                                                {post.title}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </aside>
+                </div>
             </div>
         </div>
     );
