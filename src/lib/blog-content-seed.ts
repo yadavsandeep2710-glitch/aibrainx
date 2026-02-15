@@ -5,7 +5,7 @@ export const BLOG_POSTS_SEED = [
     slug: "chatgpt-vs-gemini-india",
     excerpt: "Confused between ChatGPT and Google Gemini? We compare pricing in Rupees, Hindi support, and features to help Indian students and professionals choose the best AI.",
     category: "Comparison",
-    cover_image_url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1675271591211-126ad94e495d?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>The Battle for India's Best AI Chatbot</h2>
       <p>In 2026, the choice isn't just about which AI is smarter—it's about which one works better for <strong>you</strong> in India. With OpenAI's ChatGPT and Google's Gemini both fighting for dominance, Indian users are often left wondering: <em>"Which one gives me more value for my Rupees?"</em></p>
@@ -88,7 +88,7 @@ export const BLOG_POSTS_SEED = [
     slug: "midjourney-vs-dalle3-india",
     excerpt: "We compare the top AI image generators for Indian creators. Discover pricing, ease of use, and which tool creates the best Indian aesthetics.",
     category: "Comparison",
-    cover_image_url: "https://images.unsplash.com/photo-1686191128892-3b67bf8c75dd?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1579783902614-a3fb392796a5?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Visualizing India: Midjourney or DALL·E 3?</h2>
       <p>For Indian graphic designers, social media managers, and digital artists, AI image generation has revolutionized creativity. The two heavyweights are <a href="/tools/midjourney">Midjourney</a> and OpenAI's DALL·E 3 (available in ChatGPT). But which one understands "Cyberpunk Mumbai" or "Traditional Kerala Saree" better?</p>
@@ -138,7 +138,7 @@ export const BLOG_POSTS_SEED = [
     slug: "best-ai-tools-students-india-2026",
     excerpt: "Detailed guide for Indian students: Top AI tools for JEE/NEET prep, essay writing, coding, and productivity. Study smarter, not harder.",
     category: "Best Lists",
-    cover_image_url: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Study Smarter with AI: A Guide for Indian Students</h2>
       <p>Education in India is competitive. Whether you're preparing for <strong>JEE, NEET, UPSC</strong>, or just trying to survive your engineering semester exams, AI tools can give you a massive edge. It's not about cheating; it's about optimizing your learning.</p>
@@ -170,7 +170,7 @@ export const BLOG_POSTS_SEED = [
     slug: "is-chatgpt-free-india-pricing",
     excerpt: "Everything you need to know about ChatGPT pricing in India. What do you get for free? Is the Plus subscription worth ₹1,650?",
     category: "Pricing",
-    cover_image_url: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1580519542052-3a9555013d83?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>The Truth About ChatGPT Pricing in India</h2>
       <p>ChatGPT is a household name, but its pricing model can be confusing. Do you really need to pay? Let's break down the costs in Indian Rupees and see what you actually get.</p>
@@ -216,7 +216,7 @@ export const BLOG_POSTS_SEED = [
     slug: "how-indian-freelancers-use-ai",
     excerpt: "Learn how Indian freelancers on Upwork and Fiverr are using AI tools to double their productivity and income.",
     category: "Guides",
-    cover_image_url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Boosting Your Freelance Income with AI</h2>
       <p>The freelance market in India is booming. From content writing to coding, Indians dominate platforms like Upwork and Fiverr. But the competition is fierce. The secret weapon for top earners in 2026? <strong>Artificial Intelligence.</strong></p>
@@ -243,7 +243,7 @@ export const BLOG_POSTS_SEED = [
     slug: "best-free-ai-tools-india",
     excerpt: "You don't need to pay to access powerful AI. Here is a curated list of the best completely free AI tools available in India.",
     category: "Best Lists",
-    cover_image_url: "https://images.unsplash.com/photo-1531297461136-82lw3381e9f1?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1614064641938-3bcee52636c4?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Top Free AI Tools You Can Use Today</h2>
       <p>AI subscription fatigue is real. But some of the best tools are still free (or have amazing free tiers). Here are our top picks for Indian users watching their budget.</p>
@@ -267,7 +267,7 @@ export const BLOG_POSTS_SEED = [
     slug: "runway-vs-pictory-india",
     excerpt: "Video creation is exploding in India. Should you use Runway for cinematic AI or Pictory for quick social clips? We compare them.",
     category: "Comparison",
-    cover_image_url: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44e?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Runway vs Pictory: Choosing Your Video AI</h2>
       <p>The Indian creator economy is video-first. From YouTube Shorts to Instagram Reels, video is king. Two tools stand out, but they serve very different purposes.</p>
@@ -289,7 +289,7 @@ export const BLOG_POSTS_SEED = [
     slug: "best-ai-tools-creators-india",
     excerpt: "YouTube, Instagram, or LinkedIn? These AI tools will help Indian creators crack the algorithm and produce content faster.",
     category: "Best Lists",
-    cover_image_url: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>AI Toolkit for Indian Creators</h2>
       <p>India has one of the largest creator communities in the world. To stand out, you need speed and quality.</p>
@@ -308,7 +308,7 @@ export const BLOG_POSTS_SEED = [
     slug: "midjourney-cost-india-breakdown",
     excerpt: "Confused by Midjourney's dollar pricing? We break down the exact costs in INR including taxes and how to subscribe.",
     category: "Pricing",
-    cover_image_url: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1607863680198-23d4b2565df0?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Midjourney Pricing: A Real-World Check</h2>
       <p>Midjourney doesn't show INR pricing on their site, which confuses many. Here is the breakdown as of 2026.</p>
@@ -331,7 +331,7 @@ export const BLOG_POSTS_SEED = [
     slug: "is-canva-ai-worth-it-india",
     excerpt: "Canva Pro unlocks powerful AI features. Is it worth the ₹500/month subscription for Indian users? We analyze.",
     category: "Pricing",
-    cover_image_url: "https://images.unsplash.com/photo-1612815154858-60aa4c4603e1?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Canva Pro: To Buy or Not to Buy?</h2>
       <p>Canva is a staple in India. From wedding cards to startup pitch decks, everyone uses it. But is the "Magic Studio" AI upgrade worth the monthly fee?</p>
@@ -356,7 +356,7 @@ export const BLOG_POSTS_SEED = [
     slug: "indian-students-ai-study-guide",
     excerpt: "Don't work harder, work smarter. A complete guide on using AI for summarizing notes, creating quizzes, and mastering difficult concepts.",
     category: "Guides",
-    cover_image_url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>The Smart Student's AI Handbook</h2>
       <p>AI isn't about getting ChatGPT to write your assignment (you'll get caught!). It's about using it as a super-tutor.</p>
@@ -378,7 +378,7 @@ export const BLOG_POSTS_SEED = [
     slug: "ai-tools-beginner-guide-india",
     excerpt: "New to AI? Start here. We explain LLMs, Image Generators, and Chatbots in simple language for the Indian beginner.",
     category: "Guides",
-    cover_image_url: "https://images.unsplash.com/photo-1676299081847-824916de030a?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>Welcome to the AI Revolution</h2>
       <p>You hear "AI" everywhere. News, office, chai-tapri discussions. But what actually is it? And how do you start?</p>
@@ -403,7 +403,7 @@ export const BLOG_POSTS_SEED = [
     slug: "how-indian-small-businesses-use-ai-grow",
     excerpt: "A practical guide for Indian small business owners: Learn how to use AI tools to save time, cut costs, and compete with bigger players—without breaking the bank.",
     category: "Guides",
-    cover_image_url: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1572584642822-6f8de0243c93?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>AI for Small Business: The Indian Advantage</h2>
       <p>Running a small business in India is tough. You're competing with big brands that have massive budgets, large teams, and expensive tools. But here's the good news: <strong>AI has leveled the playing field.</strong></p>
@@ -572,7 +572,7 @@ export const BLOG_POSTS_SEED = [
     slug: "future-ai-jobs-india-2026",
     excerpt: "Will AI replace your job or upgrade it? We analyze the Indian job market, predicting which sectors will boom and which skills will become obsolete by 2030.",
     category: "Future of Work",
-    cover_image_url: "https://images.unsplash.com/photo-1485827404703-89f5520c2722?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>The Shift in India's Workforce</h2>
       <p>India's IT sector is undergoing a seismic shift. The days of mass hiring for basic coding and testing roles are fading. By 2030, the Indian workforce will look drastically different, driven by AI automation and augmentation.</p>
@@ -605,7 +605,7 @@ export const BLOG_POSTS_SEED = [
     slug: "ethical-ai-indian-startups",
     excerpt: "Bias in algorithms, data privacy, and deepfakes. Why ethical AI is not just a moral choice but a business necessity for Indian founders in 2026.",
     category: "Ethics & Society",
-    cover_image_url: "https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>The Cost of Ignoring Ethics</h2>
       <p>In the race to build the fastest LLM, many Indian startups are cutting corners on safety. But with the Digital India Act of 2025, the legal landscape has changed. Ignoring AI ethics is now a liability.</p>
@@ -630,7 +630,7 @@ export const BLOG_POSTS_SEED = [
     slug: "top-ai-tools-indian-languages",
     excerpt: "English is not enough. Discover the best AI tools for Hindi, Tamil, Telugu, and Bengali content creation and translation.",
     category: "Tools & Reviews",
-    cover_image_url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1000",
+    cover_image_url: "https://images.unsplash.com/photo-1532375810709-74b1a8522a81?auto=format&fit=crop&q=80&w=1000",
     content: `
       <h2>The Rise of 'Bharat' AI</h2>
       <p>The next billion users in India won't be searching in English. They will use voice and vernacular text. Here are the tools bridging the language divide.</p>
