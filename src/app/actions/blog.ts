@@ -8,7 +8,9 @@ import { cookies } from 'next/headers';
 // Helper to check if user is admin via cookie
 async function isAdmin() {
     const cookieStore = await cookies();
-    return cookieStore.get('admin_session')?.value === 'true';
+    const adminSession = cookieStore.get('admin_session')?.value;
+    console.log('isAdmin check - admin_session cookie:', adminSession);
+    return adminSession === 'true';
 }
 
 export async function createPostAction(post: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>) {
@@ -26,7 +28,7 @@ export async function createPostAction(post: Omit<BlogPost, 'id' | 'created_at' 
         .single();
 
     if (error) {
-        console.error('Error creating post:', error);
+        console.error('SERVER ACTION ERROR (createPost):', error);
         throw new Error(error.message);
     }
 
@@ -51,7 +53,7 @@ export async function updatePostAction(id: string, updates: Partial<BlogPost>) {
         .single();
 
     if (error) {
-        console.error('Error updating post:', error);
+        console.error('SERVER ACTION ERROR (updatePost):', error);
         throw new Error(error.message);
     }
 

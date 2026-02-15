@@ -88,9 +88,9 @@ export default function AdminDashboard() {
             setTimeout(() => setSaveMsg(''), 3000);
             resetForm();
             refreshData();
-        } catch (error) {
+        } catch (error: any) {
             console.error('Failed to save post:', error);
-            alert('Failed to save post. Please try again.');
+            alert(`Failed to save post: ${error.message || 'Unknown error'}`);
         }
     };
 
