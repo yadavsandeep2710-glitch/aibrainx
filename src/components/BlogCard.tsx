@@ -21,7 +21,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 
             <div className={styles.content}>
                 <div className={styles.meta}>
-                    <span className={styles.date}>{new Date(post.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                    <span className={styles.date}>{post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft'}</span>
                     <span className={styles.dot}>·</span>
                     <span className={styles.readTime}>{post.read_time} min read</span>
                 </div>
