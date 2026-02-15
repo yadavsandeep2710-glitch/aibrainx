@@ -1,0 +1,79 @@
+'use server';
+
+import { createAdminClient } from '@/lib/supabase-admin';
+import { BlogPost } from '@/lib/types';
+import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+
+// Helper to check if user is admin via cookie
+async function isAdmin() {
+    const cookieStore = await cookies();
+    return cookieStore.get('admin_session')?.value === 'true';
+}
+
+export async function createPostAction(post: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>) {
+    if (!(await isAdmin())) {
+        throw new Error('Unauthorized');
+    }
+
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+        .from('blog_posts')
+        .insert([post])
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Error creating post:', error);
+        throw new Error(error.message);
+    }
+
+    revalidatePath('/blog');
+    revalidatePath('/admin');
+    return data as BlogPost;
+}
+
+export async function updatePostAction(id: string, updates: Partial<BlogPost>) {
+    if (!(await isAdmin())) {
+        throw new Error('Unauthorized');
+    }
+
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+        .from('blog_posts')
+        .update({ ...updates, updated_at: new Date().toISOString() })
+        .eq('id', id)
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Error updating post:', error);
+        throw new Error(error.message);
+    }
+
+    revalidatePath('/blog');
+    revalidatePath(`/blog/${data.slug}`);
+    revalidatePath('/admin');
+    return data as BlogPost;
+}
+
+export async function deletePostAction(id: string) {
+    if (!(await isAdmin())) {
+        throw new Error('Unauthorized');
+    }
+
+    const supabase = createAdminClient();
+    const { error } = await supabase
+        .from('blog_posts')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        console.error('Error deleting post:', error);
+        throw new Error(error.message);
+    }
+
+    revalidatePath('/blog');
+    revalidatePath('/admin');
+    return true;
+}

@@ -8,10 +8,11 @@ import { createClient } from '@/lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
 import RichTextEditor from '@/components/RichTextEditor';
 import {
-    getPosts, createPost, updatePost, deletePost,
+    getPosts,
     getAllTools, getToolSubmissions, updateSubmissionStatus,
     getContactMessages, generateId, categories,
 } from '@/lib/store';
+import { createPostAction, updatePostAction, deletePostAction } from '@/app/actions/blog';
 import type { BlogPost, Tool } from '@/lib/types';
 import type { ToolSubmission, ContactMessage } from '@/lib/store';
 import styles from './page.module.css';
@@ -78,9 +79,9 @@ export default function AdminDashboard() {
 
         try {
             if (editingPost) {
-                await updatePost(editingPost.id, postData);
+                await updatePostAction(editingPost.id, postData);
             } else {
-                await createPost(postData);
+                await createPostAction(postData);
             }
             setSaveMsg(publish ? '✅ Post published!' : '✅ Draft saved!');
             setTimeout(() => setSaveMsg(''), 3000);
@@ -106,7 +107,7 @@ export default function AdminDashboard() {
 
     const handleDeletePost = async (id: string) => {
         if (confirm('Are you sure you want to delete this post?')) {
-            await deletePost(id);
+            await deletePostAction(id);
             refreshData();
         }
     };
