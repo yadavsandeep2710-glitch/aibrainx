@@ -161,6 +161,27 @@ export default function AdminDashboard() {
         }
     };
 
+    const handleSeedContent = async () => {
+        if (!confirm('Are you sure you want to seed default blog content? This may overwrite existing posts with the same slug.')) return;
+
+        try {
+            setLoading(true);
+            const res = await fetch('/api/admin/seed-blog', { method: 'POST' });
+            const data = await res.json();
+            if (res.ok) {
+                alert('Seed complete! Refreshing...');
+                window.location.reload();
+            } else {
+                alert('Seed failed: ' + (data.error || 'Unknown error'));
+            }
+        } catch (err) {
+            alert('Error seeding content');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const approvedTools = toolsList.filter(t => t.status === 'approved');
     const pendingSubs = submissions.filter(s => s.status === 'pending');
     const publishedPosts = posts.filter(p => p.published_at);
@@ -181,13 +202,24 @@ export default function AdminDashboard() {
                             <h1 className={styles.title}>🔒 Admin Dashboard</h1>
                             {user && <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', marginTop: '0.25rem' }}>Signed in as: {user.email}</p>}
                         </div>
-                        <button
-                            className="btn btn-ghost btn-sm"
-                            onClick={handleLogout}
-                            disabled={isLoggingOut}
-                        >
-                            {isLoggingOut ? 'Logging out...' : '🚪 Logout'}
-                        </button>
+                        <div className={styles.headerActions}>
+                            <button className="btn btn-secondary btn-sm" onClick={handleSeedContent} disabled={loading}>
+                                {loading ? 'Seeding...' : '🌱 Seed Content'}
+                            </button>
+                            <button className="btn btn-primary btn-sm" onClick={() => {
+                                setEditingPost(null);
+                                setNewPost({ title: '', slug: '', excerpt: '', content: '', cover_image_url: '', category: '', tags: '', meta_title: '', meta_description: '' });
+                                setShowEditor(true);
+                                setActiveTab('blog');
+                            }}>+ New Post</button>
+                            <button
+                                className="btn btn-ghost btn-sm"
+                                onClick={handleLogout}
+                                disabled={isLoggingOut}
+                            >
+                                {isLoggingOut ? 'Logging out...' : '🚪 Logout'}
+                            </button>
+                        </div>
                     </div>
                     <p className={styles.subtitle}>Manage your AI tools directory, blog, and submissions</p>
                 </div>
@@ -294,7 +326,12 @@ export default function AdminDashboard() {
                                             <select className="input-field" value={newPost.category} onChange={e => setNewPost(p => ({ ...p, category: e.target.value }))}>
                                                 <option value="">Select</option>
                                                 <option value="Education">Education</option>
-                                                <option value="Comparisons">Comparisons</option>
+                                                <option value="Comparison">Comparison</option>
+                                                <option value="Best Lists">Best Lists</option>
+                                                <option value="Pricing">Pricing / Questions</option>
+                                                <option value="Guides">How-to / Guides</option>
+                                                <option value="Education">Education</option>
+                                                <option value="Comparisons">Comparisons (Legacy)</option>
                                                 <option value="Business">Business</option>
                                                 <option value="Industry">Industry</option>
                                                 <option value="Development">Development</option>
