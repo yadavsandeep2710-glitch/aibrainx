@@ -51,12 +51,16 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                     <p className={styles.excerpt}>{post.excerpt}</p>
                     <div className={styles.meta}>
                         <div className={styles.author}>
-                            <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(post.author)}&background=3b82f6&color=fff&rounded=true`} alt={post.author} style={{ width: 24, height: 24 }} />
+                            <img
+                                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(post.author)}&background=3b82f6&color=fff&rounded=true`}
+                                alt={post.author}
+                                style={{ width: 32, height: 32 }}
+                            />
                             <span>{post.author}</span>
                         </div>
-                        <span>·</span>
+                        <span className={styles.separator}></span>
                         <span>{post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Draft'}</span>
-                        <span>·</span>
+                        <span className={styles.separator}></span>
                         <span>{post.read_time} min read</span>
                     </div>
                 </header>
@@ -68,11 +72,25 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                 )}
 
                 <div className={styles.contentWrapper}>
-                    <article className={styles.article}>
-                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                            {sanitizedContent}
-                        </ReactMarkdown>
-                    </article>
+                    <div style={{ minWidth: 0 }}>
+                        <article className={styles.article}>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                                {sanitizedContent}
+                            </ReactMarkdown>
+                        </article>
+
+                        {/* Article Newsletter Section */}
+                        <div className={styles.articleNewsletter}>
+                            <div className={styles.newsletterContent}>
+                                <h3>Like this deep dive?</h3>
+                                <p>Join 5,000+ AI enthusiasts getting weekly insights that move the needle. No fluff, just value.</p>
+                                <form className={styles.newsletterForm}>
+                                    <input type="email" placeholder="Enter your email" required />
+                                    <button type="submit">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
                     <aside className={styles.sidebar}>
                         <div className={styles.stickySidebar}>
@@ -80,20 +98,20 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                                 <h3>Spread the knowledge</h3>
                                 <div className={styles.shareButtons}>
                                     <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                                        <span style={{ width: 20 }}>𝕏</span> Tweet
+                                        <span style={{ fontSize: '1.2rem' }}>𝕏</span> Twitter
                                     </a>
                                     <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' https://aibrainx.in/blog/' + post.slug)}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                                        <span style={{ width: 20 }}>💬</span> WhatsApp
+                                        <span style={{ fontSize: '1.2rem' }}>💬</span> WhatsApp
                                     </a>
                                     <a href={`https://www.linkedin.com/sharing/share-offsite/?url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                                        <span style={{ width: 20 }}>💼</span> LinkedIn
+                                        <span style={{ fontSize: '1.2rem' }}>💼</span> LinkedIn
                                     </a>
                                 </div>
                             </div>
 
                             {post.tags && post.tags.length > 0 && (
                                 <div className={styles.sidebarCard}>
-                                    <h3>Related Topics</h3>
+                                    <h3>Expertise Areas</h3>
                                     <div className={styles.tags}>
                                         {post.tags.map(tag => <span key={tag} className="tag">#{tag}</span>)}
                                     </div>
@@ -101,7 +119,7 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                             )}
 
                             <div className="ad-slot">
-                                <p style={{ fontSize: '12px', opacity: 0.5 }}>ADVERTISEMENT</p>
+                                <p style={{ fontSize: '10px', opacity: 0.5, letterSpacing: '1px' }}>SPONSORED CONTENT</p>
                             </div>
                         </div>
                     </aside>
@@ -113,11 +131,17 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                         <div className={styles.relatedGrid}>
                             {relatedPosts.map(rp => (
                                 <Link key={rp.id} href={`/blog/${rp.slug}`} className={styles.relatedCard}>
-                                    <img src={rp.cover_image_url} alt={rp.title} className={styles.relatedImage} loading="lazy" />
+                                    <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/9' }}>
+                                        <img src={rp.cover_image_url} alt={rp.title} className={styles.relatedImage} loading="lazy" />
+                                    </div>
                                     <div className={styles.relatedContent}>
-                                        <span className={styles.relatedMeta}>{rp.category}</span>
+                                        <span className={styles.relatedMeta} style={{ color: 'var(--accent-primary)', textTransform: 'uppercase', fontSize: '10px', letterSpacing: '1px' }}>
+                                            {rp.category}
+                                        </span>
                                         <h3>{rp.title}</h3>
-                                        <span className={styles.relatedMeta}>{rp.read_time} min read</span>
+                                        <div className={styles.relatedMeta}>
+                                            <span>{rp.read_time} min read</span>
+                                        </div>
                                     </div>
                                 </Link>
                             ))}
