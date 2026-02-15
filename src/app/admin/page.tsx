@@ -79,11 +79,18 @@ export default function AdminDashboard() {
         };
 
         try {
+            let result;
             if (editingPost) {
-                await updatePostAction(editingPost.id, postData);
+                result = await updatePostAction(editingPost.id, postData);
             } else {
-                await createPostAction(postData);
+                result = await createPostAction(postData);
             }
+
+            if (!result.success) {
+                alert(`Failed to save post: ${result.error}`);
+                return;
+            }
+
             setSaveMsg(publish ? '✅ Post published!' : '✅ Draft saved!');
             setTimeout(() => setSaveMsg(''), 3000);
             resetForm();
@@ -108,7 +115,11 @@ export default function AdminDashboard() {
 
     const handleDeletePost = async (id: string) => {
         if (confirm('Are you sure you want to delete this post?')) {
-            await deletePostAction(id);
+            const result = await deletePostAction(id);
+            if (!result.success) {
+                alert(`Failed to delete post: ${result.error}`);
+                return;
+            }
             refreshData();
         }
     };
