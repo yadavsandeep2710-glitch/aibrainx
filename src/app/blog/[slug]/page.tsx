@@ -4,6 +4,7 @@ import { useState, useEffect, use } from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { getAllBlogPosts, getPublishedBlogPosts } from '@/lib/store';
 import type { BlogPost } from '@/lib/types';
 import styles from './page.module.css';
@@ -94,7 +95,7 @@ export default function BlogArticlePage({ params }: PageProps) {
 
                     <div className={styles.contentWrapper}>
                         <article className={`prose ${styles.article}`}>
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                                 {post.content}
                             </ReactMarkdown>
                         </article>
