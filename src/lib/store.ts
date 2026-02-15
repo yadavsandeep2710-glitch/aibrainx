@@ -38,7 +38,7 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
     const { data, error } = await supabase
         .from('blog_posts')
         .select('*')
-        .eq('published', true)
+        .not('published_at', 'is', null) // Filter where published_at is NOT null
         .order('published_at', { ascending: false });
 
     if (error) {
@@ -66,9 +66,19 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 export async function createPost(post: Omit<BlogPost, 'id' | 'created_at' | 'updated_at'>): Promise<BlogPost | null> {
     const supabase = createClient(); // Always client here for admin actions? Or should be server?
     // If admin is client-side, use browser client.
+    const postWithDerivedPublished = {
+        ...post,
+        published_at: post.published_at,
+        // Remove 'published' if it exists in the input object to avoid error
+    };
+    // Need to cast to any or omit 'published' from the input type in the function signature if strictly typed
+    // But since Omit<BlogPost...> is used, we should be fine if we ensure the object passed doesn't have it.
+    // However, the caller might pass it.
+    const { published, ...postData } = post as any;
+
     const { data, error } = await supabase
         .from('blog_posts')
-        .insert([post])
+        .insert([postData])
         .select()
         .single();
 
@@ -81,9 +91,12 @@ export async function createPost(post: Omit<BlogPost, 'id' | 'created_at' | 'upd
 
 export async function updatePost(id: string, updates: Partial<BlogPost>): Promise<BlogPost | null> {
     const supabase = createClient();
+    // Remove 'published' from updates
+    const { published, ...updateData } = updates as any;
+
     const { data, error } = await supabase
         .from('blog_posts')
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...updateData, updated_at: new Date().toISOString() })
         .eq('id', id)
         .select()
         .single();

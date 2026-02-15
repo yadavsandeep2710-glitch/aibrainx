@@ -42,7 +42,7 @@ export interface BlogPost {
     author: string;
     category: string;
     tags: string[];
-    published: boolean;
+    published?: boolean;
     published_at: string | null;
     read_time: number;
     meta_title?: string | null;

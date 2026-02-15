@@ -17,9 +17,11 @@ export async function createPostAction(post: Omit<BlogPost, 'id' | 'created_at' 
     }
 
     const supabase = createAdminClient();
+    const { published, ...postData } = post as any;
+
     const { data, error } = await supabase
         .from('blog_posts')
-        .insert([post])
+        .insert([postData])
         .select()
         .single();
 
@@ -39,9 +41,11 @@ export async function updatePostAction(id: string, updates: Partial<BlogPost>) {
     }
 
     const supabase = createAdminClient();
+    const { published, ...updateData } = updates as any;
+
     const { data, error } = await supabase
         .from('blog_posts')
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...updateData, updated_at: new Date().toISOString() })
         .eq('id', id)
         .select()
         .single();

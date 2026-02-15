@@ -163,7 +163,7 @@ export default function AdminDashboard() {
 
     const approvedTools = toolsList.filter(t => t.status === 'approved');
     const pendingSubs = submissions.filter(s => s.status === 'pending');
-    const publishedPosts = posts.filter(p => p.published);
+    const publishedPosts = posts.filter(p => p.published_at);
 
     const stats = [
         { label: 'Total Tools', value: approvedTools.length, icon: '🤖', color: 'var(--accent-primary)' },
@@ -251,7 +251,7 @@ export default function AdminDashboard() {
                                             <tr key={post.id}>
                                                 <td><strong>{post.title}</strong></td>
                                                 <td><span className="badge badge-new">{post.category}</span></td>
-                                                <td><span className={`badge ${post.published ? 'badge-approved' : 'badge-pending'}`}>{post.published ? '✅ Live' : '📝 Draft'}</span></td>
+                                                <td><span className={`badge ${post.published_at ? 'badge-approved' : 'badge-pending'}`}>{post.published_at ? '✅ Live' : '📝 Draft'}</span></td>
                                                 <td>{post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN') : '—'}</td>
                                                 <td className={styles.actionBtns}>
                                                     <button className="btn btn-sm btn-ghost" onClick={() => handleEditPost(post)}>Edit</button>
@@ -406,11 +406,11 @@ export default function AdminDashboard() {
                                                     <br /><span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>/{post.slug}</span>
                                                 </td>
                                                 <td><span className="badge badge-new">{post.category}</span></td>
-                                                <td><span className={`badge ${post.published ? 'badge-approved' : 'badge-pending'}`}>{post.published ? '✅ Live' : '📝 Draft'}</span></td>
+                                                <td><span className={`badge ${post.published_at ? 'badge-approved' : 'badge-pending'}`}>{post.published_at ? '✅ Live' : '📝 Draft'}</span></td>
                                                 <td>{post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN') : '—'}</td>
                                                 <td style={{ color: 'var(--text-muted)' }}>—</td>
                                                 <td className={styles.actionBtns}>
-                                                    {post.published && <Link href={`/blog/${post.slug}`} className="btn btn-sm btn-ghost" target="_blank">View</Link>}
+                                                    {post.published_at && <Link href={`/blog/${post.slug}`} className="btn btn-sm btn-ghost" target="_blank">View</Link>}
                                                     <button className="btn btn-sm btn-ghost" onClick={() => handleEditPost(post)}>Edit</button>
                                                     <button className="btn btn-sm btn-ghost" style={{ color: 'var(--red, #ef4444)' }} onClick={() => handleDeletePost(post.id)}>Delete</button>
                                                 </td>
