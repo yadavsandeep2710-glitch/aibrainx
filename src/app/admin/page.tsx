@@ -38,6 +38,7 @@ export default function AdminDashboard() {
         title: '', slug: '', excerpt: '', content: '', category: '', cover_image_url: '',
         tags: '', meta_title: '', meta_description: '',
     });
+    const [loading, setLoading] = useState(false);
 
     // Load data on mount
     useEffect(() => {
