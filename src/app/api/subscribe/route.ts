@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
                 const resend = new Resend(process.env.RESEND_API_KEY);
 
                 await resend.emails.send({
-                    from: 'AIBrainX <noreply@aibrainx.in>',
+                    from: process.env.RESEND_FROM_EMAIL || 'AIBrainX <noreply@aibrainx.in>',
                     to: email,
                     subject: 'Your Free AI Tools Guide is Here! 🎁',
                     html: `

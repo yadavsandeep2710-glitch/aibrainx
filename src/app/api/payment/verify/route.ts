@@ -3,85 +3,85 @@ import crypto from 'crypto';
 import { createServerSupabaseClient } from '@/lib/supabase-server';
 
 export async function POST(request: NextRequest) {
+  try {
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      order_id,
+    } = await request.json();
+
+    // Verify signature
+    const sign = razorpay_order_id + '|' + razorpay_payment_id;
+    const expectedSign = crypto
+      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
+      .update(sign.toString())
+      .digest('hex');
+
+    if (razorpay_signature !== expectedSign) {
+      return NextResponse.json(
+        { error: 'Invalid payment signature' },
+        { status: 400 }
+      );
+    }
+
+    // Update order in database
+    const supabase = await createServerSupabaseClient();
+
+    const { data: order, error: updateError } = await supabase
+      .from('orders')
+      .update({
+        payment_status: 'completed',
+        razorpay_payment_id,
+        razorpay_signature,
+        payment_verified_at: new Date().toISOString(),
+      })
+      .eq('id', order_id)
+      .select()
+      .single();
+
+    if (updateError) {
+      console.error('Database error:', updateError);
+      return NextResponse.json(
+        { error: 'Failed to verify payment' },
+        { status: 500 }
+      );
+    }
+
+    // Create download token
+    const { data: downloadToken } = await supabase
+      .rpc('generate_download_token');
+
+    // Get order items to create download records
+    const { data: orderItems } = await supabase
+      .from('order_items')
+      .select('product_id')
+      .eq('order_id', order_id);
+
+    if (orderItems && orderItems.length > 0) {
+      for (const item of orderItems) {
+        await supabase.from('downloads').insert({
+          order_id,
+          product_id: item.product_id,
+          user_email: order.user_email,
+          download_token: downloadToken,
+          expires_at: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year
+        });
+      }
+    }
+
+    // Send confirmation email with download link
     try {
-        const {
-            razorpay_order_id,
-            razorpay_payment_id,
-            razorpay_signature,
-            order_id,
-        } = await request.json();
+      const { Resend } = await import('resend');
+      const resend = new Resend(process.env.RESEND_API_KEY);
 
-        // Verify signature
-        const sign = razorpay_order_id + '|' + razorpay_payment_id;
-        const expectedSign = crypto
-            .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
-            .update(sign.toString())
-            .digest('hex');
+      const downloadUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/download?token=${downloadToken}`;
 
-        if (razorpay_signature !== expectedSign) {
-            return NextResponse.json(
-                { error: 'Invalid payment signature' },
-                { status: 400 }
-            );
-        }
-
-        // Update order in database
-        const supabase = await createServerSupabaseClient();
-
-        const { data: order, error: updateError } = await supabase
-            .from('orders')
-            .update({
-                payment_status: 'completed',
-                razorpay_payment_id,
-                razorpay_signature,
-                payment_verified_at: new Date().toISOString(),
-            })
-            .eq('id', order_id)
-            .select()
-            .single();
-
-        if (updateError) {
-            console.error('Database error:', updateError);
-            return NextResponse.json(
-                { error: 'Failed to verify payment' },
-                { status: 500 }
-            );
-        }
-
-        // Create download token
-        const { data: downloadToken } = await supabase
-            .rpc('generate_download_token');
-
-        // Get order items to create download records
-        const { data: orderItems } = await supabase
-            .from('order_items')
-            .select('product_id')
-            .eq('order_id', order_id);
-
-        if (orderItems && orderItems.length > 0) {
-            for (const item of orderItems) {
-                await supabase.from('downloads').insert({
-                    order_id,
-                    product_id: item.product_id,
-                    user_email: order.user_email,
-                    download_token: downloadToken,
-                    expires_at: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year
-                });
-            }
-        }
-
-        // Send confirmation email with download link
-        try {
-            const { Resend } = await import('resend');
-            const resend = new Resend(process.env.RESEND_API_KEY);
-
-            const downloadUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/download?token=${downloadToken}`;
-
-            await resend.emails.send({
-                from: 'AIBrainX <noreply@aibrainx.in>',
-                to: order.user_email, // Use order.user_email
-                subject: 'Your AI Guide is Ready! 📚',
-                html: `
+      await resend.emails.send({
+        from: process.env.RESEND_FROM_EMAIL || 'AIBrainX <noreply@aibrainx.in>',
+        to: order.user_email, // Use order.user_email
+        subject: 'Your AI Guide is Ready! 📚',
+        html: `
               <!DOCTYPE html>
               <html>
               <head>
@@ -128,22 +128,22 @@ export async function POST(request: NextRequest) {
               </body>
               </html>
             `,
-            });
-        } catch (emailError) {
-            console.error('Email sending error:', emailError);
-            // Don't fail the request if email fails
-        }
-
-        return NextResponse.json({
-            success: true,
-            order_id,
-            download_token: downloadToken,
-        });
-    } catch (error: any) {
-        console.error('Payment verification error:', error);
-        return NextResponse.json(
-            { error: error.message || 'Failed to verify payment' },
-            { status: 500 }
-        );
+      });
+    } catch (emailError) {
+      console.error('Email sending error:', emailError);
+      // Don't fail the request if email fails
     }
+
+    return NextResponse.json({
+      success: true,
+      order_id,
+      download_token: downloadToken,
+    });
+  } catch (error: any) {
+    console.error('Payment verification error:', error);
+    return NextResponse.json(
+      { error: error.message || 'Failed to verify payment' },
+      { status: 500 }
+    );
+  }
 }
