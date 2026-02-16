@@ -66,7 +66,7 @@ export default async function BlogPage() {
                                     <span className={styles.dot}>•</span>
                                     <span>{featuredPost.read_time} min read</span>
                                     <span className={styles.dot}>•</span>
-                                    <time dateTime={featuredPost.published_at}>{new Date(featuredPost.published_at).toLocaleDateString()}</time>
+                                    <time dateTime={featuredPost.published_at || featuredPost.created_at}>{new Date(featuredPost.published_at || featuredPost.created_at).toLocaleDateString()}</time>
                                 </div>
                             </div>
                         </Link>
@@ -155,8 +155,8 @@ export default async function BlogPage() {
                                         <Link href={`/blog/${post.slug}`} className={styles.recentLink}>
                                             {post.title}
                                         </Link>
-                                        <time dateTime={post.published_date} className={styles.recentDate}>
-                                            {post.published_date}
+                                        <time dateTime={post.published_at || post.created_at} className={styles.recentDate}>
+                                            {new Date(post.published_at || post.created_at).toLocaleDateString()}
                                         </time>
                                     </div>
                                 ))}
