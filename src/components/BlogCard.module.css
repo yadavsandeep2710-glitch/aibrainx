@@ -3,23 +3,30 @@
     flex-direction: column;
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-2xl);
     overflow: hidden;
     text-decoration: none;
     color: inherit;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     height: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.featured {
+    border-color: var(--accent-primary);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent-primary);
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+    transform: translateY(-6px);
+    border-color: var(--border-default);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .card:hover .image {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    /* Smoother zoom */
 }
 
 .imageWrap {
@@ -27,54 +34,70 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    background-color: var(--bg-subtle);
 }
 
 .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .category {
     position: absolute;
-    top: var(--space-4);
-    left: var(--space-4);
-    padding: var(--space-1) var(--space-4);
-    background: rgba(10, 14, 26, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: var(--radius-full);
-    font-size: 0.65rem;
-    font-weight: 800;
-    color: var(--accent-primary);
+    top: 1rem;
+    left: 1rem;
+    padding: 0.35rem 0.85rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    /* Ensure contrast */
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.05em;
     z-index: 2;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .content {
-    padding: var(--space-6);
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
+    gap: 1rem;
     flex: 1;
 }
 
 .meta {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    font-size: var(--text-xs);
+    gap: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.dot {
+    color: var(--border-default);
 }
 
 .title {
     font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    font-weight: 800;
+    font-size: 1.35rem;
+    /* Larger title */
+    font-weight: 700;
     color: var(--text-primary);
     line-height: 1.3;
     display: -webkit-box;
@@ -82,7 +105,12 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    transition: color 0.2s ease;
+}
+
+.card:hover .title {
+    color: var(--accent-primary);
 }
 
 .excerpt {
@@ -94,6 +122,7 @@
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    font-weight: 400;
 }
 
 .footer {
@@ -101,23 +130,27 @@
     align-items: center;
     justify-content: space-between;
     margin-top: auto;
-    padding-top: var(--space-4);
+    padding-top: 1rem;
     border-top: 1px solid var(--border-subtle);
 }
 
 .author {
-    font-size: var(--text-xs);
-    color: var(--text-muted);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
     font-weight: 600;
 }
 
 .readMore {
-    font-size: var(--text-sm);
-    font-weight: 700;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--accent-primary);
-    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: gap 0.3s ease;
 }
 
 .card:hover .readMore {
-    transform: translateX(4px);
+    gap: 0.5rem;
+    text-decoration: underline;
 }

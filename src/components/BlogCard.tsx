@@ -4,18 +4,20 @@ import styles from './BlogCard.module.css';
 
 interface BlogCardProps {
     post: BlogPost;
+    featured?: boolean;
 }
 
-export default function BlogCard({ post }: BlogCardProps) {
+export default function BlogCard({ post, featured = false }: BlogCardProps) {
     return (
-        <Link href={`/blog/${post.slug}`} className={styles.card}>
+        <Link href={`/blog/${post.slug}`} className={`${styles.card} ${featured ? styles.featured : ''}`}>
             <div className={styles.imageWrap}>
                 <img
                     src={post.cover_image_url}
                     alt={post.title}
                     className={styles.image}
-                    loading="lazy"
+                    loading={featured ? "eager" : "lazy"}
                 />
+                <div className={styles.overlay}></div>
                 <span className={styles.category}>{post.category}</span>
             </div>
 
@@ -30,8 +32,8 @@ export default function BlogCard({ post }: BlogCardProps) {
                 <p className={styles.excerpt}>{post.excerpt}</p>
 
                 <div className={styles.footer}>
-                    <span className={styles.author}>By {post.author}</span>
-                    <span className={styles.readMore}>Read more →</span>
+                    <span className={styles.author}>By {post.author || 'AI Insider Team'}</span>
+                    <span className={styles.readMore}>Read Article <span className={styles.arrow}>→</span></span>
                 </div>
             </div>
         </Link>

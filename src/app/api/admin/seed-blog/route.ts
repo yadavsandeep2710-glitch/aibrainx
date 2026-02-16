@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         for (const post of BLOG_POSTS_SEED) {
             // Calculate read time
             const wordCount = post.content.replace(/<[^>]*>/g, '').split(/\s+/).length;
-            const readTime = Math.ceil(wordCount / 200);
+            const readTime = (post as any).read_time || Math.ceil(wordCount / 200);
 
             const { data, error } = await supabase
                 .from('blog_posts')
@@ -33,15 +33,12 @@ export async function POST(request: NextRequest) {
                     cover_image_url: post.cover_image_url,
                     category: post.category,
                     tags: post.tags,
-                    author: 'AI BrainX Team',
+                    author: (post as any).author || 'AI BrainX Team',
                     read_time: readTime,
-                    published_at: new Date().toISOString(), // Publish immediately
-                    // Dont overwrite created_at if exists? upsert overwrites all by default unless ignored.
-                    // We'll just overwrite for simplicity on seed.
-                    created_at: new Date().toISOString(),
+                    published_at: (post as any).published_at || new Date().toISOString(),
                     updated_at: new Date().toISOString(),
-                    meta_title: post.title,
-                    meta_description: post.excerpt
+                    meta_title: (post as any).meta_title || post.title,
+                    meta_description: (post as any).meta_description || post.excerpt
                 }, { onConflict: 'slug' })
                 .select();
 
