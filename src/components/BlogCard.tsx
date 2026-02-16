@@ -7,33 +7,30 @@ interface BlogCardProps {
     featured?: boolean;
 }
 
-export default function BlogCard({ post, featured = false }: BlogCardProps) {
+export default function BlogCard({ post }: { post: BlogPost }) {
     return (
-        <Link href={`/blog/${post.slug}`} className={`${styles.card} ${featured ? styles.featured : ''}`}>
+        <Link href={`/blog/${post.slug}`} className={styles.card}>
             <div className={styles.imageWrap}>
                 <img
                     src={post.cover_image_url}
                     alt={post.title}
                     className={styles.image}
-                    loading={featured ? "eager" : "lazy"}
+                    loading="lazy"
                 />
-                <div className={styles.overlay}></div>
-                <span className={styles.category}>{post.category}</span>
+                <span className={styles.badge}>{post.category}</span>
             </div>
 
             <div className={styles.content}>
-                <div className={styles.meta}>
-                    <span className={styles.date}>{post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft'}</span>
-                    <span className={styles.dot}>·</span>
-                    <span className={styles.readTime}>{post.read_time} min read</span>
-                </div>
-
                 <h3 className={styles.title}>{post.title}</h3>
                 <p className={styles.excerpt}>{post.excerpt}</p>
 
                 <div className={styles.footer}>
-                    <span className={styles.author}>By {post.author || 'AI Insider Team'}</span>
-                    <span className={styles.readMore}>Read Article <span className={styles.arrow}>→</span></span>
+                    <div className={styles.meta}>
+                        <span>{post.read_time} min read</span>
+                        <span>•</span>
+                        <span>{new Date(post.published_at || post.created_at).toLocaleDateString()}</span>
+                    </div>
+                    <span className={styles.readMore}>Read →</span>
                 </div>
             </div>
         </Link>
