@@ -66,7 +66,7 @@ export default async function BlogPage() {
                                     <span className={styles.dot}>•</span>
                                     <span>{featuredPost.read_time} min read</span>
                                     <span className={styles.dot}>•</span>
-                                    <time dateTime={featuredPost.published_date}>{featuredPost.published_date}</time>
+                                    <time dateTime={featuredPost.published_at}>{new Date(featuredPost.published_at).toLocaleDateString()}</time>
                                 </div>
                             </div>
                         </Link>
