@@ -1213,6 +1213,438 @@ export const blogPosts: BlogPost[] = [
         meta_description: 'Complete guide to AI coding assistants. Compare Cursor, GitHub Copilot, CodeWhisperer for Indian developers.',
         created_at: '2025-02-10', updated_at: '2025-02-10'
     },
+    {
+        id: '20', name: 'Poe', slug: 'poe', tagline: 'Fast access to GPT-4o, Claude 3.5, and thousands of other AI bots',
+        description: `Poe is the ultimate AI model aggregator. Instead of paying for separate subscriptions to OpenAI, Anthropic, and Google, you get access to all their best models — plus thousands of user-created bots — in a single, fast interface.
+
+## What Poe Does
+
+Compare answers from different top-tier models side-by-side. Create your own custom chatbots with specific personalities and knowledge bases without writing a line of code. Access specialized bots for coding, roleplay, and image generation.
+
+## Verdict
+
+For Indian users who want to try multiple AI models without multiple subscriptions, Poe is the most cost-effective choice. It's fast, reliable, and has great mobile apps.`,
+        url: 'https://poe.com', logo_url: '/logos/poe.svg',
+        category_id: '9', pricing: 'freemium', pricing_details: 'Free daily limits. Premium: ₹1,650/mo',
+        rating: 4.7, review_count: 320, featured: false, status: 'approved', tags: ['chatbot', 'aggregator', 'mobile', 'gpt-4', 'claude'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '21', name: 'Grok', slug: 'grok', tagline: 'Real-time AI search with fewer filters, integrated into X (Twitter)',
+        description: `Grok is Elon Musk's answer to ChatGPT, integrated directly into X. It has real-time access to the global conversation on X, meaning it knows about breaking news and trends the moment they happen. It's also designed to be more humorous and restricted than other AIs.
+
+## What Grok Does
+
+Ask Grok about current events and get summaries based on live X posts. It offers two modes: "Regular" for serious answers and "Fun" for witty, roast-style responses. It can also generate uncensored images using the Flux model.
+
+## Verdict
+
+Perfect for news junkies and Twitter power users. If you want an AI that's less "corporate" and more up-to-the-minute, Grok is it.`,
+        url: 'https://x.com/i/grok', logo_url: '/logos/grok.svg',
+        category_id: '9', pricing: 'paid', pricing_details: 'Included with X Premium (~₹650/mo)',
+        rating: 4.5, review_count: 210, featured: false, status: 'approved', tags: ['chatbot', 'news', 'twitter', 'uncensored', 'real-time'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '22', name: 'QuillBot', slug: 'quillbot', tagline: 'AI paraphrasing tool to improve your writing clarity',
+        description: `QuillBot is an essential tool for students and writers. It uses AI to rewrite, paraphrase, and summarize text, helping you avoid plagiarism and improve fluency. It's incredibly popular in India for academic writing and professional emails.
+
+## What QuillBot Does
+
+Paste any text and QuillBot's AI will rewrite it in a different tone or style while keeping the same meaning. It also offers a grammar checker, plagiarism checker, and citation generator.
+
+## Verdict
+
+A must-have for students and non-native English speakers. The free version is very usable, and the Premium plan is affordable.`,
+        url: 'https://quillbot.com', logo_url: '/logos/quillbot.svg',
+        category_id: '1', pricing: 'freemium', pricing_details: 'Free: 125 words/paraphrase. Premium: ₹333/mo (annual)',
+        rating: 4.6, review_count: 890, featured: false, status: 'approved', tags: ['writing', 'paraphrasing', 'academic', 'grammar', 'student'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '23', name: 'Surfer SEO', slug: 'surfer-seo', tagline: 'AI tool to write content that ranks on Google',
+        description: `Surfer SEO takes the guesswork out of ranking. It analyzes top-ranking pages for your keyword and gives you a data-driven recipe for content that Google will love. It tells you exactly how many words, headings, and images to use.
+
+## What Surfer Does
+
+Its Content Editor gives you a real-time score as you write, suggesting keywords to include to improve your ranking chances. It integrates with Jasper and WordPress for seamless workflows.
+
+## Verdict
+
+Essential for serious SEOs and affiliate marketers. It's pricey but pays for itself in organic traffic.`,
+        url: 'https://surferseo.com', logo_url: '/logos/surfer.svg',
+        category_id: '6', pricing: 'paid', pricing_details: 'Essential: $89/mo (~₹7,400)',
+        rating: 4.5, review_count: 410, featured: false, status: 'approved', tags: ['seo', 'marketing', 'content', 'ranking', 'optimization'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '24', name: 'DALL·E 3', slug: 'dall-e', tagline: 'Simple, accurate image generation by OpenAI',
+        description: `DALL·E 3 is integrated into ChatGPT and is known for its ability to follow complex instructions perfectly. Unlike other tools that struggle with text and specific details, DALL·E 3 draws exactly what you ask for.
+
+## What DALL·E Does
+
+Create images from simple conversation. It handles text inside images better than almost any competitor. Great for logos, continuous character designs, and specific scene compositions.
+
+## Verdict
+
+The easiest image generator to use. If you have ChatGPT Plus, you already have access to this powerful tool.`,
+        url: 'https://openai.com/dall-e-3', logo_url: '/logos/dalle.svg',
+        category_id: '2', pricing: 'paid', pricing_details: 'Included in ChatGPT Plus (₹1,650/mo)',
+        rating: 4.6, review_count: 650, featured: true, status: 'approved', tags: ['image', 'art', 'openai', 'chatgpt', 'easy'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '25', name: 'Stable Diffusion', slug: 'stable-diffusion', tagline: 'Open-source image generation you can run locally',
+        description: `Stable Diffusion is the power-user's choice. It's open-source, meaning you can run it on your own PC for free if you have a good GPU. It offers unmatched control through extensions like ControlNet and thousands of custom models.
+
+## What It Does
+
+Generate anything with zero censorship (on local versions). Train it on your own face or style. It's the engine behind many other AI art apps.
+
+## Verdict
+
+Best for tech-savvy users who want total control and no monthly fees. Using it locally requires a strong PC.`,
+        url: 'https://stability.ai', logo_url: '/logos/stablediffusion.svg',
+        category_id: '2', pricing: 'freemium', pricing_details: 'Free (local). API/DreamStudio: Pay-per-image',
+        rating: 4.7, review_count: 550, featured: false, status: 'approved', tags: ['image', 'art', 'open-source', 'local', 'free'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '26', name: 'Ideogram', slug: 'ideogram', tagline: 'AI image generator that specializes in perfect typography',
+        description: `Ideogram solved the biggest problem in AI art: text. While other models produce gibberish, Ideogram renders perfect, legible text on signs, logos, and t-shirt designs. It's a favorite for print-on-demand creators.
+
+## What Ideogram Does
+
+Generate logos, posters, and designs with correct spelling. It has a vibrant community where you can remix other people's prompts.
+
+## Verdict
+
+If you need text in your AI images (logos, signs, quotes), this is the best tool on the market, period.`,
+        url: 'https://ideogram.ai', logo_url: '/logos/ideogram.svg',
+        category_id: '2', pricing: 'freemium', pricing_details: 'Free: 10 prompts/day. Basic: $7/mo (~₹580)',
+        rating: 4.6, review_count: 280, featured: false, status: 'approved', tags: ['image', 'typography', 'logos', 'design', 'text'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '27', name: 'Pika', slug: 'pika', tagline: 'Animate your ideas into 3D cartoons and videos',
+        description: `Pika Labs makes AI video generation fun and accessible. Known for its "Lip Sync" feature, it allows characters in AI videos to speak with perfect mouth movements. It's great for animation and social media clips.
+
+## What Pika Does
+
+Turn text or images into short video clips. Modify specific elements of a video (like changing a shirt color) without changing the rest of the scene.
+
+## Verdict
+
+Excellent for creators making animated shorts or character-driven content. The lip-sync feature is a game-changer.`,
+        url: 'https://pika.art', logo_url: '/logos/pika.svg',
+        category_id: '3', pricing: 'freemium', pricing_details: 'Free daily credits. Standard: $8/mo (~₹660)',
+        rating: 4.4, review_count: 190, featured: false, status: 'approved', tags: ['video', 'animation', 'lip-sync', 'creative', 'social'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '28', name: 'Synthesia', slug: 'synthesia', tagline: 'Create professional AI video presentations with avatars',
+        description: `Synthesia is the leader in AI avatars. Create training videos, corporate presentations, and marketing clips using hyper-realistic AI presenters who speak in 120+ languages. No cameras or actors needed.
+
+## What Synthesia Does
+
+Type your script, choose an avatar, and get a professional video in minutes. Ideal for corporate training and explainer videos.
+
+## Verdict
+
+Best for businesses. It replaces expensive video production teams for corporate communications.`,
+        url: 'https://synthesia.io', logo_url: '/logos/synthesia.svg',
+        category_id: '3', pricing: 'paid', pricing_details: 'Starter: ₹1,500/mo',
+        rating: 4.5, review_count: 340, featured: false, status: 'approved', tags: ['video', 'avatars', 'corporate', 'presentation', 'training'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '29', name: 'Murf AI', slug: 'murf-ai', tagline: 'Studio-quality AI voice generator for professionals',
+        description: `Murf goes beyond simple text-to-speech. It offers a studio-like interface where you can time voiceovers to video, adjust pitch and emphasis, and create broadcast-quality audio narration.
+
+## What Murf Does
+
+Generate voiceovers for ads, elearning, and podcasts. It includes a massive library of voices that sound distinctively human.
+
+## Verdict
+
+Great for professional voiceover work where you need precise control over timing and delivery.`,
+        url: 'https://murf.ai', logo_url: '/logos/murf.svg',
+        category_id: '3', pricing: 'freemium', pricing_details: 'Free trial. Creator: $23/mo (~₹1,900)',
+        rating: 4.4, review_count: 220, featured: false, status: 'approved', tags: ['audio', 'voiceover', 'tts', 'studio', 'narration'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '30', name: 'Replit AI', slug: 'replit-ai', tagline: 'Code, collaborate, and deploy AI apps in the browser',
+        description: `Replit is a complete cloud IDE that lets you code and host apps instantly. Its AI features help you write code, debug errors, and even generate entire apps from natural language prompts.
+
+## What Replit Does
+
+It's an "IDE in the browser." You can start coding in seconds on any device (even an iPad). The AI assistant helps generate boilerplate and fix bugs.
+
+## Verdict
+
+Perfect for beginners and hackathons. It removes the pain of setting up local development environments.`,
+        url: 'https://replit.com', logo_url: '/logos/replit.svg',
+        category_id: '4', pricing: 'freemium', pricing_details: 'Free tier. Core: $20/mo (~₹1,650)',
+        rating: 4.3, review_count: 580, featured: false, status: 'approved', tags: ['coding', 'ide', 'cloud', 'deployment', 'beginner'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '31', name: 'Tabnine', slug: 'tabnine', tagline: 'Private, secure AI code assistant for enterprise',
+        description: `Tabnine focuses on privacy. Unlike other AI coding tools that verify code in the cloud, Tabnine can run locally or on your private server, ensuring your proprietary code never leaves your environment.
+
+## What Tabnine Does
+
+It provides code completions based on your existing codebase's patterns. It's less "chatty" than Copilot but very fast and secure.
+
+## Verdict
+
+The best choice for enterprise teams with strict security requirements.`,
+        url: 'https://tabnine.com', logo_url: '/logos/tabnine.svg',
+        category_id: '4', pricing: 'freemium', pricing_details: 'Free basic plan. Pro: $12/mo (~₹1,000)',
+        rating: 4.2, review_count: 310, featured: false, status: 'approved', tags: ['coding', 'security', 'enterprise', 'autocomplete', 'privacy'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '32', name: 'Codeium', slug: 'codeium', tagline: 'Free, fast, and powerful alternative to GitHub Copilot',
+        description: `Codeium offers premium AI coding features for free for individuals. It supports 70+ languages and integrates with almost every editor, from VS Code to Vim. It's incredibly fast and accurate.
+
+## What Codeium Does
+
+Autocomplete, chat, and search your codebase. It feels very similar to Copilot but is free for personal use.
+
+## Verdict
+
+The best free AI coding assistant. If you want Copilot-like features without the monthly fee, Codeium is the answer.`,
+        url: 'https://codeium.com', logo_url: '/logos/codeium.svg',
+        category_id: '4', pricing: 'freemium', pricing_details: 'Free for individuals. Teams: $12/seat/mo',
+        rating: 4.7, review_count: 450, featured: false, status: 'approved', tags: ['coding', 'free', 'autocomplete', 'developer', 'fast'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '33', name: 'Make', slug: 'make', tagline: 'Visual automation platform to connect apps without code',
+        description: `Formerly Integromat, Make is a powerful visual alternative to Zapier. It lets you build complex workflows with branches, loops, and logic that other tools can't handle.
+
+## What Make Does
+
+Connect thousands of apps. Trigger an action when a new lead arrives, format the data, updated your CRM, and send a Slack message — all automatically.
+
+## Verdict
+
+More affordable and powerful than Zapier, but has a steeper learning curve. Best for complex automations.`,
+        url: 'https://make.com', logo_url: '/logos/make.svg',
+        category_id: '5', pricing: 'freemium', pricing_details: 'Free: 1,000 ops/mo. Core: $9/mo (~₹750)',
+        rating: 4.6, review_count: 390, featured: false, status: 'approved', tags: ['automation', 'workflow', 'nocode', 'visual', 'productivity'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '34', name: 'Bardeen', slug: 'bardeen', tagline: 'AI automation that runs right in your browser',
+        description: `Bardeen is unique because it runs locally in your Chrome browser. This makes it incredibly fast and private. It's perfect for scraping websites, finding leads, and automating browser tasks.
+
+## What Bardeen Does
+
+"Scrape this list of LinkedIn profiles and save to Notion." "Summarize this page and email it to me." Bardeen handles these browser-based tasks effortlessly.
+
+## Verdict
+
+The best tool for scraping data and automating web research tasks.`,
+        url: 'https://bardeen.ai', logo_url: '/logos/bardeen.svg',
+        category_id: '5', pricing: 'freemium', pricing_details: 'Free basic use. Pro: $10/mo (~₹830)',
+        rating: 4.5, review_count: 240, featured: false, status: 'approved', tags: ['automation', 'scraping', 'browser', 'research', 'productivity'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '35', name: 'Otter.ai', slug: 'otter-ai', tagline: 'Your AI meeting assistant that records and summarizes',
+        description: `Otter joins your Zoom/Meet/Teams calls, records the audio, transcribes it in real-time, and generates a summary with action items. You never have to take meeting notes again.
+
+## What Otter Does
+
+It captures every word, identifies speakers, and makes the meeting searchable. You can ask Otter questions about what was discussed later.
+
+## Verdict
+
+Indispensable for remote workers and students attending online lectures.`,
+        url: 'https://otter.ai', logo_url: '/logos/otter.svg',
+        category_id: '5', pricing: 'freemium', pricing_details: 'Free: 300 mins/mo. Pro: $10/mo (~₹830)',
+        rating: 4.6, review_count: 610, featured: false, status: 'approved', tags: ['transcription', 'meetings', 'notes', 'productivity', 'voice'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '36', name: 'Hootsuite AI', slug: 'hootsuite', tagline: 'Social media management with built-in AI writing',
+        description: `Hootsuite is the veteran social media scheduler, now upgraded with AI. It helps you generate captions, hashtags, and post ideas for Instagram, LinkedIn, Twitter, and more.
+
+## What Hootsuite Does
+
+Schedule posts to all networks from one dashboard. OwlyWriter AI generates captions and repurposes top-performing content.
+
+## Verdict
+
+The professional choice for social media managers handling multiple brands.`,
+        url: 'https://hootsuite.com', logo_url: '/logos/hootsuite.svg',
+        category_id: '6', pricing: 'paid', pricing_details: 'Professional: ₹1,915/mo',
+        rating: 4.4, review_count: 520, featured: false, status: 'approved', tags: ['social-media', 'marketing', 'scheduling', 'writing', 'analytics'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '37', name: 'FeedHive', slug: 'feedhive', tagline: 'AI-powered social media scheduler for growth',
+        description: `FeedHive uses AI to predict the best time to post and helps you recycle evergreen content. It's designed for growth-focused creators who want to maximize engagement.
+
+## What FeedHive Does
+
+Visually plan your grid. Use AI to improve your tweets/posts. Automatically retweet your best content when your audience is most active.
+
+## Verdict
+
+Excellent for individual creators and solopreneurs focused on Twitter and LinkedIn growth.`,
+        url: 'https://feedhive.com', logo_url: '/logos/feedhive.svg',
+        category_id: '6', pricing: 'paid', pricing_details: 'Creator: $15/mo (~₹1,250)',
+        rating: 4.5, review_count: 180, featured: false, status: 'approved', tags: ['social-media', 'growth', 'tracking', 'recycling', 'marketing'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '38', name: 'AdCreative.ai', slug: 'adcreative-ai', tagline: 'Generate conversion-focused ad creatives in seconds',
+        description: `AdCreative.ai uses data points from millions of successful ads to generate banners and creatives that are scientifically proven to convert better.
+
+## What It Does
+
+Upload your brand assets, and it generates hundreds of ad variations for Facebook, Instagram, and Google Ads, ranked by their predicted conversion score.
+
+## Verdict
+
+A huge time-saver for performance marketers and agencies.`,
+        url: 'https://adcreative.ai', logo_url: '/logos/adcreative.svg',
+        category_id: '6', pricing: 'paid', pricing_details: 'Starter: $21/mo (~₹1,750)',
+        rating: 4.3, review_count: 270, featured: false, status: 'approved', tags: ['ads', 'marketing', 'design', 'conversion', 'social'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '39', name: 'HubSpot AI', slug: 'hubspot', tagline: 'Complete CRM platform with embedded AI tools',
+        description: `HubSpot has integrated AI across its entire CRM suite. From drafting emails to summarizing calls and generating blog posts, Content Hub and Breeze AI make every go-to-market task easier.
+
+## What It Does
+
+Manage unlimited contacts. Generate websites and landing pages with AI. Automate email marketing sequences.
+
+## Verdict
+
+The gold standard for inbound marketing. The free CRM is excellent for startups.`,
+        url: 'https://hubspot.com', logo_url: '/logos/hubspot.svg',
+        category_id: '6', pricing: 'freemium', pricing_details: 'Free CRM. Starter: $20/mo (~₹1,650)',
+        rating: 4.6, review_count: 950, featured: false, status: 'approved', tags: ['crm', 'marketing', 'email', 'sales', 'enterprise'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '40', name: 'Khanmigo', slug: 'khanmigo', tagline: 'World-class AI tutor for every student',
+        description: `Khan Academy's AI tutor sits alongside students as they work. Instead of giving answers, it guides them to the solution ask a real teacher would.
+
+## What Khanmigo Does
+
+Helps with math, science, and coding. It can also help teachers creating lesson plans and grading.
+
+## Verdict
+
+The most ethical and educational use of AI for students. Great for Indian students following Khan Academy curriculums.`,
+        url: 'https://khanacademy.org/khanmigo', logo_url: '/logos/khanmigo.svg',
+        category_id: '7', pricing: 'paid', pricing_details: 'donation/monthly fee (~₹350/mo)',
+        rating: 4.8, review_count: 310, featured: false, status: 'approved', tags: ['education', 'tutor', 'student', 'learning', 'math'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '41', name: 'Duolingo Max', slug: 'duolingo', tagline: 'Learn languages with roleplay and AI explanations',
+        description: `Duolingo Max adds GPT-4 power to the world’s favorite language app. Explain My Answer gives you detailed feedback, and Roleplay lets you practice real-world conversations.
+
+## What It Does
+
+Gamified language learning with smarter, more personalized feedback.
+
+## Verdict
+
+The best way to casually learn a new language.`,
+        url: 'https://duolingo.com', logo_url: '/logos/duolingo.svg',
+        category_id: '7', pricing: 'freemium', pricing_details: 'Free. Max: varies (~₹800/mo)',
+        rating: 4.7, review_count: 1200, featured: true, status: 'approved', tags: ['education', 'language', 'mobile', 'learning', 'gamified'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '42', name: 'Scholarcy', slug: 'scholarcy', tagline: 'AI article summarizer for researchers',
+        description: `Scholarcy reads academic papers and breaks them down into bite-sized summary flashcards. It highlights key findings, limitations, and references.
+
+## What Scholarcy Does
+
+Upload a PDF and get a structured summary. It links to open-access versions of cited sources.
+
+## Verdict
+
+A lifesaver for PhD students and researchers drowning in literature reviews.`,
+        url: 'https://scholarcy.com', logo_url: '/logos/scholarcy.svg',
+        category_id: '7', pricing: 'freemium', pricing_details: 'Free limits. Personal: $9.99/mo (~₹830)',
+        rating: 4.5, review_count: 150, featured: false, status: 'approved', tags: ['research', 'academic', 'summary', 'education', 'reading'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '43', name: 'Remove.bg', slug: 'remove-bg', tagline: 'Remove image backgrounds automatically in 5 seconds',
+        description: `It does one thing and does it perfectly: removes backgrounds. No selecting pixels, no marking boundaries. Just upload and download.
+
+## What It Does
+
+Instant transparent backgrounds for products, people, and graphics. Integrates with Photoshop and Canva.
+
+## Verdict
+
+Essential for e-commerce sellers and designers.`,
+        url: 'https://remove.bg', logo_url: '/logos/removebg.svg',
+        category_id: '8', pricing: 'freemium', pricing_details: 'Free low-res. High-res: pay-per-image',
+        rating: 4.6, review_count: 550, featured: false, status: 'approved', tags: ['design', 'image-editing', 'background', 'tools', 'free'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '44', name: 'Cleanup.pictures', slug: 'cleanup-pictures', tagline: 'Retouch and remove functionality better than Photoshop',
+        description: `Remove unwanted objects, people, text, or defects from any picture. It uses advanced inpainting to fill the space naturally.
+
+## What It Does
+
+Highlight an object (like a tourist in your travel, or a watermark) and it vanishes instantly.
+
+## Verdict
+
+Incredible free tool for quick photo fixes.`,
+        url: 'https://cleanup.pictures', logo_url: '/logos/cleanup.svg',
+        category_id: '8', pricing: 'freemium', pricing_details: 'Free (720p). Pro: $4/mo (~₹330)',
+        rating: 4.5, review_count: 280, featured: false, status: 'approved', tags: ['design', 'photo-editing', 'magic-eraser', 'tools', 'free'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '45', name: 'Luma AI', slug: 'luma-ai', tagline: 'Capture 3D masterpieces with your iPhone',
+        description: `Luma AI brings NeRF (Neural Radiance Fields) technology to your phone. Capture realistic 3D models and scenes just by taking a video. Dream Machine generates high-quality videos from text.
+
+## What Luma Does
+
+Create 3D assets for games and VFX. Generate smooth, realistic videos from text prompts (Dream Machine).
+
+## Verdict
+
+Cutting-edge tech for 3D artists and video creators.`,
+        url: 'https://lumalabs.ai', logo_url: '/logos/luma.svg',
+        category_id: '3', pricing: 'freemium', pricing_details: 'Free to use. Paid tiers for heavy usage',
+        rating: 4.4, review_count: 310, featured: false, status: 'approved', tags: ['3d', 'video', 'nerf', 'creative', 'vfx'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
+    {
+        id: '46', name: 'Mubert', slug: 'mubert', tagline: 'Royalty-free AI music generation for creators',
+        description: `Generate unique, royalty-free background music for your videos, podcasts, and streams. Mubert creates music instantly to fit your specific mood and duration.
+
+## What Mubert Does
+
+"Lo-fi hip hop for 5 minutes." "Upbeat electronic intro." Mubert generates it on the fly. No more copyright strikes.
+
+## Verdict
+
+Perfect for YouTubers and streamers who need safe background music.`,
+        url: 'https://mubert.com', logo_url: '/logos/mubert.svg',
+        category_id: '3', pricing: 'freemium', pricing_details: 'Free (with attribution). Pro: $14/mo (~₹1,160)',
+        rating: 4.3, review_count: 190, featured: false, status: 'approved', tags: ['audio', 'music', 'royalty-free', 'creators', 'youtube'],
+        created_at: '2026-02-16', updated_at: '2026-02-16'
+    },
 ];
 
 export const reviews: Review[] = [
