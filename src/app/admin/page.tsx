@@ -61,9 +61,16 @@ export default function AdminDashboard() {
         setMessages(getContactMessages());
     };
 
+    const sanitizeSlug = (text: string) => {
+        return text
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+    };
+
     const handleSavePost = async (publish: boolean) => {
         const postData = {
-            slug: newPost.slug || newPost.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+            slug: sanitizeSlug(newPost.slug || newPost.title),
             title: newPost.title,
             excerpt: newPost.excerpt,
             content: newPost.content,
@@ -579,6 +586,6 @@ export default function AdminDashboard() {
                     )}
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

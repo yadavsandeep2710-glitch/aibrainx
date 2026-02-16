@@ -39,8 +39,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function BlogArticlePage({ params }: PageProps) {
-    const { slug } = await params;
-    const post = await getPostBySlug(slug);
+    const { slug: rawSlug } = await params;
+    const slug = decodeURIComponent(rawSlug);
+    let post = await getPostBySlug(slug);
+
+    if (!post) {
+        // Fallback: Try a sanitized version of the slug (common if URL has spaces/caps)
+        const sanitizedSlug = slug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        if (sanitizedSlug !== slug) {
+            post = await getPostBySlug(sanitizedSlug);
+        }
+    }
 
     if (!post) {
         notFound();
