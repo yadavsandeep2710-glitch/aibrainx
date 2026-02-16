@@ -31,7 +31,16 @@ const unindent = (str: string) => {
 };
 
 export default function BlogPostContent({ post, relatedPosts }: BlogPostContentProps) {
-    const sanitizedContent = unindent(post.content);
+    // Clean content to remove accidental JSON schema blocks that might have been injected into the text
+    const cleanContent = (content: string) => {
+        if (!content) return '';
+        // Remove "JSON" heading and code block pattern often left by AI generators
+        return unindent(content)
+            .replace(/JSON\s*[-_]*\s*```json\s*\{[\s\S]*?"@context":\s*"https:\/\/schema\.org"[\s\S]*?\}\s*```/gi, '')
+            .replace(/```json\s*\{[\s\S]*?"@context":\s*"https:\/\/schema\.org"[\s\S]*?\}\s*```/gi, '');
+    };
+
+    const sanitizedContent = cleanContent(post.content);
 
     return (
         <div className={styles.page}>
