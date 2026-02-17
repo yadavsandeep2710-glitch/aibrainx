@@ -133,7 +133,7 @@ function HomeContent() {
       </section>
 
       {/* Services Section */}
-      <section className={`section ${styles.servicesSection}`} style={{ background: 'var(--bg-secondary)' }}>
+      <section id="services" className={`section ${styles.servicesSection}`} style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
           <div className="section-header">
             <h2>Our Premium Services</h2>

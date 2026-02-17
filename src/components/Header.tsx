@@ -8,6 +8,7 @@ import styles from './Header.module.css';
 
 const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/#services', label: 'Services' },
     { href: '/tools', label: 'AI Tools' },
     { href: '/ai-guides', label: 'AI Guides' },
     { href: '/blog', label: 'Blog' },
