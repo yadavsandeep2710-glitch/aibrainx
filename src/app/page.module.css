@@ -316,6 +316,23 @@
   gap: var(--space-6);
 }
 
+/* Services & Packages */
+.servicesSection {
+  background: var(--bg-secondary);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.packagesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+}
+
 /* CTA Section */
 .ctaSection {
   padding: var(--space-16) 0;

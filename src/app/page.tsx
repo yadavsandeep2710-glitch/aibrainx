@@ -6,6 +6,9 @@ import Link from 'next/link';
 import ToolCard from '@/components/ToolCard';
 import BlogCard from '@/components/BlogCard';
 import { categories, tools, blogPosts, getFeaturedTools } from '@/lib/data';
+import { services, packages } from '@/lib/service-data';
+import ServiceCard from '@/components/ServiceCard';
+import PackageCard from '@/components/PackageCard';
 import styles from './page.module.css';
 
 function HomeContent() {
@@ -125,6 +128,36 @@ function HomeContent() {
             <Link href="/tools" className="btn btn-secondary btn-lg">
               View All Tools →
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className={`section ${styles.servicesSection}`} style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container">
+          <div className="section-header">
+            <h2>Our Premium Services</h2>
+            <p>Affordable, high-quality digital solutions for your business growth</p>
+          </div>
+          <div className={styles.servicesGrid}>
+            {services.map(service => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Packages Section */}
+      <section className="section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Growth Packages</h2>
+            <p>All-in-one solutions designed to scale your business</p>
+          </div>
+          <div className={styles.packagesGrid}>
+            {packages.map(pkg => (
+              <PackageCard key={pkg.id} pkg={pkg} />
+            ))}
           </div>
         </div>
       </section>
