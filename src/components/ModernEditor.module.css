@@ -1,0 +1,141 @@
+.editorWrapper {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    min-height: 60vh;
+}
+
+.editorContent {
+    font-family: var(--font-body, sans-serif);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    outline: none;
+}
+
+/* TipTap Specific Overrides */
+.editorContent :global(.tiptap) {
+    outline: none;
+}
+
+.editorContent :global(.tiptap p.is-editor-empty:first-child::before) {
+    content: attr(data-placeholder);
+    float: left;
+    color: var(--text-muted);
+    pointer-events: none;
+    height: 0;
+}
+
+.editorContent :global(.tiptap h2) {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.editorContent :global(.tiptap h3) {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+}
+
+.editorContent :global(.tiptap blockquote) {
+    border-left: 3px solid var(--accent-primary);
+    padding-left: 1.5rem;
+    font-style: italic;
+    margin: 2rem 0;
+    color: var(--text-secondary);
+}
+
+/* Bubble Menu Styles */
+.bubbleMenu {
+    display: flex;
+    background: var(--surface-float, #1e293b);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: var(--shadow-xl);
+    gap: 2px;
+}
+
+.bubbleButton {
+    background: transparent;
+    border: none;
+    padding: 6px 10px;
+    color: var(--text-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 0.875rem;
+}
+
+.bubbleButton:hover {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+}
+
+.bubbleButtonActive {
+    color: var(--accent-primary);
+    background: var(--surface-active);
+}
+
+/* Floating Menu (Slash Command) */
+.floatingMenu {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-float, #1e293b);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: var(--shadow-2xl);
+    min-width: 180px;
+    overflow: hidden;
+}
+
+.floatingItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    text-align: left;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 0.875rem;
+}
+
+.floatingItem:hover {
+    background: var(--surface-hover);
+    color: var(--text-primary);
+}
+
+.floatingItemIcon {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-card);
+    border-radius: 6px;
+    color: var(--accent-primary);
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .editorWrapper {
+        padding: 0 0.5rem;
+    }
+}

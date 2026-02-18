@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { createClient } from '@/lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
-import RichTextEditor from '@/components/RichTextEditor';
+import ModernEditor from '@/components/ModernEditor';
 import {
     getPosts,
     getAllTools, getToolSubmissions, updateSubmissionStatus,
@@ -400,10 +400,10 @@ export default function AdminDashboard() {
 
                                     <div className="input-group" style={{ marginTop: '1rem' }}>
                                         <label>Content *</label>
-                                        <RichTextEditor
+                                        <ModernEditor
                                             value={newPost.content}
-                                            onChange={(value) => setNewPost(p => ({ ...p, content: value }))}
-                                            placeholder="Write your article here... Use the toolbar above to format your content."
+                                            onChange={(value: string) => setNewPost(p => ({ ...p, content: value }))}
+                                            placeholder="Tell your story... Select text for formatting, or use the menu on empty lines."
                                         />
                                     </div>
 
