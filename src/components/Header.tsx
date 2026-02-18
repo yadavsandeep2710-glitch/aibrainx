@@ -9,11 +9,20 @@ import styles from './Header.module.css';
 const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/#services', label: 'Services' },
-    { href: '/tools', label: 'AI Tools' },
+    {
+        href: '/seo-tools',
+        label: 'AI SEO Tools',
+        dropdown: [
+            { href: '/seo-tools/seo-audit', label: 'SEO Audit' },
+            { href: '/seo-tools/keyword-research', label: 'Keyword Discovery' },
+            { href: '/seo-tools/rank-tracker', label: 'Rank Tracker' },
+            { href: '/seo-tools/search-console', label: 'Search Console' },
+            { href: '/seo-tools/ai-seo-assistant', label: 'AI Assistant' },
+        ]
+    },
+    { href: '/tools', label: 'AI Tools Directory' }, // Renamed slightly to avoid confusion
     { href: '/ai-guides', label: 'AI Guides' },
     { href: '/blog', label: 'Blog' },
-    { href: '/submit', label: 'Submit Tool' },
-    { href: '/about', label: 'About' },
 ];
 
 export default function Header() {
@@ -50,16 +59,38 @@ export default function Header() {
 
                 <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
                     {navLinks.map(link => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className={`${styles.navLink} ${pathname === link.href ? styles.navLinkActive : ''}`}
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            {link.label}
-                        </Link>
+                        link.dropdown ? (
+                            <div key={link.href} className={styles.dropdown}>
+                                <div className={`${styles.navLink} ${styles.dropdownTrigger} ${pathname.startsWith(link.href) ? styles.navLinkActive : ''}`}>
+                                    {link.label}
+                                    <span className={styles.dropdownArrow}>▼</span>
+                                </div>
+                                <div className={styles.dropdownMenu}>
+                                    {link.dropdown.map(item => (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            className={styles.dropdownItem}
+                                            onClick={() => setMobileMenuOpen(false)}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        ) : (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={`${styles.navLink} ${pathname === link.href ? styles.navLinkActive : ''}`}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        )
                     ))}
-
+                    <Link href="/submit" className={styles.navLink} onClick={() => setMobileMenuOpen(false)}>Submit Tool</Link>
+                    <Link href="/about" className={styles.navLink} onClick={() => setMobileMenuOpen(false)}>About</Link>
                 </nav>
 
                 <div className={styles.headerActions}>
