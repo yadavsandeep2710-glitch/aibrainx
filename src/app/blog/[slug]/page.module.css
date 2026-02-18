@@ -169,7 +169,7 @@
 }
 
 .article p {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .article h2 {
@@ -195,17 +195,19 @@
 /* Lists */
 .article ul,
 .article ol {
-    margin: 2rem 0;
-    padding-left: 0;
-    list-style-position: inside;
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+    list-style-position: outside;
 }
 
 .article li {
-    margin-bottom: 1rem;
-    padding-left: 1rem;
-    border-left: 2px solid var(--border-subtle);
-    /* Modern marker style */
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
     color: var(--text-secondary);
+}
+
+.article li p {
+    margin-bottom: 0.25rem;
 }
 
 /* Blockquotes - Elegant */
