@@ -34,7 +34,6 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
     // Clean content to remove accidental JSON schema blocks that might have been injected into the text
     const cleanContent = (content: string) => {
         if (!content) return '';
-        // Remove "JSON" heading and code block pattern often left by AI generators
         return unindent(content)
             .replace(/JSON\s*[-_]*\s*```json\s*\{[\s\S]*?"@context":\s*"https:\/\/schema\.org"[\s\S]*?\}\s*```/gi, '')
             .replace(/```json\s*\{[\s\S]*?"@context":\s*"https:\/\/schema\.org"[\s\S]*?\}\s*```/gi, '');
@@ -45,25 +44,26 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
     return (
         <div className={styles.page}>
             <BlogScrollProgress />
+
             <div className={styles.container}>
+                {/* Breadcrumb */}
                 <nav className={styles.breadcrumb}>
-                    <Link href="/">Home</Link>
-                    <span>/</span>
                     <Link href="/blog">Blog</Link>
                     <span>/</span>
                     <span className={styles.breadcrumbCurrent}>{post.category}</span>
                 </nav>
 
+                {/* Editorial Header */}
                 <header className={styles.articleHeader}>
                     <span className={styles.category}>{post.category}</span>
                     <h1 className={styles.title}>{post.title}</h1>
                     <p className={styles.excerpt}>{post.excerpt}</p>
+
                     <div className={styles.meta}>
                         <div className={styles.author}>
                             <img
-                                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(post.author)}&background=3b82f6&color=fff&rounded=true`}
+                                src={`https://ui-avatars.com/api/?name=${encodeURIComponent(post.author)}&background=18181b&color=fff&rounded=true`}
                                 alt={post.author}
-                                style={{ width: 32, height: 32 }}
                             />
                             <span>{post.author}</span>
                         </div>
@@ -74,90 +74,90 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                     </div>
                 </header>
 
+                {/* Cinematic Cover Image */}
                 {post.cover_image_url && (
                     <div className={styles.coverImage}>
-                        <img src={post.cover_image_url} alt={post.title} loading="lazy" />
+                        <img src={post.cover_image_url} alt={post.title} />
                     </div>
                 )}
 
+                {/* Main Content - Centered */}
                 <div className={styles.contentWrapper}>
-                    <div style={{ minWidth: 0 }}>
-                        <article className={styles.article}>
-                            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-                                {sanitizedContent}
-                            </ReactMarkdown>
-                        </article>
+                    <article className={styles.article}>
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            rehypePlugins={[rehypeRaw]}
+                            components={{
+                                // Custom link handling to open external in new tab?
+                                a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" />
+                            }}
+                        >
+                            {sanitizedContent}
+                        </ReactMarkdown>
+                    </article>
 
-                        {/* Article Newsletter Section */}
-                        <div className={styles.articleNewsletter}>
-                            <div className={styles.newsletterContent}>
-                                <h3>Like this deep dive?</h3>
-                                <p>Join 5,000+ AI enthusiasts getting weekly insights that move the needle. No fluff, just value.</p>
-                                <form className={styles.newsletterForm}>
-                                    <input type="email" placeholder="Enter your email" required />
-                                    <button type="submit">Subscribe</button>
-                                </form>
+                    {/* Article Footer: Tags & Share */}
+                    <div className={styles.articleFooter}>
+                        {post.tags && post.tags.length > 0 && (
+                            <div className={styles.tags}>
+                                {post.tags.map(tag => (
+                                    <Link key={tag} href={`/blog?category=${encodeURIComponent(tag)}`} className={styles.tag}>
+                                        #{tag}
+                                    </Link>
+                                ))}
                             </div>
+                        )}
+
+                        <div className={styles.shareSection}>
+                            <span className={styles.shareLabel}>Share this article</span>
+                            <div className={styles.shareButtons}>
+                                <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on Twitter">
+                                    𝕏
+                                </a>
+                                <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' https://aibrainx.in/blog/' + post.slug)}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on WhatsApp">
+                                    💬
+                                </a>
+                                <a href={`https://www.linkedin.com/sharing/share-offsite/?url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on LinkedIn">
+                                    💼
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Embedded Newsletter */}
+                        <div className={styles.newsletter}>
+                            <h3>Subscribe to AI BrainX</h3>
+                            <p>Get the latest AI tools and guides delivered straight to your inbox. No spam, just value.</p>
+                            <form className={styles.newsletterForm} onSubmit={(e) => e.preventDefault()}>
+                                <input type="email" placeholder="Your email address" required />
+                                <button type="submit">Subscribe Free</button>
+                            </form>
                         </div>
                     </div>
-
-                    <aside className={styles.sidebar}>
-                        <div className={styles.stickySidebar}>
-                            <div className={styles.sidebarCard}>
-                                <h3>Spread the knowledge</h3>
-                                <div className={styles.shareButtons}>
-                                    <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on Twitter">
-                                        <span>𝕏</span>
-                                    </a>
-                                    <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' https://aibrainx.in/blog/' + post.slug)}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on WhatsApp">
-                                        <span>💬</span>
-                                    </a>
-                                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on LinkedIn">
-                                        <span>💼</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            {post.tags && post.tags.length > 0 && (
-                                <div className={styles.sidebarCard}>
-                                    <h3>Expertise Areas</h3>
-                                    <div className={styles.tags}>
-                                        {post.tags.map(tag => <span key={tag} className="tag">#{tag}</span>)}
-                                    </div>
-                                </div>
-                            )}
-
-                            <div className="ad-slot">
-                                <p style={{ fontSize: '10px', opacity: 0.5, letterSpacing: '1px' }}>SPONSORED CONTENT</p>
-                            </div>
-                        </div>
-                    </aside>
                 </div>
+            </div>
 
-                {relatedPosts.length > 0 && (
-                    <section className={styles.relatedSection}>
-                        <h2 className={styles.relatedTitle}>Continue Reading</h2>
+            {/* Related Posts Section - Full Width Background */}
+            {relatedPosts.length > 0 && (
+                <section className={styles.relatedSection}>
+                    <div className={styles.relatedContainer}>
+                        <h2 className={styles.relatedTitle}>Read Next</h2>
                         <div className={styles.relatedGrid}>
                             {relatedPosts.map(rp => (
                                 <Link key={rp.id} href={`/blog/${rp.slug}`} className={styles.relatedCard}>
-                                    <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/9' }}>
+                                    <div className={styles.relatedImageWrapper}>
                                         <img src={rp.cover_image_url} alt={rp.title} className={styles.relatedImage} loading="lazy" />
                                     </div>
-                                    <div className={styles.relatedContent}>
-                                        <span className={styles.relatedMeta} style={{ color: 'var(--accent-primary)', textTransform: 'uppercase', fontSize: '10px', letterSpacing: '1px' }}>
-                                            {rp.category}
-                                        </span>
-                                        <h3>{rp.title}</h3>
-                                        <div className={styles.relatedMeta}>
-                                            <span>{rp.read_time} min read</span>
-                                        </div>
+                                    <span style={{ color: 'var(--accent-primary)', fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase' }}>{rp.category}</span>
+                                    <h3 style={{ marginTop: '0.5rem' }}>{rp.title}</h3>
+                                    <div className={styles.relatedMeta}>
+                                        <span>{rp.read_time} min read</span>
                                     </div>
                                 </Link>
                             ))}
                         </div>
-                    </section>
-                )}
-            </div>
+                    </div>
+                </section>
+            )}
         </div>
     );
 }
