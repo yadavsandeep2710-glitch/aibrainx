@@ -10,15 +10,20 @@ export async function GET(request: Request) {
 
     try {
         // Call Google PageSpeed Insights API (mobile strategy by default)
-        // No key used here - strictly rate limited but free for testing.
-        const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=PERFORMANCE&category=SEO&category=ACCESSIBILITY&strategy=mobile`;
+        const apiKey = process.env.GOOGLE_PAGESPEED_API_KEY;
+        if (!apiKey) {
+            console.warn('GOOGLE_PAGESPEED_API_KEY is missing. Rate limits may apply.');
+        }
+
+        const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=PERFORMANCE&category=SEO&category=ACCESSIBILITY&strategy=mobile&key=${apiKey || ''}`;
 
         const response = await fetch(apiUrl);
 
         if (!response.ok) {
             const errData = await response.json();
-            console.error('PageSpeed API Error:', errData);
-            throw new Error(errData.error?.message || 'Failed to analyze website');
+            console.error('PageSpeed API Error:', JSON.stringify(errData, null, 2));
+            const errorMessage = errData.error?.message || 'Failed to analyze website';
+            throw new Error(errorMessage);
         }
 
         const data = await response.json();
