@@ -1,438 +1,292 @@
-/* Professional Editorial Style - Centered & Focused */
+/* TOI Readers Blog Style - News Portal Layout */
 .page {
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    padding-bottom: var(--space-24);
+    background: #ffffff;
+    color: #333333;
+    font-family: 'Georgia', serif;
+    /* Default to serif for that classic news feel, or user preferred */
 }
 
 .container {
-    max-width: 900px;
-    /* Constrained for reading focus */
+    max-width: 1200px;
+    /* Wide alignment */
     margin: 0 auto;
-    padding: 0 var(--space-6);
-    position: relative;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    /* Main content + Sidebar */
+    gap: 40px;
+    align-items: start;
 }
 
-/* Breadcrumbs */
+/* Breadcrumbs - Minimal */
 .breadcrumb {
-    padding: var(--space-8) 0;
+    grid-column: 1 / -1;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 20px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--space-3);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-family: var(--font-body);
+    gap: 8px;
 }
 
 .breadcrumb a {
-    color: var(--text-secondary);
-    transition: color 0.2s;
+    color: #000;
     text-decoration: none;
+    font-weight: 700;
 }
 
 .breadcrumb a:hover {
-    color: var(--text-primary);
+    text-decoration: underline;
 }
 
-.breadcrumbCurrent {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-/* Header - Centered & Editorial */
+/* Header Area - Left Aligned */
 .articleHeader {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto var(--space-12);
-    padding-top: var(--space-4);
+    grid-column: 1 / 2;
+    margin-bottom: 20px;
 }
 
 .category {
-    display: inline-block;
-    font-family: var(--font-heading);
-    font-size: 0.8rem;
+    font-family: 'Arial', sans-serif;
+    color: #e21b22;
+    /* Classic News Red */
     font-weight: 700;
-    color: var(--accent-primary);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: var(--space-6);
-    padding: 0.35rem 0.75rem;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    border-radius: 9999px;
-    background: rgba(59, 130, 246, 0.05);
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .title {
-    font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 800;
-    line-height: 1.15;
-    color: var(--text-primary);
-    margin-bottom: var(--space-6);
-    letter-spacing: -0.02em;
+    font-family: 'Georgia', serif;
+    /* or a strong Sans like Roboto Condensed based on TOI */
+    font-size: 42px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
 }
 
 .excerpt {
-    font-family: var(--font-editorial);
-    font-size: 1.35rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
-    margin: 0 auto var(--space-8);
-    font-weight: 400;
-    max-width: 720px;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: #444;
+    line-height: 1.5;
+    margin-bottom: 20px;
 }
 
-/* Meta Data - Minimal Centered */
 .meta {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: var(--space-6);
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    font-family: var(--font-body);
+    gap: 15px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #666;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
 }
 
 .author {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    font-weight: 600;
-    color: var(--text-primary);
+    gap: 10px;
+    font-weight: 700;
+    color: #000;
 }
 
 .author img {
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--border-subtle);
-}
-
-.separator {
-    width: 4px;
-    height: 4px;
-    background: var(--text-muted);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
 }
 
-/* Cover Image - Cinematic */
+/* Main Content Area */
+.contentWrapper {
+    grid-column: 1 / 2;
+}
+
 .coverImage {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    max-width: 1200px;
-    /* Optional cap if you don't want full edge-to-edge on huge screens */
-    margin-bottom: var(--space-16);
-    border-radius: 0;
-    /* Full bleed usually implies no radius, or can use radius if max-width set */
-}
-
-@media (min-width: 1200px) {
-    .coverImage {
-        margin-left: auto;
-        margin-right: auto;
-        left: auto;
-        right: auto;
-        border-radius: var(--radius-xl);
-    }
+    width: 100%;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    /* Slight round */
+    overflow: hidden;
 }
 
 .coverImage img {
     width: 100%;
     height: auto;
-    max-height: 650px;
-    object-fit: cover;
     display: block;
 }
 
-/* Content Layout - Single Column Focus */
-.contentWrapper {
-    max-width: 720px;
-    /* Optimal reading width */
-    margin: 0 auto;
-}
-
-/* Article Typography - High Readability */
 .article {
-    font-family: var(--font-editorial);
-    /* Using serif for body text if available, or clean sans */
-    font-size: 1.15rem;
-    /* slightly larger base size */
+    font-family: 'Georgia', serif;
+    font-size: 18px;
     line-height: 1.8;
-    color: var(--text-primary);
-    /* High contrast */
-    --link-color: var(--accent-primary);
+    color: #333;
 }
 
 .article p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
 }
 
 .article h2 {
-    font-family: var(--font-heading);
-    font-size: 2rem;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
     font-weight: 700;
-    color: var(--text-primary);
-    margin-top: 4rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #000;
 }
 
 .article h3 {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-top: 3rem;
-    margin-bottom: 1.25rem;
-    color: var(--text-primary);
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #000;
 }
 
-/* Lists */
 .article ul,
 .article ol {
-    margin: 1.5rem 0;
-    padding-left: 1.5rem;
-    list-style-position: outside;
+    margin: 20px 0;
+    padding-left: 20px;
 }
 
 .article li {
-    margin-bottom: 0.5rem;
-    padding-left: 0.5rem;
-    color: var(--text-secondary);
+    margin-bottom: 10px;
 }
 
-.article li p {
-    margin-bottom: 0.25rem;
-}
-
-/* Blockquotes - Elegant */
 .article blockquote {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--text-primary);
-    margin: 3.5rem 0;
-    padding-left: 0;
-    border: none;
-    text-align: center;
+    border-left: 4px solid #e21b22;
+    padding-left: 20px;
     font-style: italic;
+    font-size: 20px;
+    color: #555;
+    margin: 30px 0;
 }
 
-/* Code Blocks */
-.article pre {
-    background: #1e1e1e;
-    /* Darker, cleaner */
-    padding: 1.5rem;
-    border-radius: var(--radius-lg);
-    overflow-x: auto;
-    margin: 2.5rem -2rem;
-    /* Pull out slightly */
-    font-size: 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/* Sidebar */
+.sidebar {
+    grid-column: 2 / 3;
+    grid-row: 2 / span 2;
+    /* Spans parallel to header + content */
 }
 
-@media (max-width: 768px) {
-    .article pre {
-        margin: 2.5rem 0;
-        border-radius: var(--radius-md);
-    }
-}
-
-.article code {
-    font-family: 'Fira Code', monospace;
-    color: #e2e8f0;
-}
-
-.article p code {
-    background: rgba(var(--accent-primary-rgb), 0.1);
-    color: var(--accent-primary);
-    padding: 0.1em 0.3em;
-    border-radius: 4px;
-    font-size: 0.9em;
-}
-
-/* Bottom Sections (Tags, Share, Newsletter) */
-.articleFooter {
-    margin-top: 5rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border-subtle);
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
-    margin-bottom: 3rem;
-}
-
-.tag {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    background: var(--bg-secondary);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    transition: all 0.2s;
-}
-
-.tag:hover {
-    background: var(--bg-elevated);
-    color: var(--text-primary);
-}
-
-.shareSection {
+.stickySidebar {
+    position: sticky;
+    top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 4rem;
+    gap: 30px;
 }
 
-.shareLabel {
-    font-size: 0.9rem;
-    font-weight: 600;
+.sidebarCard {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.sidebarCard h3 {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
+    margin-bottom: 15px;
+    border-left: 3px solid #e21b22;
+    padding-left: 10px;
+}
+
+/* Share & Tags */
+.shareSection {
+    margin: 30px 0;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .shareButtons {
     display: flex;
-    gap: 1rem;
+    gap: 15px;
 }
 
 .shareBtn {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    background: var(--bg-secondary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-subtle);
-    font-size: 1.2rem;
-    transition: all 0.2s;
+    color: #333;
     text-decoration: none;
+    font-size: 18px;
 }
 
 .shareBtn:hover {
-    transform: translateY(-2px);
-    background: var(--text-primary);
-    color: var(--bg-primary);
+    background: #e21b22;
+    color: white;
 }
 
-/* Embedded Newsletter */
-.newsletter {
-    background: var(--bg-secondary);
-    padding: 4rem 2rem;
-    border-radius: var(--radius-xl);
-    text-align: center;
-    margin-bottom: 5rem;
-}
-
-.newsletter h3 {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    margin-bottom: 1rem;
-}
-
-.newsletter p {
-    color: var(--text-secondary);
-    max-width: 500px;
-    margin: 0 auto 2rem;
-}
-
-.newsletterForm {
-    max-width: 400px;
-    margin: 0 auto;
-    display: flex;
-    gap: 0.75rem;
-}
-
-.newsletterForm input {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-default);
-    background: var(--bg-primary);
-}
-
-.newsletterForm button {
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--radius-lg);
-    background: var(--text-primary);
-    color: var(--bg-primary);
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-}
-
-/* Related Posts */
+/* Related Posts within Sidebar logic could go here, or below main content */
 .relatedSection {
-    background: var(--bg-secondary);
-    padding: 6rem 0;
-    margin-top: 4rem;
-}
-
-.relatedContainer {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--space-6);
+    grid-column: 1 / -1;
+    margin-top: 50px;
+    border-top: 4px solid #000;
+    padding-top: 30px;
 }
 
 .relatedTitle {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 3rem;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .relatedGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
 .relatedCard {
     text-decoration: none;
     color: inherit;
-    display: block;
 }
 
 .relatedImageWrapper {
     aspect-ratio: 16/9;
-    background: var(--bg-elevated);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    margin-bottom: 1.5rem;
+    background: #eee;
+    margin-bottom: 10px;
 }
 
 .relatedImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.relatedCard:hover .relatedImage {
-    transform: scale(1.03);
 }
 
 .relatedCard h3 {
-    font-size: 1.25rem;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
     font-weight: 700;
-    margin-bottom: 0.5rem;
     line-height: 1.4;
+    margin-bottom: 5px;
 }
 
-.relatedMeta {
-    font-size: 0.9rem;
-    color: var(--text-muted);
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: 1fr;
+        display: block;
+    }
+
+    .sidebar {
+        margin-top: 40px;
+    }
+
+    .relatedGrid {
+        grid-template-columns: 1fr;
+    }
 }
