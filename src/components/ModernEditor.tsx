@@ -8,6 +8,8 @@ import Image from '@tiptap/extension-image';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
 import Placeholder from '@tiptap/extension-placeholder';
+import Youtube from '@tiptap/extension-youtube';
+import CharacterCount from '@tiptap/extension-character-count';
 import BubbleMenuExtension from '@tiptap/extension-bubble-menu';
 import FloatingMenuExtension from '@tiptap/extension-floating-menu';
 import { useCallback, useRef, useState } from 'react';
@@ -16,7 +18,8 @@ import { v4 as uuidv4 } from 'uuid';
 import {
     FaBold, FaItalic, FaUnderline, FaQuoteRight, FaCode,
     FaListUl, FaListOl, FaLink, FaImage, FaPlus, FaHeading,
-    FaStrikethrough
+    FaStrikethrough, FaYoutube, FaAlignLeft, FaAlignCenter, FaAlignRight,
+    FaUndo, FaRedo
 } from 'react-icons/fa';
 import styles from './ModernEditor.module.css';
 
@@ -35,7 +38,7 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
         extensions: [
             StarterKit.configure({
                 heading: {
-                    levels: [2, 3],
+                    levels: [1, 2, 3],
                 },
             }),
             Underline,
@@ -44,20 +47,27 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
             Link.configure({
                 openOnClick: false,
                 HTMLAttributes: {
-                    class: 'text-accent-primary underline',
+                    class: 'text-accent-primary underline hover:text-accent-secondary transition-colors',
                 },
             }),
             Image.configure({
                 HTMLAttributes: {
-                    class: 'max-w-full rounded-lg shadow-md my-8 mx-auto block',
+                    class: 'max-w-full rounded-xl shadow-lg my-12 mx-auto block hover:opacity-95 transition-opacity cursor-pointer',
                 },
             }),
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
             }),
+            Youtube.configure({
+                inline: false,
+                HTMLAttributes: {
+                    class: 'rounded-xl shadow-lg my-12 mx-auto block max-w-full aspect-video',
+                },
+            }),
             Placeholder.configure({
                 placeholder: placeholder || 'Tell your story...',
             }),
+            CharacterCount,
         ],
         content: value,
         immediatelyRender: false,
@@ -84,6 +94,14 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
         editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
     }, [editor]);
 
+    const addYoutube = useCallback(() => {
+        if (!editor) return;
+        const url = window.prompt('Enter YouTube URL');
+        if (url) {
+            editor.commands.setYoutubeVideo({ src: url });
+        }
+    }, [editor]);
+
     const handleImageUpload = async (file: File) => {
         if (!editor) return;
         setIsUploading(true);
@@ -103,10 +121,16 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
                 .from('blog-images')
                 .getPublicUrl(filePath);
 
-            editor.chain().focus().setImage({ src: publicUrl }).run();
+            const altText = window.prompt('Enter image description (ALT text) for SEO', '');
+
+            editor.chain().focus().setImage({
+                src: publicUrl,
+                alt: altText || file.name,
+                title: altText || file.name
+            }).run();
         } catch (error) {
             console.error('Error uploading image:', error);
-            alert('Failed to upload image.');
+            alert('Failed to upload image. Please try again.');
         } finally {
             setIsUploading(false);
             if (fileInputRef.current) fileInputRef.current.value = '';
@@ -131,68 +155,110 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
 
             {/* Bubble Menu: Appears on Text Selection */}
             <BubbleMenu editor={editor} className={styles.bubbleMenu}>
-                <button
-                    onClick={() => editor.chain().focus().toggleBold().run()}
-                    className={`${styles.bubbleButton} ${editor.isActive('bold') ? styles.bubbleButtonActive : ''}`}
-                    title="Bold"
-                >
-                    <FaBold />
-                </button>
-                <button
-                    onClick={() => editor.chain().focus().toggleItalic().run()}
-                    className={`${styles.bubbleButton} ${editor.isActive('italic') ? styles.bubbleButtonActive : ''}`}
-                    title="Italic"
-                >
-                    <FaItalic />
-                </button>
-                <button
-                    onClick={() => editor.chain().focus().toggleUnderline().run()}
-                    className={`${styles.bubbleButton} ${editor.isActive('underline') ? styles.bubbleButtonActive : ''}`}
-                    title="Underline"
-                >
-                    <FaUnderline />
-                </button>
-                <button
-                    onClick={() => editor.chain().focus().toggleStrike().run()}
-                    className={`${styles.bubbleButton} ${editor.isActive('strike') ? styles.bubbleButtonActive : ''}`}
-                    title="Strikethrough"
-                >
-                    <FaStrikethrough />
-                </button>
-                <div className="w-px h-4 bg-[var(--border-subtle)] mx-1 self-center" />
-                <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                    className={`${styles.bubbleButton} ${editor.isActive('heading', { level: 2 }) ? styles.bubbleButtonActive : ''}`}
-                    title="Heading 2"
-                >
-                    <FaHeading size={12} />
-                </button>
-                <button
-                    onClick={() => editor.chain().focus().toggleBlockquote().run()}
-                    className={`${styles.bubbleButton} ${editor.isActive('blockquote') ? styles.bubbleButtonActive : ''}`}
-                    title="Quote"
-                >
-                    <FaQuoteRight />
-                </button>
-                <button
-                    onClick={setLink}
-                    className={`${styles.bubbleButton} ${editor.isActive('link') ? styles.bubbleButtonActive : ''}`}
-                    title="Link"
-                >
-                    <FaLink />
-                </button>
+                <div className={styles.bubbleGroup}>
+                    <button
+                        onClick={() => editor.chain().focus().toggleBold().run()}
+                        className={`${styles.bubbleButton} ${editor.isActive('bold') ? styles.bubbleButtonActive : ''}`}
+                        title="Bold"
+                    >
+                        <FaBold />
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleItalic().run()}
+                        className={`${styles.bubbleButton} ${editor.isActive('italic') ? styles.bubbleButtonActive : ''}`}
+                        title="Italic"
+                    >
+                        <FaItalic />
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleUnderline().run()}
+                        className={`${styles.bubbleButton} ${editor.isActive('underline') ? styles.bubbleButtonActive : ''}`}
+                        title="Underline"
+                    >
+                        <FaUnderline />
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleStrike().run()}
+                        className={`${styles.bubbleButton} ${editor.isActive('strike') ? styles.bubbleButtonActive : ''}`}
+                        title="Strikethrough"
+                    >
+                        <FaStrikethrough />
+                    </button>
+                </div>
+
+                <div className={styles.bubbleDivider} />
+
+                <div className={styles.bubbleGroup}>
+                    <button
+                        onClick={() => editor.chain().focus().setTextAlign('left').run()}
+                        className={`${styles.bubbleButton} ${editor.isActive({ textAlign: 'left' }) ? styles.bubbleButtonActive : ''}`}
+                        title="Align Left"
+                    >
+                        <FaAlignLeft />
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().setTextAlign('center').run()}
+                        className={`${styles.bubbleButton} ${editor.isActive({ textAlign: 'center' }) ? styles.bubbleButtonActive : ''}`}
+                        title="Align Center"
+                    >
+                        <FaAlignCenter />
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().setTextAlign('right').run()}
+                        className={`${styles.bubbleButton} ${editor.isActive({ textAlign: 'right' }) ? styles.bubbleButtonActive : ''}`}
+                        title="Align Right"
+                    >
+                        <FaAlignRight />
+                    </button>
+                </div>
+
+                <div className={styles.bubbleDivider} />
+
+                <div className={styles.bubbleGroup}>
+                    <button
+                        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                        className={`${styles.bubbleButton} ${editor.isActive('heading', { level: 2 }) ? styles.bubbleButtonActive : ''}`}
+                        title="Heading 2"
+                    >
+                        <FaHeading size={12} />
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().toggleBlockquote().run()}
+                        className={`${styles.bubbleButton} ${editor.isActive('blockquote') ? styles.bubbleButtonActive : ''}`}
+                        title="Quote"
+                    >
+                        <FaQuoteRight />
+                    </button>
+                    <button
+                        onClick={setLink}
+                        className={`${styles.bubbleButton} ${editor.isActive('link') ? styles.bubbleButtonActive : ''}`}
+                        title="Link"
+                    >
+                        <FaLink />
+                    </button>
+                </div>
             </BubbleMenu>
 
             {/* Floating Menu: Appears on Empty Lines */}
             <FloatingMenu editor={editor} className={styles.floatingMenu}>
                 <button
+                    onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+                    className={styles.floatingItem}
+                >
+                    <div className={styles.floatingItemIcon}>H1</div>
+                    <div>
+                        <strong>Main Title</strong>
+                        <p>Largest heading</p>
+                    </div>
+                </button>
+                <button
                     onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
                     className={styles.floatingItem}
                 >
-                    <div className={styles.floatingItemIcon}><FaHeading size={14} /></div>
+                    <div className={styles.floatingItemIcon}>H2</div>
                     <div>
-                        <strong>Heading</strong>
-                        <p style={{ fontSize: '11px', opacity: 0.7 }}>Large section heading</p>
+                        <strong>Section Heading</strong>
+                        <p>Standard section title</p>
                     </div>
                 </button>
                 <button
@@ -202,7 +268,17 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
                     <div className={styles.floatingItemIcon}><FaListUl /></div>
                     <div>
                         <strong>Bullet List</strong>
-                        <p style={{ fontSize: '11px', opacity: 0.7 }}>Simple bulleted list</p>
+                        <p>Simple bullet points</p>
+                    </div>
+                </button>
+                <button
+                    onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                    className={styles.floatingItem}
+                >
+                    <div className={styles.floatingItemIcon}><FaListOl /></div>
+                    <div>
+                        <strong>Numbered List</strong>
+                        <p>Sequential list</p>
                     </div>
                 </button>
                 <button
@@ -212,7 +288,7 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
                     <div className={styles.floatingItemIcon}><FaQuoteRight /></div>
                     <div>
                         <strong>Quote</strong>
-                        <p style={{ fontSize: '11px', opacity: 0.7 }}>Tell a story with quotes</p>
+                        <p>Highlight text with quotes</p>
                     </div>
                 </button>
                 <button
@@ -224,17 +300,17 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
                     </div>
                     <div>
                         <strong>Image</strong>
-                        <p style={{ fontSize: '11px', opacity: 0.7 }}>Add an image from your files</p>
+                        <p>Add image from device</p>
                     </div>
                 </button>
                 <button
-                    onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                    onClick={addYoutube}
                     className={styles.floatingItem}
                 >
-                    <div className={styles.floatingItemIcon}><FaCode /></div>
+                    <div className={styles.floatingItemIcon}><FaYoutube /></div>
                     <div>
-                        <strong>Code Block</strong>
-                        <p style={{ fontSize: '11px', opacity: 0.7 }}>Write code with highlighting</p>
+                        <strong>YouTube</strong>
+                        <p>Embed video</p>
                     </div>
                 </button>
                 <button
@@ -244,12 +320,39 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
                     <div className={styles.floatingItemIcon}>—</div>
                     <div>
                         <strong>Divider</strong>
-                        <p style={{ fontSize: '11px', opacity: 0.7 }}>Section break</p>
+                        <p>Horizontal line</p>
                     </div>
                 </button>
             </FloatingMenu>
 
             <EditorContent editor={editor} />
+
+            {/* Editor Footer: Stats & Actions */}
+            <div className={styles.editorFooter}>
+                <div className={styles.editorStats}>
+                    <span>{editor.storage.characterCount.words()} words</span>
+                    <span className={styles.statDivider}>|</span>
+                    <span>{editor.storage.characterCount.characters()} characters</span>
+                </div>
+                <div className={styles.editorActions}>
+                    <button
+                        onClick={() => editor.chain().focus().undo().run()}
+                        disabled={!editor.can().undo()}
+                        className={styles.actionButton}
+                        title="Undo"
+                    >
+                        <FaUndo />
+                    </button>
+                    <button
+                        onClick={() => editor.chain().focus().redo().run()}
+                        disabled={!editor.can().redo()}
+                        className={styles.actionButton}
+                        title="Redo"
+                    >
+                        <FaRedo />
+                    </button>
+                </div>
+            </div>
         </div>
     );
 }
