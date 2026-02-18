@@ -106,14 +106,14 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                             <div className={styles.sidebarCard}>
                                 <h3>Spread the knowledge</h3>
                                 <div className={styles.shareButtons}>
-                                    <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                                        <span style={{ fontSize: '1.2rem' }}>𝕏</span> Twitter
+                                    <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on Twitter">
+                                        <span>𝕏</span>
                                     </a>
-                                    <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' https://aibrainx.in/blog/' + post.slug)}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                                        <span style={{ fontSize: '1.2rem' }}>💬</span> WhatsApp
+                                    <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' https://aibrainx.in/blog/' + post.slug)}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on WhatsApp">
+                                        <span>💬</span>
                                     </a>
-                                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn}>
-                                        <span style={{ fontSize: '1.2rem' }}>💼</span> LinkedIn
+                                    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=https://aibrainx.in/blog/${post.slug}`} target="_blank" rel="noopener noreferrer" className={styles.shareBtn} aria-label="Share on LinkedIn">
+                                        <span>💼</span>
                                     </a>
                                 </div>
                             </div>
