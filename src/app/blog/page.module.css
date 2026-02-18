@@ -29,18 +29,14 @@
 }
 
 .label {
-    font-family: var(--font-mono, monospace);
-    font-size: 0.85rem;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
     color: var(--accent-primary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-weight: 700;
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background: rgba(59, 130, 246, 0.1);
-    border-radius: 9999px;
-    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .title {
@@ -48,16 +44,14 @@
     font-size: clamp(3rem, 6vw, 5rem);
     font-weight: 800;
     line-height: 1;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text-primary);
 }
 
 .subtitle {
-    font-size: 1.2rem;
+    font-family: var(--font-editorial);
+    font-size: 1.25rem;
     color: var(--text-secondary);
     line-height: 1.6;
     max-width: 60ch;

@@ -74,20 +74,23 @@ export default function BlogInterface({ initialPosts }: BlogInterfaceProps) {
                                 alt={featuredPost.title}
                                 className={styles.heroImage}
                             />
-                            <div className={styles.heroOverlay}></div>
                         </div>
+                        <div className={styles.heroOverlay}></div>
+
                         <div className={styles.heroContent}>
                             <span className={styles.heroBadge}>{featuredPost.category}</span>
+                            <h2 className={styles.heroTitle}>{featuredPost.title}</h2>
+
                             <div className={styles.heroMeta}>
                                 <span>{new Date(featuredPost.published_at || featuredPost.created_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                                 <span>•</span>
                                 <span>{featuredPost.read_time} min read</span>
                             </div>
-                            <h2 className={styles.heroTitle}>{featuredPost.title}</h2>
+
                             <p className={styles.heroExcerpt}>{featuredPost.excerpt}</p>
 
                             <div className={styles.readButton}>
-                                Read Article <span>→</span>
+                                Read Story
                             </div>
                         </div>
                     </Link>
@@ -100,8 +103,8 @@ export default function BlogInterface({ initialPosts }: BlogInterfaceProps) {
                     <div className={styles.sectionHeader}>
                         <h2 className={styles.sectionTitle}>
                             Latest Articles
-                            {searchQuery && <span className={styles.resultCount}>{filteredPosts.length} matches</span>}
                         </h2>
+                        {searchQuery && <span className={styles.resultCount}>{filteredPosts.length} results</span>}
                     </div>
 
                     {listPosts.length > 0 ? (
@@ -113,13 +116,13 @@ export default function BlogInterface({ initialPosts }: BlogInterfaceProps) {
                     ) : (
                         <div className={styles.noResults}>
                             <h3>No articles found</h3>
-                            <p>Try adjusting your search or category filter</p>
+                            <p>We couldn't find anything matching your search.</p>
                             <button
                                 className="btn btn-secondary"
-                                style={{ marginTop: '1rem' }}
+                                style={{ marginTop: '1.5rem' }}
                                 onClick={() => { setSearchQuery(''); setSelectedCategory('All'); }}
                             >
-                                Clear Filters
+                                Clear all filters
                             </button>
                         </div>
                     )}
@@ -143,12 +146,12 @@ export default function BlogInterface({ initialPosts }: BlogInterfaceProps) {
                             <button type="submit" className={styles.newsletterBtn}>Subscribe Free</button>
                         </form>
                         <div className={styles.trustBadge}>
-                            <span>🔒 No spam. Unsubscribe anytime.</span>
+                            🔒 Unsubscribe anytime. No spam.
                         </div>
                     </div>
 
                     {/* Trending Articles */}
-                    <div className={styles.sidebarWidget}>
+                    <div className={styles.sidebarWidget} style={{ border: 'none', background: 'transparent', padding: 0 }}>
                         <h3 className={styles.widgetTitle}>🔥 Trending Now</h3>
                         <div className={styles.trendingList}>
                             {trendingPosts.map((post, index) => (
@@ -159,20 +162,11 @@ export default function BlogInterface({ initialPosts }: BlogInterfaceProps) {
                                             {post.title}
                                         </Link>
                                         <div className={styles.trendingMeta}>
-                                            {post.read_time} min read • {post.category}
+                                            {post.category}
                                         </div>
                                     </div>
                                 </div>
                             ))}
-                        </div>
-                    </div>
-
-                    {/* Trust Signals */}
-                    <div className={styles.sidebarWidget} style={{ background: 'transparent', border: 'none', padding: 0 }}>
-                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                            <span className="tag">🇮🇳 Made for India</span>
-                            <span className="tag">🎓 Student Friendly</span>
-                            <span className="tag">💼 Business Ready</span>
                         </div>
                     </div>
                 </aside>
