@@ -148,60 +148,67 @@
 
 /* Article Typography - Clean & Professional "News" Look */
 .article {
-    font-family: var(--font-body);
-    /* Switch to Inter for modern tech news feel, OR 'Georgia' for classic. Let's stick to system/Inter for clean look. */
-    /* Actually, user said 'professional news blog' - often serif for body is preferred. Let's use the Merriweather we added, but cleaner. */
-    font-family: var(--font-editorial, 'Merriweather', serif);
+    /* Use Inter (Sans) for a modern tech-news look, better for lists/data */
+    font-family: var(--font-body, sans-serif);
     font-size: 1.125rem;
     /* 18px standard */
-    line-height: 1.8;
-    color: #e2e8f0;
-    /* High contrast text */
+    line-height: 1.7;
+    /* Slightly tighter for sans */
+    color: #cbd5e1;
+    /* Clear text color */
     min-width: 0;
 }
 
 /* Remove the drop cap or make it subtler */
 .article>p:first-of-type {
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-primary);
-    /* Darker/Brigther for lead */
+    /* Lead paragraph pop */
+    margin-bottom: 2rem;
 }
 
 .article p {
-    margin-bottom: 1.8rem;
+    margin-bottom: 1.5rem;
+    /* Tighter paragraph spacing */
 }
 
 .article h2 {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 2rem;
+    /* Larger H2 */
     font-weight: 800;
     color: var(--text-primary);
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
 .article h3 {
     font-family: var(--font-heading);
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-top: 2.5rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     color: var(--text-primary);
 }
 
+/* Tighter Lists for Data/Startups */
 .article ul,
 .article ol {
-    margin: 2rem 0;
-    padding-left: 1.5rem;
+    margin: 1rem 0;
+    /* Reduced from 2rem */
+    padding-left: 1.25rem;
     color: var(--text-secondary);
 }
 
 .article li {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
 }
 
+/* Make bold tags stand out for "Startup: Name" patterns */
 .article strong {
     font-weight: 700;
     color: var(--text-primary);
@@ -209,32 +216,34 @@
 
 .article blockquote {
     border-left: 4px solid var(--accent-primary);
-    padding: 0.5rem 0 0.5rem 1.5rem;
-    margin: 2.5rem 0;
-    font-size: 1.35rem;
+    padding: 1rem 0 1rem 1.5rem;
+    margin: 2rem 0;
+    font-size: 1.25rem;
     font-style: italic;
     color: var(--text-primary);
-    background: transparent;
-    /* Cleaner look */
-    /* box-shadow: none; */
+    background: rgba(255, 255, 255, 0.03);
+    /* Subtle bg */
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
 .article a {
     color: var(--accent-primary);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    font-weight: 500;
+    text-decoration: none;
+    /* Clean links */
+    border-bottom: 1px solid rgba(var(--accent-primary-rgb), 0.3);
+    transition: all 0.2s;
 }
 
 .article a:hover {
     color: var(--accent-primary-hover);
+    border-bottom-color: var(--accent-primary);
 }
 
 .article img {
     width: 100%;
-    margin: 2.5rem 0;
+    margin: 2rem 0;
     border-radius: var(--radius-md);
-    /* border: 1px solid var(--border-subtle); */
+    box-shadow: var(--shadow-md);
 }
 
 /* Code Blocks */
@@ -262,12 +271,9 @@
     gap: 2.5rem;
 }
 
+/* Sidebar Card Styles */
 .sidebarCard {
-    /* No background/border for a cleaner "embedded" look, or minimal */
-    /* background: var(--bg-card); */
-    /* border: 1px solid var(--border-subtle); */
-    /* padding: 1.5rem; */
-    /* border-radius: var(--radius-lg); */
+    margin-bottom: 2rem;
 }
 
 .sidebarCard h3 {
@@ -371,7 +377,7 @@
 .relatedCard {
     /* Transparent or minimal card */
     display: block;
-    group: hover;
+    text-decoration: none;
 }
 
 .relatedImage {
