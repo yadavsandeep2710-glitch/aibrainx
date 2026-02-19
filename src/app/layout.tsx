@@ -3,6 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/lib/auth-context';
 import './globals.css';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
@@ -52,6 +53,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="VYuhJsP/MadgDoqNhX4W1w"
+          strategy="afterInteractive"
+        />
         <AuthProvider>
           <Header />
           <main>{children}</main>
