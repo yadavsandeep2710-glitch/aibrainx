@@ -107,19 +107,21 @@ export default function ModernEditor({ value, onChange, placeholder }: ModernEdi
         setIsUploading(true);
 
         try {
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${uuidv4()}.${fileExt}`;
-            const filePath = `blog-content/${fileName}`;
+            const formData = new FormData();
+            formData.append('file', file);
 
-            const { error: uploadError } = await supabase.storage
-                .from('blog-images')
-                .upload(filePath, file);
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData,
+            });
 
-            if (uploadError) throw uploadError;
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Upload failed');
+            }
 
-            const { data: { publicUrl } } = supabase.storage
-                .from('blog-images')
-                .getPublicUrl(filePath);
+            const data = await response.json();
+            const publicUrl = data.url;
 
             const altText = window.prompt('Enter image description (ALT text) for SEO', '');
 
