@@ -43,6 +43,10 @@ export const metadata: Metadata = {
       'impact-site-verification': '71a06b6d-a9b6-40be-a490-572de799ed94',
     },
   },
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
