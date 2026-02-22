@@ -1,0 +1,246 @@
+/* ===== Prompt Card Styles ===== */
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.card:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Prompt Block */
+.promptBlock {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.promptLabel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(59, 130, 246, 0.08);
+    border-bottom: 1px solid var(--border-default);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.promptIcon {
+    font-size: var(--text-sm);
+}
+
+.promptText {
+    padding: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Actions */
+.cardActions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.copyBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-5);
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--accent-glow);
+}
+
+.copyBtn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    pointer-events: none;
+}
+
+.copyBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.copyBtn:hover::after {
+    animation: promptShine 0.6s ease forwards;
+}
+
+.copyBtnCopied {
+    background: var(--green);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.copyIcon {
+    font-size: var(--text-base);
+}
+
+.exampleToggle {
+    padding: var(--space-2) var(--space-4);
+    background: transparent;
+    color: var(--text-tertiary);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.exampleToggle:hover {
+    color: var(--text-secondary);
+    border-color: var(--border-default);
+    background: var(--glass-bg);
+}
+
+/* Example Block */
+.exampleBlock {
+    background: rgba(16, 185, 129, 0.04);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    animation: promptFadeIn 0.3s ease;
+}
+
+.exampleLabel {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: rgba(16, 185, 129, 0.08);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--green);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.exampleText {
+    padding: var(--space-4);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 0;
+}
+
+/* Tags */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-subtle);
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px var(--space-3);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    transition: all var(--transition-fast);
+}
+
+.tag:hover {
+    border-color: var(--border-accent);
+    color: var(--accent-primary);
+    background: rgba(59, 130, 246, 0.08);
+}
+
+/* Animations */
+@keyframes promptShine {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+
+@keyframes promptFadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card {
+        padding: var(--space-4);
+    }
+
+    .title {
+        font-size: var(--text-lg);
+    }
+
+    .promptText {
+        font-size: var(--text-xs);
+        max-height: 250px;
+    }
+
+    .cardActions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .copyBtn {
+        justify-content: center;
+    }
+}

@@ -11,6 +11,7 @@ const navLinks = [
     { href: '/#services', label: 'Services' },
     { href: '/tools', label: 'AI Tools Directory' }, // Renamed slightly to avoid confusion
     { href: '/ai-guides', label: 'AI Guides' },
+    { href: '/ai-prompts', label: 'AI Prompts' },
     { href: '/blog', label: 'Blog' },
 ];
 

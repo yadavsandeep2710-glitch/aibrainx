@@ -15,6 +15,7 @@ const footerLinks = {
     ],
     'Resources': [
         { href: '/blog', label: 'Blog' },
+        { href: '/ai-prompts', label: 'AI Prompts' },
         { href: '/tools', label: 'Tools Directory' },
         { href: '/submit', label: 'Submit a Tool' },
         { href: '/about', label: 'About Us' },
