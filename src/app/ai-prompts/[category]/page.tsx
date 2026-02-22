@@ -86,8 +86,18 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                 <div className="container">
                     <div className={styles.headerContent}>
                         <span className={styles.headerIcon}>{cat.icon}</span>
-                        <h1 className={styles.title}>{cat.name}</h1>
-                        <p className={styles.intro}>{cat.description}</p>
+                        <h1 className={styles.title}>{cat.extended_content?.intro_heading || cat.name}</h1>
+
+                        {cat.extended_content?.intro_text ? (
+                            <div className={styles.richIntro}>
+                                {cat.extended_content.intro_text.split('\n\n').map((para, i) => (
+                                    <p key={i}>{para}</p>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className={styles.intro}>{cat.description}</p>
+                        )}
+
                         <div className={styles.headerMeta}>
                             <span className={styles.metaBadge}>
                                 📋 {categoryPrompts.length} Free Prompts
@@ -95,19 +105,85 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                             <span className={styles.metaBadge}>
                                 🌍 {categoryPrompts[0]?.region || 'India/Global'}
                             </span>
+                            {cat.extended_content?.eeat && (
+                                <span className={styles.metaBadge}>
+                                    📅 Updated: {cat.extended_content.eeat.last_updated}
+                                </span>
+                            )}
                         </div>
                     </div>
                 </div>
             </section>
 
+            {/* Why Specialized Section */}
+            {cat.extended_content?.why_specialized && (
+                <section className={`section ${styles.whySpecialized}`}>
+                    <div className="container">
+                        <div className={styles.contentCard}>
+                            <h2>{cat.extended_content.why_specialized.title}</h2>
+                            <p>{cat.extended_content.why_specialized.content}</p>
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Usage Guide Section */}
+            {cat.extended_content?.usage_guide && (
+                <section className={`section ${styles.usageSection}`}>
+                    <div className="container">
+                        <div className={styles.usageCard}>
+                            <h2>{cat.extended_content.usage_guide.title}</h2>
+                            <div className={styles.stepGrid}>
+                                {cat.extended_content.usage_guide.steps.map((step, i) => (
+                                    <div key={i} className={styles.stepItem}>
+                                        <span className={styles.stepNumber}>{i + 1}</span>
+                                        <p>{step}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* Prompt Cards */}
             <section className={`section ${styles.promptsSection}`}>
                 <div className="container">
-                    <div className={styles.promptsGrid}>
-                        {categoryPrompts.map(prompt => (
-                            <PromptCard key={prompt.id} prompt={prompt} />
-                        ))}
+                    <div className="section-header">
+                        <h2>Ready-to-Use {cat.name}</h2>
+                        <p>Browse our curated library of high-performance prompts</p>
                     </div>
+
+                    {categorySlug === 'ai-prompts-for-indian-business' ? (
+                        <>
+                            {['GST', 'Startup', 'Marketing', 'MSME', 'E-commerce', 'HR', 'Customer Support'].map(subCat => {
+                                const filteredPrompts = categoryPrompts.filter(p =>
+                                    p.tags.some(tag => tag.toLowerCase().includes(subCat.toLowerCase()))
+                                );
+
+                                if (filteredPrompts.length === 0) return null;
+
+                                return (
+                                    <div key={subCat} className={styles.subCategoryBlock}>
+                                        <h3 className={styles.subCategoryHeader}>
+                                            {subCat} Prompts
+                                        </h3>
+                                        <div className={styles.promptsGrid}>
+                                            {filteredPrompts.map(prompt => (
+                                                <PromptCard key={prompt.id} prompt={prompt} />
+                                            ))}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </>
+                    ) : (
+                        <div className={styles.promptsGrid}>
+                            {categoryPrompts.map(prompt => (
+                                <PromptCard key={prompt.id} prompt={prompt} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
 
@@ -173,6 +249,26 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                     </div>
                 </div>
             </section>
+
+            {/* EEAT Section */}
+            {cat.extended_content?.eeat && (
+                <section className={`section ${styles.eeatSection}`}>
+                    <div className="container">
+                        <div className={styles.eeatCard}>
+                            <div className={styles.eeatContent}>
+                                <h3>Who Created These Prompts?</h3>
+                                <p>{cat.extended_content.eeat.curator}</p>
+                                <div className={styles.editorialNote}>
+                                    <strong>Editorial Note:</strong> {cat.extended_content.eeat.editorial_note}
+                                </div>
+                                <div className={styles.lastUpdated}>
+                                    Last Updated: {cat.extended_content.eeat.last_updated} | Next Review: Quarterly
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Internal Links */}
             <section className={`section ${styles.internalLinks}`}>

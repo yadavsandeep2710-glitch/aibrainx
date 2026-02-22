@@ -23,4 +23,21 @@ export interface PromptCategory {
     prompt_count: number;
     related_blog_slugs: string[];
     faqs: { question: string; answer: string }[];
+    extended_content?: {
+        intro_heading?: string;
+        intro_text?: string;
+        why_specialized?: {
+            title: string;
+            content: string;
+        };
+        usage_guide?: {
+            title: string;
+            steps: string[];
+        };
+        eeat?: {
+            curator: string;
+            editorial_note: string;
+            last_updated: string;
+        };
+    };
 }
