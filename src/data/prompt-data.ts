@@ -10,7 +10,7 @@ export const promptCategories: PromptCategory[] = [
         meta_title: 'AI Prompts for Work – Boost Productivity | AIBrainX',
         meta_description: 'Browse the best AI prompts for work. Draft emails, create reports, plan projects & automate tasks using ChatGPT, Gemini & more. Free to copy.',
         prompt_count: 5,
-        related_blog_slugs: [],
+        related_blog_slugs: ['ai-replace-jobs-india', 'ai-tools-start-business-india'],
         faqs: [
             { question: 'What are AI prompts for work?', answer: 'AI prompts for work are pre-written instructions you can paste into AI tools like ChatGPT or Gemini to quickly generate professional emails, reports, project plans, and more — saving hours of manual effort.' },
             { question: 'Do I need to pay to use these prompts?', answer: 'No! All prompts on AIBrainX are completely free to browse and copy. Simply click the "Copy Prompt" button and paste it into your favourite AI tool.' },
@@ -26,7 +26,7 @@ export const promptCategories: PromptCategory[] = [
         meta_title: 'AI Prompts for Marketing – Ads, SEO & Social | AIBrainX',
         meta_description: 'Get the best AI prompts for marketing. Create ads, social media posts, email campaigns & SEO content with ChatGPT. Free to copy & use.',
         prompt_count: 5,
-        related_blog_slugs: [],
+        related_blog_slugs: ['ai-tools-start-business-india'],
         faqs: [
             { question: 'How can AI prompts improve my marketing?', answer: 'AI prompts help you generate ad copy, social media content, email campaigns, and SEO strategies in seconds — allowing you to test more ideas, iterate faster, and scale your marketing output.' },
             { question: 'Are these prompts suitable for Indian markets?', answer: 'Yes! Many prompts are designed with the Indian audience in mind, including references to local platforms, ₹ pricing, and culturally relevant messaging strategies.' },
@@ -42,7 +42,7 @@ export const promptCategories: PromptCategory[] = [
         meta_title: 'AI Prompts for Students – Study Smarter | AIBrainX',
         meta_description: 'Best AI prompts for students. Get help with essays, research, exam prep & projects using ChatGPT. Free study prompts for Indian students.',
         prompt_count: 5,
-        related_blog_slugs: [],
+        related_blog_slugs: ['10-best-free-ai-tools-students-india'],
         faqs: [
             { question: 'Is it okay for students to use AI prompts?', answer: 'AI prompts are excellent study aids when used responsibly. They help you understand concepts, generate outlines, and prepare for exams — always verify the output and use it as a learning tool, not for plagiarism.' },
             { question: 'Will these prompts work for Indian exams like UPSC or JEE?', answer: 'Yes! Several prompts are designed for competitive exam preparation, including generating practice questions, summarising NCERT topics, and creating revision notes.' },
@@ -58,7 +58,7 @@ export const promptCategories: PromptCategory[] = [
         meta_title: 'AI Prompts for HR – Hiring & People Ops | AIBrainX',
         meta_description: 'Top AI prompts for HR professionals. Write job descriptions, screen resumes, create policies & onboarding plans. Free prompts for HR teams.',
         prompt_count: 5,
-        related_blog_slugs: [],
+        related_blog_slugs: ['ai-replace-jobs-india'],
         faqs: [
             { question: 'How can HR professionals benefit from AI prompts?', answer: 'AI prompts dramatically speed up routine HR tasks like writing job descriptions, creating interview questions, drafting policies, and preparing performance review templates — freeing up time for strategic people management.' },
             { question: 'Are these prompts compliant with Indian labour laws?', answer: 'The prompts provide a strong starting point, but always review generated content against current Indian labour regulations and your company\'s legal guidelines before finalising any official documents.' },
@@ -74,7 +74,7 @@ export const promptCategories: PromptCategory[] = [
         meta_title: 'AI Prompts for Content Writing – Blogs & Copy | AIBrainX',
         meta_description: 'Best AI prompts for content writing. Create blog posts, product descriptions, YouTube scripts & web copy. Free prompts for writers.',
         prompt_count: 5,
-        related_blog_slugs: [],
+        related_blog_slugs: ['chatgpt-vs-claude-vs-gemini-comparison', 'top-ai-image-generators-compared'],
         faqs: [
             { question: 'Can AI really write good content?', answer: 'AI generates excellent first drafts and outlines. The best approach is to use AI prompts to overcome writer\'s block, generate ideas, and create drafts — then add your unique voice, expertise, and editing to produce polished content.' },
             { question: 'Will AI-generated content rank on Google?', answer: 'Google evaluates content quality, not how it was created. By using these prompts as a starting point and adding original insights, expertise, and value, your content can absolutely rank well in search results.' },
@@ -90,7 +90,7 @@ export const promptCategories: PromptCategory[] = [
         meta_title: 'AI Prompts for Indian Business – SME & Startups | AIBrainX',
         meta_description: 'AI prompts for Indian business owners. GST invoicing, MSME compliance, vendor management & marketing for the Indian market. Free to use.',
         prompt_count: 5,
-        related_blog_slugs: [],
+        related_blog_slugs: ['ai-tools-start-business-india', 'ai-replace-jobs-india'],
         faqs: [
             { question: 'Why do Indian businesses need special AI prompts?', answer: 'Indian businesses operate in a unique regulatory environment (GST, MSME, RBI guidelines) and cultural context. These prompts are tailored to generate content, strategies, and documents that are relevant to the Indian market specifically.' },
             { question: 'Can these help with GST and tax compliance?', answer: 'Yes! We have prompts for generating GST-compliant invoice templates, understanding tax slab calculations, and drafting compliance documentation — though always verify with a chartered accountant.' },
@@ -460,4 +460,11 @@ export function getPromptCategory(slug: string): PromptCategory | undefined {
 
 export function getAllCategorySlugs(): string[] {
     return promptCategories.map(c => c.slug);
+}
+
+export function getExamplePrompts(categorySlug: string, count: number = 2): { title: string; description: string }[] {
+    return prompts
+        .filter(p => p.category === categorySlug)
+        .slice(0, count)
+        .map(p => ({ title: p.title, description: p.description }));
 }

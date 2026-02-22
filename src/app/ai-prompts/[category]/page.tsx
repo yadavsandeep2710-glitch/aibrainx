@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { promptCategories, getPromptsByCategory, getPromptCategory, getAllCategorySlugs } from '@/data/prompt-data';
 import PromptCard from '@/components/PromptCard';
 import PromptFAQ from '@/components/PromptFAQ';
+import { blogPosts } from '@/lib/data';
 import styles from './page.module.css';
 
 interface PageProps {
@@ -44,6 +45,11 @@ export default async function PromptCategoryPage({ params }: PageProps) {
 
     const categoryPrompts = getPromptsByCategory(categorySlug);
     const otherCategories = promptCategories.filter(c => c.slug !== categorySlug);
+
+    // Get related blog posts
+    const relatedBlogs = blogPosts.filter(post =>
+        cat.related_blog_slugs.includes(post.slug)
+    );
 
     // JSON-LD Article Schema
     const articleSchema = {
@@ -110,6 +116,35 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                 <section className="section">
                     <div className="container">
                         <PromptFAQ faqs={cat.faqs} categoryName={cat.name} />
+                    </div>
+                </section>
+            )}
+
+            {/* Related Blog Posts */}
+            {relatedBlogs.length > 0 && (
+                <section className={`section ${styles.relatedBlogs}`}>
+                    <div className="container">
+                        <h2 className={styles.sectionTitle}>Related AI Guides & News</h2>
+                        <div className={styles.blogGrid}>
+                            {relatedBlogs.map(blog => (
+                                <Link
+                                    key={blog.slug}
+                                    href={`/blog/${blog.slug}`}
+                                    className={styles.blogCard}
+                                >
+                                    <img
+                                        src={blog.cover_image_url}
+                                        alt={blog.title}
+                                        className={styles.blogImage}
+                                    />
+                                    <div className={styles.blogContent}>
+                                        <span className={styles.blogCategory}>{blog.category}</span>
+                                        <h3 className={styles.blogTitle}>{blog.title}</h3>
+                                        <p className={styles.blogExcerpt}>{blog.excerpt}</p>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </section>
             )}
