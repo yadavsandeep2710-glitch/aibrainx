@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { promptCategories, getExamplePrompts } from '@/data/prompt-data';
 import PromptFAQ from '@/components/PromptFAQ';
+import PromptSearch from '@/components/PromptSearch';
 import styles from './page.module.css';
 
 /* ===== Enhanced SEO Metadata ===== */
@@ -158,6 +159,11 @@ export default function AIPromptsPage() {
                         Browse high-quality, ready-to-use AI prompts for work, marketing, students,
                         HR, content writing, and Indian business. Just copy, paste, and go.
                     </p>
+
+                    <div className={styles.heroSearch}>
+                        <PromptSearch />
+                    </div>
+
                     <div className={styles.heroStats}>
                         <div className={styles.stat}>
                             <span className={styles.statNumber}>30+</span>

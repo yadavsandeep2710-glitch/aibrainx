@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { promptCategories, getPromptsByCategory, getPromptCategory, getAllCategorySlugs } from '@/data/prompt-data';
-import PromptCard from '@/components/PromptCard';
 import PromptFAQ from '@/components/PromptFAQ';
+import PromptFilterSection from '@/components/PromptFilterSection';
 import { blogPosts } from '@/lib/data';
 import styles from './page.module.css';
 
@@ -26,11 +26,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
         title: cat.meta_title,
         description: cat.meta_description,
+        keywords: cat.meta_keywords,
         openGraph: {
             title: cat.meta_title,
             description: cat.meta_description,
             type: 'article',
             url: `https://aibrainx.in/ai-prompts/${cat.slug}`,
+        },
+        alternates: {
+            canonical: `https://aibrainx.in/ai-prompts/${cat.slug}`,
         },
     };
 }
@@ -51,7 +55,7 @@ export default async function PromptCategoryPage({ params }: PageProps) {
         cat.related_blog_slugs.includes(post.slug)
     );
 
-    // JSON-LD Article Schema
+    // JSON-LD: Article Schema
     const articleSchema = {
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -63,14 +67,48 @@ export default async function PromptCategoryPage({ params }: PageProps) {
             name: 'AIBrainX',
             url: 'https://aibrainx.in',
         },
+        dateModified: cat.extended_content?.eeat?.last_updated || '2026-02-22',
     };
+
+    // JSON-LD: BreadcrumbList Schema
+    const breadcrumbSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://aibrainx.in' },
+            { '@type': 'ListItem', position: 2, name: 'AI Prompts', item: 'https://aibrainx.in/ai-prompts' },
+            { '@type': 'ListItem', position: 3, name: cat.name, item: `https://aibrainx.in/ai-prompts/${cat.slug}` },
+        ],
+    };
+
+    // JSON-LD: ItemList Schema for Prompts
+    const itemListSchema = {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: `${cat.name} Library`,
+        description: `Browse ${categoryPrompts.length} high-quality AI prompts for ${cat.name.toLowerCase()}.`,
+        numberOfItems: categoryPrompts.length,
+        itemListElement: categoryPrompts.map((p, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+                '@type': 'ListItem',
+                name: p.title,
+                description: p.description,
+                url: `https://aibrainx.in/ai-prompts/${cat.slug}#${p.id}`,
+            }
+        }))
+    };
+
+    const subCategories = categorySlug === 'ai-prompts-for-indian-business'
+        ? ['GST', 'Startup', 'Marketing', 'MSME', 'E-commerce', 'HR', 'Customer Support']
+        : undefined;
 
     return (
         <div className={styles.page}>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
 
             {/* Breadcrumb */}
             <div className={`container ${styles.breadcrumb}`}>
@@ -110,6 +148,7 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                                     📅 Updated: {cat.extended_content.eeat.last_updated}
                                 </span>
                             )}
+                            <span className={styles.metaBadge}>✅ Free to Copy</span>
                         </div>
                     </div>
                 </div>
@@ -146,44 +185,18 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                 </section>
             )}
 
-            {/* Prompt Cards */}
+            {/* Prompt Cards with Filter */}
             <section className={`section ${styles.promptsSection}`}>
                 <div className="container">
                     <div className="section-header">
                         <h2>Ready-to-Use {cat.name}</h2>
-                        <p>Browse our curated library of high-performance prompts</p>
+                        <p>Search, filter, and copy high-performance prompts instantly</p>
                     </div>
-
-                    {categorySlug === 'ai-prompts-for-indian-business' ? (
-                        <>
-                            {['GST', 'Startup', 'Marketing', 'MSME', 'E-commerce', 'HR', 'Customer Support'].map(subCat => {
-                                const filteredPrompts = categoryPrompts.filter(p =>
-                                    p.tags.some(tag => tag.toLowerCase().includes(subCat.toLowerCase()))
-                                );
-
-                                if (filteredPrompts.length === 0) return null;
-
-                                return (
-                                    <div key={subCat} className={styles.subCategoryBlock}>
-                                        <h3 className={styles.subCategoryHeader}>
-                                            {subCat} Prompts
-                                        </h3>
-                                        <div className={styles.promptsGrid}>
-                                            {filteredPrompts.map(prompt => (
-                                                <PromptCard key={prompt.id} prompt={prompt} />
-                                            ))}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </>
-                    ) : (
-                        <div className={styles.promptsGrid}>
-                            {categoryPrompts.map(prompt => (
-                                <PromptCard key={prompt.id} prompt={prompt} />
-                            ))}
-                        </div>
-                    )}
+                    <PromptFilterSection
+                        prompts={categoryPrompts}
+                        categorySlug={categorySlug}
+                        subCategories={subCategories}
+                    />
                 </div>
             </section>
 
@@ -200,7 +213,7 @@ export default async function PromptCategoryPage({ params }: PageProps) {
             {relatedBlogs.length > 0 && (
                 <section className={`section ${styles.relatedBlogs}`}>
                     <div className="container">
-                        <h2 className={styles.sectionTitle}>Related AI Guides & News</h2>
+                        <h2 className={styles.sectionTitle}>Related AI Guides &amp; News</h2>
                         <div className={styles.blogGrid}>
                             {relatedBlogs.map(blog => (
                                 <Link
@@ -242,7 +255,7 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                                 <span className={styles.otherIcon}>{other.icon}</span>
                                 <div>
                                     <h3 className={styles.otherName}>{other.name}</h3>
-                                    <span className={styles.otherCount}>{other.prompt_count} prompts</span>
+                                    <span className={styles.otherCount}>{other.prompt_count}+ prompts</span>
                                 </div>
                             </Link>
                         ))}
@@ -282,6 +295,9 @@ export default async function PromptCategoryPage({ params }: PageProps) {
                         </Link>
                         <Link href="/blog" className={styles.linkCard}>
                             📰 Read Our AI Blog
+                        </Link>
+                        <Link href="/guides" className={styles.linkCard}>
+                            📚 AI Guides &amp; How-Tos
                         </Link>
                     </div>
                 </div>

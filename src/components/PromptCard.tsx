@@ -1,14 +1,32 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { AIPrompt } from '@/lib/prompt-types';
 import styles from './PromptCard.module.css';
 
 interface PromptCardProps {
     prompt: AIPrompt;
+    onTagClick?: (tag: string) => void;
 }
 
-export default function PromptCard({ prompt }: PromptCardProps) {
+// Helper to render description with basic [text](/path) markdown links
+const renderDescription = (text: string) => {
+    const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+    return parts.map((part, i) => {
+        const match = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
+        if (match) {
+            return (
+                <Link key={i} href={match[2]} className={styles.descriptionLink}>
+                    {match[1]}
+                </Link>
+            );
+        }
+        return part;
+    });
+};
+
+export default function PromptCard({ prompt, onTagClick }: PromptCardProps) {
     const [copied, setCopied] = useState(false);
     const [showExample, setShowExample] = useState(false);
 
@@ -31,10 +49,12 @@ export default function PromptCard({ prompt }: PromptCardProps) {
     };
 
     return (
-        <article className={styles.card}>
+        <article className={styles.card} id={prompt.id}>
             <div className={styles.cardHeader}>
                 <h3 className={styles.title}>{prompt.title}</h3>
-                <p className={styles.description}>{prompt.description}</p>
+                <div className={styles.description}>
+                    {renderDescription(prompt.description)}
+                </div>
             </div>
 
             <div className={styles.promptBlock}>
@@ -86,7 +106,14 @@ export default function PromptCard({ prompt }: PromptCardProps) {
 
             <div className={styles.tags}>
                 {prompt.tags.map(tag => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
+                    <button
+                        key={tag}
+                        className={styles.tag}
+                        onClick={() => onTagClick?.(tag)}
+                        title={`Filter by ${tag}`}
+                    >
+                        {tag}
+                    </button>
                 ))}
             </div>
         </article>

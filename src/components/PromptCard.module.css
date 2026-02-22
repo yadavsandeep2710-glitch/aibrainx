@@ -201,6 +201,8 @@
     font-size: 0.7rem;
     color: var(--text-tertiary);
     transition: all var(--transition-fast);
+    cursor: pointer;
+    font-family: inherit;
 }
 
 .tag:hover {
@@ -209,15 +211,37 @@
     background: rgba(59, 130, 246, 0.08);
 }
 
+.descriptionLink {
+    color: var(--accent-light);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.descriptionLink:hover {
+    color: var(--accent-primary);
+}
+
 /* Animations */
 @keyframes promptShine {
-    0% { left: -100%; }
-    100% { left: 200%; }
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
 }
 
 @keyframes promptFadeIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive */

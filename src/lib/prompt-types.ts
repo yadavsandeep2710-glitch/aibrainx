@@ -20,6 +20,7 @@ export interface PromptCategory {
     description: string;
     meta_title: string;
     meta_description: string;
+    meta_keywords?: string[];
     prompt_count: number;
     related_blog_slugs: string[];
     faqs: { question: string; answer: string }[];
