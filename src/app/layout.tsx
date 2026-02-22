@@ -62,6 +62,19 @@ export default function RootLayout({
           data-key="VYuhJsP/MadgDoqNhX4W1w"
           strategy="afterInteractive"
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PLEFMQQKFJ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-PLEFMQQKFJ');
+          `}
+        </Script>
         <AuthProvider>
           <Header />
           <main>{children}</main>
