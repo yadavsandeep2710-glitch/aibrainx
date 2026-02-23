@@ -1277,14 +1277,12 @@ For more details on its performance, check out our [Murf AI Review & Pricing Ind
 
 Murf AI offers competitive pricing with localized payment options for Indian users.
 
-| Plan | Price (Approx. INR) | Best For |
-|------|-------------------|----------|
+| Plan | Price | Best For |
+|------|-------|----------|
 | **Free** | ₹0 | Testing & personal projects |
-| **Creator** | ~₹2,200/mo | Individual creators & YouTubers |
-| **Business** | ~₹6,500/mo | Marketing teams & EdTech startups |
+| **Creator** | ₹2,200/mo | Individual creators & YouTubers |
+| **Business** | ₹6,500/mo | Marketing teams & EdTech startups |
 | **Enterprise** | Custom | Large corporations with security needs |
-
-*Prices are estimated based on current exchange rates and localized billing trends.*
 
 ## Murf AI Use Cases (Students, Creators, Businesses)
 
@@ -1332,7 +1330,7 @@ Absolutely. Using Murf AI for YouTube is very popular in India, especially for i
 ### 4. How does Murf AI pricing compare to hiring a voice actor in India?
 Murf AI is significantly cheaper than hiring professional voice actors for bulk content. A single 10-minute professional voiceover in India can cost ₹5,000-₹10,000, whereas a monthly Murf subscription costs much less and allows unlimited revisions.`,
         url: 'https://murf.ai', logo_url: '/logos/murf.svg',
-        category_id: '3', pricing: 'freemium', pricing_details: 'Free trial. Creator: ~₹2,200/mo, Business: ~₹6,500/mo',
+        category_id: '3', pricing: 'freemium', pricing_details: 'Free: ₹0, Creator: ₹2,200/mo, Business: ₹6,500/mo',
         rating: 4.4, review_count: 220, featured: false, status: 'approved', tags: ['audio', 'voiceover', 'tts', 'studio', 'narration', 'hindi'],
         created_at: '2026-02-16', updated_at: '2026-02-23'
     },
