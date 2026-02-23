@@ -1,4 +1,7 @@
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 import { tools, categories, getToolReviews } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -121,48 +124,29 @@ export default async function ToolDetailPage({ params }: PageProps) {
                             <section className={styles.section}>
                                 <h2 className={styles.sectionTitle}>About {tool.name}</h2>
                                 <div className={styles.description}>
-                                    {tool.description.split('\n\n').map((para, i) => {
-                                        const cleanedPara = para.replace(/\*\*/g, '');
-                                        if (cleanedPara.startsWith('## ')) {
-                                            return <h3 key={i} className={styles.descH3}>{cleanedPara.replace('## ', '')}</h3>;
-                                        }
-                                        if (para.startsWith('- ')) {
-                                            return (
-                                                <ul key={i} className={styles.descList}>
-                                                    {para.split('\n').map((item, j) => (
-                                                        <li key={j}>{item.replace(/^\- \*\*(.+?)\*\*(.*)/, '$1$2').replace('- ', '').replace(/\*\*/g, '')}</li>
-                                                    ))}
-                                                </ul>
-                                            );
-                                        }
-                                        if (para.startsWith('| ')) {
-                                            // Handle tables
-                                            const rows = para.split('\n');
-                                            return (
-                                                <div key={i} className={styles.tableWrapper}>
-                                                    <table className={styles.pricingTable}>
-                                                        <thead>
-                                                            <tr>
-                                                                {rows[0].split('|').filter(Boolean).map((cell, idx) => (
-                                                                    <th key={idx}>{cell.trim()}</th>
-                                                                ))}
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            {rows.slice(2).map((row, rowIdx) => (
-                                                                <tr key={rowIdx}>
-                                                                    {row.split('|').filter(Boolean).map((cell, cellIdx) => (
-                                                                        <td key={cellIdx}>{cell.trim()}</td>
-                                                                    ))}
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
+                                    <ReactMarkdown
+                                        remarkPlugins={[remarkGfm]}
+                                        rehypePlugins={[rehypeRaw]}
+                                        components={{
+                                            h3: ({ node, ...props }) => <h3 {...props} className={styles.descH3} />,
+                                            ul: ({ node, ...props }) => <ul {...props} className={styles.descList} />,
+                                            ol: ({ node, ...props }) => <ol {...props} className={styles.descList} />,
+                                            table: ({ node, ...props }) => (
+                                                <div className={styles.tableWrapper}>
+                                                    <table {...props} className={styles.pricingTable} />
                                                 </div>
-                                            );
-                                        }
-                                        return <p key={i}>{cleanedPara}</p>;
-                                    })}
+                                            ),
+                                            a: ({ node, ...props }) => {
+                                                const isInternal = props.href?.startsWith('/') || props.href?.includes('aibrainx.in');
+                                                if (isInternal) {
+                                                    return <Link href={props.href || '#'} className="text-primary hover:underline">{props.children}</Link>;
+                                                }
+                                                return <a {...props} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline" />;
+                                            }
+                                        }}
+                                    >
+                                        {tool.description}
+                                    </ReactMarkdown>
                                 </div>
                             </section>
 
