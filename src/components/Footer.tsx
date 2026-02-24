@@ -59,6 +59,8 @@ export default function Footer() {
                         <p className={styles.brandDescription}>
                             India&apos;s most trusted AI tools directory. Discover, compare, and find the perfect AI tools
                             for your needs — with pricing in ₹ and reviews from Indian users.
+                            <br /><br />
+                            📩 <strong>Contact:</strong> <a href="mailto:contact@aibrainx.in" className={styles.footerLink}>contact&#64;aibrainx.in</a>
                         </p>
                         <form className={styles.newsletter} onSubmit={handleSubscribe}>
                             <p className={styles.newsletterLabel}>Get weekly AI updates 🇮🇳</p>

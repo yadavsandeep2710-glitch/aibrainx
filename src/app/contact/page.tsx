@@ -67,7 +67,7 @@ export default function ContactPage() {
                     <div className={styles.infoSidebar}>
                         <div className={styles.infoCard}>
                             <h3>📧 Email</h3>
-                            <p>yadav.sandeep2710@gmail.com</p>
+                            <p><a href="mailto:contact@aibrainx.in">contact&#64;aibrainx.in</a></p>
                         </div>
                         <div className={styles.infoCard}>
                             <h3>⏰ Response Time</h3>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                         </div>
                         <div className={styles.infoCard}>
                             <h3>💼 Business Inquiries</h3>
-                            <p>For partnership and advertising: <strong>business@aibrainx.in</strong></p>
+                            <p>For partnership and advertising: <strong>contact&#64;aibrainx.in</strong></p>
                         </div>
                         <div className={styles.infoCard}>
                             <h3>🌍 Location</h3>

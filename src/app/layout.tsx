@@ -76,6 +76,7 @@ export default function RootLayout({
                   "@id": "https://aibrainx.in/#organization",
                   "name": "AIBrainX",
                   "url": "https://aibrainx.in",
+                  "email": "contact@aibrainx.in",
                   "logo": {
                     "@type": "ImageObject",
                     "@id": "https://aibrainx.in/#logo",
@@ -91,10 +92,29 @@ export default function RootLayout({
                     "@type": "PostalAddress",
                     "addressCountry": "IN"
                   },
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "email": "contact@aibrainx.in",
+                    "contactType": "customer service",
+                    "areaServed": "IN",
+                    "availableLanguage": "en"
+                  },
+                  "founder": { "@id": "https://aibrainx.in/#person" },
                   "sameAs": [
                     "https://twitter.com/aibrainx",
                     "https://youtube.com/@aibrainx",
                     "https://linkedin.com/company/aibrainx"
+                  ]
+                },
+                {
+                  "@type": "Person",
+                  "@id": "https://aibrainx.in/#person",
+                  "name": "Sandeep Yadav",
+                  "url": "https://aibrainx.in",
+                  "jobTitle": "Founder",
+                  "worksFor": { "@id": "https://aibrainx.in/#organization" },
+                  "sameAs": [
+                    "https://www.linkedin.com/in/sandeep-yadav-aibrainx"
                   ]
                 },
                 {
