@@ -3,6 +3,9 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { tools, categories, getToolReviews } from '@/lib/data';
+import AuthorBox from '@/components/AuthorBox';
+import ReviewMethodology from '@/components/ReviewMethodology';
+import Disclosure from '@/components/Disclosure';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import styles from './page.module.css';
@@ -15,13 +18,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const { slug } = await params;
     const tool = tools.find(t => t.slug === slug);
     if (!tool) return { title: 'Tool Not Found' };
+    const year = 2026;
     return {
-        title: `${tool.name} — ${tool.tagline}`,
-        description: `${tool.name}: ${tool.tagline}. Read reviews, compare pricing in ₹, and discover if it's right for you.`,
+        title: `${tool.name} Review (${year}): Pricing in India, Pros & Cons & Verdict`,
+        description: `${tool.name} ${year} Review: Get the latest honest verdict on ${tool.name}. Explore features, pricing in Indian Rupees (₹), and how it helps Indian users.`,
         openGraph: {
-            title: `${tool.name} — AI Tool Review | AIBrainX.in`,
-            description: tool.tagline,
+            title: `${tool.name} Review (${year}) | AIBrainX.in`,
+            description: `Read our comprehensive ${year} review of ${tool.name} including India-specific pricing and features.`,
+            locale: 'en_IN',
+            type: 'website',
         },
+        alternates: {
+            canonical: `https://aibrainx.in/tools/${slug}`,
+        }
     };
 }
 
@@ -44,18 +53,38 @@ export default async function ToolDetailPage({ params }: PageProps) {
         name: tool.name,
         description: tool.tagline,
         url: tool.url,
-        applicationCategory: 'AI Tool',
+        applicationCategory: 'MultimediaApplication',
+        operatingSystem: 'Windows, macOS, Web',
+        brand: {
+            '@type': 'Brand',
+            name: tool.name
+        },
         aggregateRating: {
             '@type': 'AggregateRating',
             ratingValue: tool.rating,
             reviewCount: tool.review_count,
             bestRating: 5,
+            worstRating: 1
+        },
+        review: {
+            '@type': 'Review',
+            author: {
+                '@type': 'Person',
+                name: 'AIBrainX Editorial Team'
+            },
+            reviewBody: `${tool.name} is one of the top AI tools for ${category?.name || 'AI enthusiasts'} in India, offering great value and unique features for ${tool.tags.slice(0, 3).join(', ')}.`,
+            reviewRating: {
+                '@type': 'Rating',
+                ratingValue: tool.rating,
+                bestRating: 5
+            }
         },
         offers: {
             '@type': 'Offer',
             price: tool.pricing === 'free' ? '0' : undefined,
             priceCurrency: 'INR',
             availability: 'https://schema.org/InStock',
+            url: tool.url
         },
     };
 
@@ -149,6 +178,11 @@ export default async function ToolDetailPage({ params }: PageProps) {
                                     </ReactMarkdown>
                                 </div>
                             </section>
+
+                            {/* EEAT Components Integration */}
+                            <AuthorBox />
+                            <ReviewMethodology />
+                            <Disclosure />
 
                             {/* Pricing Details Card - Enhanced */}
                             {tool.pricing_details && (

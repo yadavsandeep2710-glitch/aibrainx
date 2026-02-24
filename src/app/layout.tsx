@@ -43,6 +43,13 @@ export const metadata: Metadata = {
       'impact-site-verification': '71a06b6d-a9b6-40be-a490-572de799ed94',
     },
   },
+  alternates: {
+    canonical: 'https://aibrainx.in',
+    languages: {
+      'en-IN': 'https://aibrainx.in',
+      'x-default': 'https://aibrainx.in',
+    },
+  },
   icons: {
     icon: '/icon.svg',
     apple: '/icon.svg',
@@ -55,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <body>
         <Script
           src="https://analytics.ahrefs.com/analytics.js"

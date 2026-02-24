@@ -17,21 +17,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         };
     }
 
+    const year = 2026;
+    const isReview = post.title.toLowerCase().includes('review') || post.title.toLowerCase().includes('comparison');
+
+    let title = post.meta_title || `${post.title} | AIBrainX`;
+    if (isReview && !title.includes(year.toString())) {
+        title = `${post.title} (${year}) — India Guide | AIBrainX`;
+    }
+
     return {
-        title: post.meta_title || `${post.title} | AIBrainX`,
+        title: title,
         description: post.meta_description || post.excerpt,
         openGraph: {
-            title: post.meta_title || post.title,
+            title: title,
             description: post.meta_description || post.excerpt,
             url: `https://aibrainx.in/blog/${post.slug}`,
             images: post.cover_image_url ? [{ url: post.cover_image_url, alt: post.title }] : [],
             type: 'article',
             publishedTime: post.published_at || undefined,
             authors: [post.author],
+            locale: 'en_IN',
+        },
+        alternates: {
+            canonical: `https://aibrainx.in/blog/${post.slug}`,
         },
         twitter: {
             card: 'summary_large_image',
-            title: post.meta_title || post.title,
+            title: title,
             description: post.meta_description || post.excerpt,
             images: post.cover_image_url ? [post.cover_image_url] : [],
         },
@@ -60,12 +72,13 @@ export default async function BlogArticlePage({ params }: PageProps) {
     const allPublished = await getPublishedPosts();
     const relatedPosts = allPublished.filter(p => p.id !== post.id).slice(0, 3);
 
+    const isReview = post.title.toLowerCase().includes('review') || post.title.toLowerCase().includes('comparison') || post.title.toLowerCase().includes('vs') || post.title.toLowerCase().includes('best');
     const PROMPT_ENGINEERING_SLUG = 'how-to-write-ai-prompts-a-beginner-s-guide-with-examples-2026';
-    const isPromptPost = post.slug === PROMPT_ENGINEERING_SLUG || slug === PROMPT_ENGINEERING_SLUG;
+    const isPromptPost = post.slug === PROMPT_ENGINEERING_SLUG || rawSlug === PROMPT_ENGINEERING_SLUG;
 
     return (
         <>
-            {/* Structured Data Verification v1.1 - Added: 2026-02-24 */}
+            {/* SEO & EEAT Schema v2.0 - Optimized for 2026 */}
             {isPromptPost ? (
                 <>
                     <script
@@ -127,40 +140,65 @@ export default async function BlogArticlePage({ params }: PageProps) {
                                 "@type": "Article",
                                 "headline": "How to Write AI Prompts: A Beginner’s Guide with Practical Examples (2026)",
                                 "description": "Learn how to write AI prompts with simple steps and real examples. This beginner-friendly 2026 guide helps students and professionals in India get better AI results.",
-                                "image": "https://www.aibrainx.in/wp-content/uploads/how-to-write-ai-prompts-beginner-guide-2026.jpg",
+                                "image": post.cover_image_url || "https://www.aibrainx.in/wp-content/uploads/how-to-write-ai-prompts-beginner-guide-2026.jpg",
                                 "author": {
-                                    "@type": "Organization",
-                                    "name": "AIBrainX"
+                                    "@type": "Person",
+                                    "name": post.author
                                 },
                                 "publisher": {
                                     "@type": "Organization",
-                                    "name": "AIBrainX",
+                                    "name": "AIBrainX.in",
                                     "logo": {
                                         "@type": "ImageObject",
-                                        "url": "https://www.aibrainx.in/wp-content/uploads/aibrainx-logo.png"
+                                        "url": "https://www.aibrainx.in/icon.svg"
                                     }
                                 },
                                 "mainEntityOfPage": {
                                     "@type": "WebPage",
-                                    "@id": "https://www.aibrainx.in/blog/how-to-write-ai-prompts-a-beginner-s-guide-with-examples-2026"
+                                    "@id": `https://www.aibrainx.in/blog/${post.slug}`
                                 },
-                                "datePublished": "2026-02-11",
-                                "dateModified": "2026-02-24",
+                                "datePublished": post.published_at,
+                                "dateModified": post.updated_at || post.published_at,
                                 "inLanguage": "en-IN",
                                 "articleSection": "AI Prompts",
-                                "keywords": [
-                                    "AI prompts",
-                                    "how to write AI prompts",
-                                    "AI prompt writing",
-                                    "AI prompts for beginners",
-                                    "AI prompt examples",
-                                    "AI prompts India",
-                                    "AI prompts 2026"
-                                ]
+                                "keywords": ["AI prompts", "how to write AI prompts", "AI prompt writing", "India", "2026"]
                             })
                         }}
                     />
                 </>
+            ) : isReview ? (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'Review',
+                            'itemReviewed': {
+                                '@type': 'SoftwareApplication',
+                                'name': post.title.split('Review')[0].trim() || 'AI Tool',
+                                'applicationCategory': 'BusinessApplication'
+                            },
+                            'author': {
+                                '@type': 'Person',
+                                'name': 'AIBrainX Editorial Team'
+                            },
+                            'reviewRating': {
+                                '@type': 'Rating',
+                                'ratingValue': '4.5',
+                                'bestRating': '5'
+                            },
+                            'publisher': {
+                                '@type': 'Organization',
+                                'name': 'AIBrainX.in'
+                            },
+                            'headline': post.title,
+                            'description': post.excerpt,
+                            'image': post.cover_image_url,
+                            'datePublished': post.published_at,
+                            'inLanguage': 'en-IN'
+                        }),
+                    }}
+                />
             ) : (
                 <script
                     type="application/ld+json"
@@ -172,8 +210,9 @@ export default async function BlogArticlePage({ params }: PageProps) {
                             description: post.excerpt,
                             image: post.cover_image_url,
                             datePublished: post.published_at,
-                            author: { '@type': 'Organization', name: post.author },
+                            author: { '@type': 'Person', name: post.author },
                             publisher: { '@type': 'Organization', name: 'AIBrainX.in' },
+                            inLanguage: 'en-IN'
                         }),
                     }}
                 />

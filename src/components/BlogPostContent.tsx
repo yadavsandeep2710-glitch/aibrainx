@@ -8,6 +8,9 @@ import type { BlogPost } from '@/lib/types';
 import styles from '@/app/blog/[slug]/page.module.css';
 
 import BlogScrollProgress from '@/components/BlogScrollProgress';
+import AuthorBox from '@/components/AuthorBox';
+import ReviewMethodology from '@/components/ReviewMethodology';
+import Disclosure from '@/components/Disclosure';
 
 interface BlogPostContentProps {
     post: BlogPost;
@@ -40,6 +43,12 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
     };
 
     const sanitizedContent = cleanContent(post.content);
+
+    const isReviewOrComparison =
+        post.title.toLowerCase().includes('review') ||
+        post.title.toLowerCase().includes('comparison') ||
+        post.title.toLowerCase().includes('vs') ||
+        post.title.toLowerCase().includes('best');
 
     return (
         <div className={styles.page}>
@@ -112,6 +121,14 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                                 >
                                     {sanitizedContent}
                                 </ReactMarkdown>
+
+                                {isReviewOrComparison && (
+                                    <div style={{ marginTop: '40px' }}>
+                                        <AuthorBox name={post.author} />
+                                        <ReviewMethodology />
+                                        <Disclosure />
+                                    </div>
+                                )}
                             </article>
                         </div>
                     </main>
