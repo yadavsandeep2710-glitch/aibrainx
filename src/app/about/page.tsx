@@ -10,6 +10,35 @@ export const metadata: Metadata = {
 export default function AboutPage() {
     return (
         <div className={styles.page}>
+            {/* AboutPage & Author Schema */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@graph": [
+                            {
+                                "@type": "AboutPage",
+                                "@id": "https://www.aibrainx.in/about/#webpage",
+                                "url": "https://www.aibrainx.in/about",
+                                "name": "About AIBrainX - Our Editorial Team & Methodology",
+                                "isPartOf": { "@id": "https://aibrainx.in/#website" },
+                                "description": "Learn about the AIBrainX Editorial Team, our AI tool testing methodology, and our commitment to trustworthiness for Indian users.",
+                                "mainEntity": { "@id": "https://aibrainx.in/#organization" },
+                                "inLanguage": "en-IN"
+                            },
+                            {
+                                "@type": "Organization",
+                                "@id": "https://www.aibrainx.in/about/#author",
+                                "name": "AIBrainX Editorial Team",
+                                "description": "A team of AI researchers and reviewers focused on providing hands-on testing of AI tools and workflows for the Indian market.",
+                                "parentOrganization": { "@id": "https://aibrainx.in/#organization" },
+                                "url": "https://www.aibrainx.in/about"
+                            }
+                        ]
+                    })
+                }}
+            />
             {/* Hero Section */}
             <header className={styles.hero}>
                 <div className={styles.container}>

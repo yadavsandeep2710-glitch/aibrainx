@@ -64,6 +64,52 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <body>
+        {/* Global JSON-LD Schema - Organization & WebSite */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://aibrainx.in/#organization",
+                  "name": "AIBrainX",
+                  "url": "https://aibrainx.in",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "@id": "https://aibrainx.in/#logo",
+                    "url": "https://aibrainx.in/icon.svg",
+                    "contentUrl": "https://aibrainx.in/icon.svg",
+                    "width": 512,
+                    "height": 512,
+                    "caption": "AIBrainX"
+                  },
+                  "image": { "@id": "https://aibrainx.in/#logo" },
+                  "description": "India's most trusted AI tools directory, helping students, creators, and businesses discover and compare AI solutions with pricing in ₹.",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "IN"
+                  },
+                  "sameAs": [
+                    "https://twitter.com/aibrainx",
+                    "https://youtube.com/@aibrainx",
+                    "https://linkedin.com/company/aibrainx"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://aibrainx.in/#website",
+                  "url": "https://aibrainx.in",
+                  "name": "AIBrainX.in",
+                  "description": "Discover the Best AI Tools for India",
+                  "publisher": { "@id": "https://aibrainx.in/#organization" },
+                  "inLanguage": "en-IN"
+                }
+              ]
+            })
+          }}
+        />
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="VYuhJsP/MadgDoqNhX4W1w"
