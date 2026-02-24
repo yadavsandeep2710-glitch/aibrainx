@@ -170,16 +170,15 @@
     border-radius: 0 8px 8px 0;
 }
 
-/* Pros and Cons Styling */
-.article ul li:has(strong:contains("Pro")),
-.article ul li:has(strong:contains("Advantage")) {
+/* Pros and Cons Styling - Placeholder for future class-based styling */
+.proItem {
     list-style: none;
     position: relative;
     padding-left: 30px;
     color: #166534;
 }
 
-.article ul li:has(strong:contains("Pro"))::before {
+.proItem::before {
     content: "✓";
     position: absolute;
     left: 0;
@@ -187,15 +186,14 @@
     font-weight: 900;
 }
 
-.article ul li:has(strong:contains("Con")),
-.article ul li:has(strong:contains("Disadvantage")) {
+.conItem {
     list-style: none;
     position: relative;
     padding-left: 30px;
     color: #991b1b;
 }
 
-.article ul li:has(strong:contains("Con"))::before {
+.conItem::before {
     content: "✕";
     position: absolute;
     left: 0;

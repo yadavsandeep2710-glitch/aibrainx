@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -115,8 +116,19 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                                     remarkPlugins={[remarkGfm]}
                                     rehypePlugins={[rehypeRaw]}
                                     components={{
-                                        // Custom link handling to open external in new tab?
-                                        a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" style={{ color: '#e21b22', fontWeight: 700 }} />
+                                        // Custom link handling to open external in new tab
+                                        a: ({ node, ...props }) => <a {...props} target="_blank" rel="noopener noreferrer" style={{ color: '#e21b22', fontWeight: 700 }} />,
+                                        // Custom list item handling for Pros/Cons styling
+                                        li: ({ children, ...props }) => {
+                                            const content = React.Children.toArray(children).join('').toLowerCase();
+                                            let className = '';
+                                            if (content.includes('pro:') || content.includes('advantage:')) {
+                                                className = styles.proItem;
+                                            } else if (content.includes('con:') || content.includes('disadvantage:')) {
+                                                className = styles.conItem;
+                                            }
+                                            return <li {...props} className={className}>{children}</li>;
+                                        }
                                     }}
                                 >
                                     {sanitizedContent}
