@@ -49,43 +49,76 @@ export default async function ToolDetailPage({ params }: PageProps) {
 
     const jsonLd = {
         '@context': 'https://schema.org',
-        '@type': 'SoftwareApplication',
-        name: tool.name,
-        description: tool.tagline,
-        url: tool.url,
-        applicationCategory: 'MultimediaApplication',
-        operatingSystem: 'Windows, macOS, Web',
-        brand: {
-            '@type': 'Brand',
-            name: tool.name
-        },
-        aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: tool.rating,
-            reviewCount: tool.review_count,
-            bestRating: 5,
-            worstRating: 1
-        },
-        review: {
-            '@type': 'Review',
-            author: {
-                '@type': 'Person',
-                name: 'AIBrainX Editorial Team'
+        '@graph': [
+            {
+                '@type': 'SoftwareApplication',
+                name: tool.name,
+                description: tool.tagline,
+                url: tool.url,
+                applicationCategory: 'MultimediaApplication',
+                operatingSystem: 'Windows, macOS, Web',
+                brand: {
+                    '@type': 'Brand',
+                    name: tool.name
+                },
+                aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: tool.rating,
+                    reviewCount: tool.review_count,
+                    bestRating: 5,
+                    worstRating: 1
+                },
+                review: {
+                    '@type': 'Review',
+                    author: {
+                        '@type': 'Person',
+                        name: 'AIBrainX Editorial Team'
+                    },
+                    reviewBody: `${tool.name} is one of the top AI tools for ${category?.name || 'AI enthusiasts'} in India, offering great value and unique features for ${tool.tags.slice(0, 3).join(', ')}.`,
+                    reviewRating: {
+                        '@type': 'Rating',
+                        ratingValue: tool.rating,
+                        bestRating: 5
+                    }
+                },
+                offers: {
+                    '@type': 'Offer',
+                    price: tool.pricing === 'free' ? '0' : undefined,
+                    priceCurrency: 'INR',
+                    availability: 'https://schema.org/InStock',
+                    url: tool.url
+                }
             },
-            reviewBody: `${tool.name} is one of the top AI tools for ${category?.name || 'AI enthusiasts'} in India, offering great value and unique features for ${tool.tags.slice(0, 3).join(', ')}.`,
-            reviewRating: {
-                '@type': 'Rating',
-                ratingValue: tool.rating,
-                bestRating: 5
+            {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {
+                        '@type': 'ListItem',
+                        'position': 1,
+                        'name': 'Home',
+                        'item': 'https://aibrainx.in'
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 2,
+                        'name': 'AI Tools',
+                        'item': 'https://aibrainx.in/tools'
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 3,
+                        'name': category?.name || 'Category',
+                        'item': `https://aibrainx.in/tools?category=${category?.slug}`
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 4,
+                        'name': tool.name,
+                        'item': `https://aibrainx.in/tools/${tool.slug}`
+                    }
+                ]
             }
-        },
-        offers: {
-            '@type': 'Offer',
-            price: tool.pricing === 'free' ? '0' : undefined,
-            priceCurrency: 'INR',
-            availability: 'https://schema.org/InStock',
-            url: tool.url
-        },
+        ]
     };
 
     // Extract key features from description

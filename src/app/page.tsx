@@ -18,8 +18,51 @@ function HomeContent() {
   const latestPosts = blogPosts.slice(0, 3);
   const topCategories = categories.slice(0, 8);
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is AIBrainX.in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "AIBrainX.in is India's most trusted AI tools directory, helping students, creators, and professionals discover and compare AI solutions with localized insights and pricing in Indian Rupees (₹)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the AI tools listed on AIBrainX free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We list a mix of Free, Freemium, and Paid tools. Each tool page clearly displays the pricing model and any available free versions for Indian users."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does AIBrainX evaluate AI tools?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our editorial team manually reviews every tool, testing for utility, performance, and value-for-money specifically for the Indian market."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I submit my AI tool to AIBrainX?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Developers can submit their AI tools through our /submit page. Every submission undergoes a manual review to ensure it meets our quality standards."
+        }
+      }
+    ]
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {error === 'unauthorized' && (
         <div className={styles.errorBox}>
           ⚠️ Sorry, you don&apos;t have admin access. Only authorized administrators can access the admin dashboard.

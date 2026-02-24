@@ -36,14 +36,41 @@ export default function ToolsPage() {
             case 'popular': result.sort((a, b) => b.review_count - a.review_count); break;
             case 'rating': result.sort((a, b) => b.rating - a.rating); break;
             case 'newest': result.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()); break;
-            case 'name': result.sort((a, b) => a.name.localeCompare(b.name)); break;
         }
-
         return result;
     }, [search, selectedCategory, pricing, sort]);
 
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            {
+                '@type': 'CollectionPage',
+                '@id': 'https://aibrainx.in/tools/#webpage',
+                'url': 'https://aibrainx.in/tools',
+                'name': `AI Tools Directory — ${tools.length}+ Curated Tools for India`,
+                'description': 'Discover a manually-reviewed directory of AI tools with pricing in Indian Rupees, reviews, and localized insights.',
+                'isPartOf': { '@id': 'https://aibrainx.in/#website' },
+                'about': { '@id': 'https://aibrainx.in/#organization' },
+                'mainEntity': {
+                    '@type': 'ItemList',
+                    'numberOfItems': tools.length,
+                    'itemListElement': tools.slice(0, 30).map((tool, i) => ({
+                        '@type': 'ListItem',
+                        'position': i + 1,
+                        'url': `https://aibrainx.in/tools/${tool.slug}`,
+                        'name': tool.name
+                    }))
+                }
+            }
+        ]
+    };
+
     return (
         <div className={styles.page}>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="container">
                 {/* Page Header */}
                 <div className={styles.pageHeader}>
