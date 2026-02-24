@@ -12,9 +12,9 @@
 }
 
 .card:hover {
-    border-color: var(--border-accent);
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: var(--shadow-glow-card);
+    transform: translateY(-4px);
 }
 
 .cardHeader {
@@ -38,10 +38,12 @@
 
 /* Prompt Block */
 .promptBlock {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-md);
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
     overflow: hidden;
+    position: relative;
 }
 
 .promptLabel {

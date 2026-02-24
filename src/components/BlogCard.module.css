@@ -128,3 +128,17 @@
     opacity: 1;
     transform: translateX(0);
 }
+
+@media (max-width: 640px) {
+    .content {
+        padding: 1.25rem;
+    }
+
+    .title {
+        font-size: 1.15rem;
+    }
+
+    .excerpt {
+        font-size: 0.9rem;
+    }
+}

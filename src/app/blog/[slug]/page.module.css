@@ -161,11 +161,65 @@
 
 .article blockquote {
     border-left: 4px solid #e21b22;
-    padding-left: 20px;
+    padding: 20px 30px;
     font-style: italic;
     font-size: 20px;
-    color: #555;
+    color: #444;
+    margin: 40px 0;
+    background: #fcfcfc;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Pros and Cons Styling */
+.article ul li:has(strong:contains("Pro")),
+.article ul li:has(strong:contains("Advantage")) {
+    list-style: none;
+    position: relative;
+    padding-left: 30px;
+    color: #166534;
+}
+
+.article ul li:has(strong:contains("Pro"))::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #22c55e;
+    font-weight: 900;
+}
+
+.article ul li:has(strong:contains("Con")),
+.article ul li:has(strong:contains("Disadvantage")) {
+    list-style: none;
+    position: relative;
+    padding-left: 30px;
+    color: #991b1b;
+}
+
+.article ul li:has(strong:contains("Con"))::before {
+    content: "✕";
+    position: absolute;
+    left: 0;
+    color: #ef4444;
+    font-weight: 900;
+}
+
+/* Highlight Box */
+.highlightBox {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(139, 92, 246, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    border-radius: 12px;
+    padding: 25px;
     margin: 30px 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.highlightBox h4 {
+    margin-top: 0 !important;
+    color: #3b82f6 !important;
+    font-size: 18px !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Sidebar */

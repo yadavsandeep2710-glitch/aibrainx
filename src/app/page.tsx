@@ -21,17 +21,8 @@ function HomeContent() {
   return (
     <>
       {error === 'unauthorized' && (
-        <div style={{
-          background: 'rgba(239, 68, 68, 0.1)',
-          border: '1px solid rgba(239, 68, 68, 0.3)',
-          color: '#ef4444',
-          padding: '1rem',
-          borderRadius: '8px',
-          margin: '1rem auto',
-          maxWidth: '1200px',
-          textAlign: 'center',
-        }}>
-          ⚠️ Sorry, you don't have admin access. Only authorized administrators can access the admin dashboard.
+        <div className={styles.errorBox}>
+          ⚠️ Sorry, you don&apos;t have admin access. Only authorized administrators can access the admin dashboard.
         </div>
       )}
       {/* Hero Section */}
@@ -185,60 +176,17 @@ function HomeContent() {
       {/* AI Prompts CTA */}
       <section className="section" style={{ background: 'var(--bg-secondary)' }}>
         <div className="container">
-          <div style={{
-            maxWidth: '900px',
-            margin: '0 auto',
-            textAlign: 'center',
-            padding: '3rem 2rem',
-            background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.06), rgba(59, 130, 246, 0.06), rgba(6, 182, 212, 0.04))',
-            border: '1px solid rgba(139, 92, 246, 0.15)',
-            borderRadius: '24px',
-            position: 'relative',
-            overflow: 'hidden',
-          }}>
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '2px',
-              background: 'linear-gradient(135deg, #8b5cf6, #3b82f6, #06b6d4)',
-            }} />
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              background: 'linear-gradient(135deg, #8b5cf6, #3b82f6)',
-              color: 'white',
-              padding: '0.5rem 1rem',
-              borderRadius: '30px',
-              fontSize: '0.875rem',
-              fontWeight: '600',
-              marginBottom: '1.5rem',
-            }}>
+          <div className={styles.promptCta}>
+            <div className={styles.promptBadge}>
               💡 Free AI Prompts
             </div>
-            <h2 style={{
-              fontSize: '2rem',
-              fontWeight: '800',
-              color: 'var(--text-primary)',
-              margin: '0 0 1rem 0',
-              lineHeight: '1.2',
-            }}>
+            <h2 className={styles.promptTitle}>
               Ready-to-Use AI Prompts for Every Need
             </h2>
-            <p style={{
-              fontSize: '1.125rem',
-              color: 'var(--text-secondary)',
-              lineHeight: '1.6',
-              margin: '0 0 2rem 0',
-              maxWidth: '600px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}>
+            <p className={styles.promptText}>
               Browse 30+ curated AI prompts for work, marketing, students, HR, content writing, and Indian business. Copy, paste, and generate results instantly.
             </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div className={styles.flexCenter}>
               <Link href="/ai-prompts" className="btn btn-primary btn-lg">
                 Browse AI Prompts →
               </Link>
@@ -277,50 +225,20 @@ function HomeContent() {
       </section>
 
       {/* Premium AI Guides CTA */}
-      <section className="section" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)' }}>
+      <section className={`section ${styles.premiumSection}`}>
         <div className="container">
-          <div style={{
-            maxWidth: '800px',
-            margin: '0 auto',
-            textAlign: 'center',
-            padding: '3rem 2rem',
-            background: 'white',
-            borderRadius: '16px',
-            border: '2px solid #3b82f6',
-          }}>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-              color: 'white',
-              padding: '0.5rem 1rem',
-              borderRadius: '30px',
-              fontSize: '0.875rem',
-              fontWeight: '600',
-              marginBottom: '1.5rem',
-            }}>
+          <div className={styles.premiumCard}>
+            <div className={styles.premiumBadge}>
               📚 Premium Guides
             </div>
-            <h2 style={{
-              fontSize: '2rem',
-              fontWeight: '800',
-              color: '#111827',
-              margin: '0 0 1rem 0',
-              lineHeight: '1.2',
-            }}>
+            <h2 className={styles.premiumTitle}>
               Stop Wasting Money on the Wrong AI Tools
             </h2>
-            <p style={{
-              fontSize: '1.125rem',
-              color: '#4b5563',
-              lineHeight: '1.6',
-              margin: '0 0 2rem 0',
-            }}>
+            <p className={styles.premiumText}>
               Get expert recommendations with pricing in ₹, detailed comparisons, and step-by-step guides.
               Perfect for students, creators, and freelancers.
             </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div className={styles.flexCenter}>
               <Link href="/ai-guides" className="btn btn-primary btn-lg">
                 View Premium Guides →
               </Link>

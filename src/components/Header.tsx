@@ -71,7 +71,9 @@ export default function Header() {
                                     alt="Profile"
                                     className={styles.userAvatar}
                                 />
-                                <span className={styles.userName}>{user.user_metadata?.full_name || user.email?.split('@')[0]}</span>
+                                <div className={styles.userTextWrapper}>
+                                    <span className={styles.userName}>{user.user_metadata?.full_name || user.email?.split('@')[0]}</span>
+                                </div>
                             </div>
                             <button onClick={handleSignOut} className={styles.signOutBtn}>
                                 Sign Out
