@@ -61,10 +61,12 @@ export default async function BlogArticlePage({ params }: PageProps) {
     const relatedPosts = allPublished.filter(p => p.id !== post.id).slice(0, 3);
 
     const PROMPT_ENGINEERING_SLUG = 'how-to-write-ai-prompts-a-beginner-s-guide-with-examples-2026';
+    const isPromptPost = post.slug === PROMPT_ENGINEERING_SLUG || slug === PROMPT_ENGINEERING_SLUG;
 
-    const renderSchema = () => {
-        if (slug === PROMPT_ENGINEERING_SLUG) {
-            return (
+    return (
+        <>
+            {/* Structured Data Verification v1.1 - Added: 2026-02-24 */}
+            {isPromptPost ? (
                 <>
                     <script
                         type="application/ld+json"
@@ -159,31 +161,23 @@ export default async function BlogArticlePage({ params }: PageProps) {
                         }}
                     />
                 </>
-            );
-        }
-
-        return (
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        '@context': 'https://schema.org',
-                        '@type': 'Article',
-                        headline: post.title,
-                        description: post.excerpt,
-                        image: post.cover_image_url,
-                        datePublished: post.published_at,
-                        author: { '@type': 'Organization', name: post.author },
-                        publisher: { '@type': 'Organization', name: 'AIBrainX.in' },
-                    }),
-                }}
-            />
-        );
-    };
-
-    return (
-        <>
-            {renderSchema()}
+            ) : (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'Article',
+                            headline: post.title,
+                            description: post.excerpt,
+                            image: post.cover_image_url,
+                            datePublished: post.published_at,
+                            author: { '@type': 'Organization', name: post.author },
+                            publisher: { '@type': 'Organization', name: 'AIBrainX.in' },
+                        }),
+                    }}
+                />
+            )}
             <BlogPostContent post={post} relatedPosts={relatedPosts} />
         </>
     );
