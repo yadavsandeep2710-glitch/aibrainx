@@ -87,8 +87,10 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                                 </div>
                                 <span className={styles.separator}>|</span>
                                 <div>
-                                    <div style={{ fontSize: '11px', color: '#888' }}>CREATED</div>
-                                    <span>{post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Draft'}</span>
+                                    <div style={{ fontSize: '11px', color: '#888', fontWeight: 600 }}>LAST UPDATED</div>
+                                    <span style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>
+                                        {post.updated_at ? new Date(post.updated_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : (post.published_at ? new Date(post.published_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : '2026')}
+                                    </span>
                                 </div>
                                 <span className={styles.separator}>|</span>
                                 <span>{post.read_time} min read</span>
@@ -134,13 +136,11 @@ export default function BlogPostContent({ post, relatedPosts }: BlogPostContentP
                                     {sanitizedContent}
                                 </ReactMarkdown>
 
-                                {isReviewOrComparison && (
-                                    <div style={{ marginTop: '40px' }}>
-                                        <AuthorBox name={post.author} />
-                                        <ReviewMethodology />
-                                        <Disclosure />
-                                    </div>
-                                )}
+                                <div style={{ marginTop: '50px', borderTop: '1px solid var(--border-subtle)', paddingTop: '30px' }}>
+                                    <AuthorBox name={post.author === "AIBrainX" ? "AIBrainX Editorial Team" : post.author} />
+                                    <ReviewMethodology />
+                                    <Disclosure />
+                                </div>
                             </article>
                         </div>
                     </main>

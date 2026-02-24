@@ -9,13 +9,13 @@ interface ReviewMethodologyProps {
 
 const ReviewMethodology: React.FC<ReviewMethodologyProps> = ({
     testedOn = "Web (Desktop & Mobile)",
-    duration = "72+ Hours of Hands-on Use",
-    criteria = ["Accuracy", "India-specific Utility", "Pricing Value", "Local Language Support", "User Interface"]
+    duration = "Hands-on Research & Analysis",
+    criteria = ["Accuracy", "India-specific Utility", "Pricing Value", "Ease of Use", "User Support"]
 }) => {
     return (
         <div className={styles.methodology}>
             <h3 className={styles.title}>
-                <span>🔍</span> Review Methodology
+                <span>🛡️</span> How this article was created
             </h3>
             <div className={styles.grid}>
                 <div className={styles.item}>

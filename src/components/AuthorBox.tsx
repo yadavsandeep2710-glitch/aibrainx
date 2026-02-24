@@ -9,8 +9,8 @@ interface AuthorBoxProps {
 
 const AuthorBox: React.FC<AuthorBoxProps> = ({
     name = "AIBrainX Editorial Team",
-    title = "Senior AI Reviewer & SaaS Specialist",
-    bio = "Our editorial team consists of Indian AI architects and software engineers with deep expertise in large language models, automation tools, and the Indian SaaS ecosystem. We test every tool for regional usability, local pricing value, and performance."
+    title = "AI Research & Review Team (India)",
+    bio = "We test AI tools, prompts, and workflows for students, creators, and businesses in India to ensure they are practical, affordable, and effective for the Indian market."
 }) => {
     return (
         <div className={styles.authorBox}>

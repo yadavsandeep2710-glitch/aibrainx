@@ -142,8 +142,9 @@ export default async function BlogArticlePage({ params }: PageProps) {
                                 "description": "Learn how to write AI prompts with simple steps and real examples. This beginner-friendly 2026 guide helps students and professionals in India get better AI results.",
                                 "image": post.cover_image_url || "https://www.aibrainx.in/wp-content/uploads/how-to-write-ai-prompts-beginner-guide-2026.jpg",
                                 "author": {
-                                    "@type": "Person",
-                                    "name": post.author
+                                    "@type": "Organization",
+                                    "name": "AIBrainX Editorial Team",
+                                    "url": "https://www.aibrainx.in/about"
                                 },
                                 "publisher": {
                                     "@type": "Organization",
@@ -158,7 +159,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
                                     "@id": `https://www.aibrainx.in/blog/${post.slug}`
                                 },
                                 "datePublished": post.published_at,
-                                "dateModified": post.updated_at || post.published_at,
+                                "dateModified": post.updated_at || post.published_at || new Date().toISOString(),
                                 "inLanguage": "en-IN",
                                 "articleSection": "AI Prompts",
                                 "keywords": ["AI prompts", "how to write AI prompts", "AI prompt writing", "India", "2026"]
@@ -179,7 +180,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
                                 'applicationCategory': 'BusinessApplication'
                             },
                             'author': {
-                                '@type': 'Person',
+                                '@type': 'Organization',
                                 'name': 'AIBrainX Editorial Team'
                             },
                             'reviewRating': {
@@ -189,12 +190,17 @@ export default async function BlogArticlePage({ params }: PageProps) {
                             },
                             'publisher': {
                                 '@type': 'Organization',
-                                'name': 'AIBrainX.in'
+                                'name': 'AIBrainX.in',
+                                'logo': {
+                                    '@type': 'ImageObject',
+                                    'url': 'https://www.aibrainx.in/icon.svg'
+                                }
                             },
                             'headline': post.title,
                             'description': post.excerpt,
                             'image': post.cover_image_url,
                             'datePublished': post.published_at,
+                            'dateModified': post.updated_at || post.published_at || new Date().toISOString(),
                             'inLanguage': 'en-IN'
                         }),
                     }}
@@ -210,8 +216,13 @@ export default async function BlogArticlePage({ params }: PageProps) {
                             description: post.excerpt,
                             image: post.cover_image_url,
                             datePublished: post.published_at,
-                            author: { '@type': 'Person', name: post.author },
-                            publisher: { '@type': 'Organization', name: 'AIBrainX.in' },
+                            dateModified: post.updated_at || post.published_at || new Date().toISOString(),
+                            author: { '@type': 'Organization', name: 'AIBrainX Editorial Team' },
+                            publisher: {
+                                '@type': 'Organization',
+                                name: 'AIBrainX.in',
+                                logo: { '@type': 'ImageObject', url: 'https://www.aibrainx.in/icon.svg' }
+                            },
                             inLanguage: 'en-IN'
                         }),
                     }}
