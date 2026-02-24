@@ -60,8 +60,109 @@ export default async function BlogArticlePage({ params }: PageProps) {
     const allPublished = await getPublishedPosts();
     const relatedPosts = allPublished.filter(p => p.id !== post.id).slice(0, 3);
 
-    return (
-        <>
+    const PROMPT_ENGINEERING_SLUG = 'how-to-write-ai-prompts-a-beginner-s-guide-with-examples-2026';
+
+    const renderSchema = () => {
+        if (slug === PROMPT_ENGINEERING_SLUG) {
+            return (
+                <>
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@type": "FAQPage",
+                                "mainEntity": [
+                                    {
+                                        "@type": "Question",
+                                        "name": "What is an AI prompt?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "An AI prompt is an instruction or question given to an AI tool to generate a response. Clear and detailed prompts help AI provide more accurate and useful answers."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "How do I write good AI prompts as a beginner?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Beginners should write clear prompts by defining the task, adding context, specifying the audience, and mentioning the desired format or tone."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "Are AI prompts useful for students in India?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Yes, AI prompts help Indian students with exam preparation, notes, assignments, and understanding complex topics using simple explanations."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "Can AI prompts help with SEO and content writing?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Yes, well-written AI prompts can generate SEO-friendly blog posts, meta descriptions, FAQs, and content ideas when proper structure and keywords are provided."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "Is AI prompt writing a useful skill in 2026?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Absolutely. AI prompt writing is a valuable skill for students, professionals, freelancers, and businesses to improve productivity and efficiency."
+                                        }
+                                    }
+                                ]
+                            })
+                        }}
+                    />
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@type": "Article",
+                                "headline": "How to Write AI Prompts: A Beginner’s Guide with Practical Examples (2026)",
+                                "description": "Learn how to write AI prompts with simple steps and real examples. This beginner-friendly 2026 guide helps students and professionals in India get better AI results.",
+                                "image": "https://www.aibrainx.in/wp-content/uploads/how-to-write-ai-prompts-beginner-guide-2026.jpg",
+                                "author": {
+                                    "@type": "Organization",
+                                    "name": "AIBrainX"
+                                },
+                                "publisher": {
+                                    "@type": "Organization",
+                                    "name": "AIBrainX",
+                                    "logo": {
+                                        "@type": "ImageObject",
+                                        "url": "https://www.aibrainx.in/wp-content/uploads/aibrainx-logo.png"
+                                    }
+                                },
+                                "mainEntityOfPage": {
+                                    "@type": "WebPage",
+                                    "@id": "https://www.aibrainx.in/blog/how-to-write-ai-prompts-a-beginner-s-guide-with-examples-2026"
+                                },
+                                "datePublished": "2026-02-11",
+                                "dateModified": "2026-02-24",
+                                "inLanguage": "en-IN",
+                                "articleSection": "AI Prompts",
+                                "keywords": [
+                                    "AI prompts",
+                                    "how to write AI prompts",
+                                    "AI prompt writing",
+                                    "AI prompts for beginners",
+                                    "AI prompt examples",
+                                    "AI prompts India",
+                                    "AI prompts 2026"
+                                ]
+                            })
+                        }}
+                    />
+                </>
+            );
+        }
+
+        return (
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -77,6 +178,12 @@ export default async function BlogArticlePage({ params }: PageProps) {
                     }),
                 }}
             />
+        );
+    };
+
+    return (
+        <>
+            {renderSchema()}
             <BlogPostContent post={post} relatedPosts={relatedPosts} />
         </>
     );
