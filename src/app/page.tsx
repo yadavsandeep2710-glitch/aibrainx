@@ -57,11 +57,28 @@ function HomeContent() {
     ]
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "AIBrainX",
+        "item": "https://aibrainx.in"
+      }
+    ]
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {error === 'unauthorized' && (
         <div className={styles.errorBox}>
@@ -81,21 +98,56 @@ function HomeContent() {
             <span>🇮🇳</span> India&apos;s #1 AI Tools Directory
           </div>
           <h1 className={styles.heroTitle}>
-            Discover the Best
-            <span className={styles.heroGradient}> AI Tools </span>
-            for India
+            Best AI Tools in India (2026)
           </h1>
           <p className={styles.heroSubtitle}>
-            Explore 500+ AI tools with pricing in ₹, real reviews from Indian users,
-            and daily insights — all in one place.
+            Explore a curated AI tools directory for Indian students, creators, and businesses. Compare features, pricing in ₹, free tools, expert guides, and ready-to-use AI prompts.
           </p>
           <div className={styles.heroActions}>
             <Link href="/tools" className="btn btn-primary btn-lg">
               🔍 Explore AI Tools
             </Link>
-            <Link href="/submit" className="btn btn-secondary btn-lg">
-              📤 Submit Your Tool
+            <Link href="/tools" className="btn btn-secondary btn-lg">
+              📊 Compare AI Tools in India
             </Link>
+          </div>
+
+          {/* Popular AI Resources Block (PRD) */}
+          <div className={styles.prdLinkBlock}>
+            <h2 className={styles.prdBlockTitle}>Popular AI Resources in India</h2>
+            <div className={styles.prdLinkGrid}>
+              <Link href="/blog/10-best-free-ai-tools-students-india" className={styles.prdLinkItem}>
+                10 Best Free AI Tools for Students
+              </Link>
+              <Link href="/tools/murf-ai" className={styles.prdLinkItem}>
+                Murf AI Review & Pricing
+              </Link>
+              <Link href="/ai-prompts/ai-prompts-for-students" className={styles.prdLinkItem}>
+                AI Prompts for Students
+              </Link>
+              <Link href="/ai-guides/best-ai-tools-india" className={styles.prdLinkItem}>
+                Best AI Tools Guide India
+              </Link>
+            </div>
+          </div>
+
+          {/* Explore by Category Block (PRD) */}
+          <div className={styles.prdLinkBlock}>
+            <h2 className={styles.prdBlockTitle}>Explore AI by Category</h2>
+            <div className={styles.prdLinkGrid}>
+              <Link href="/tools" className={styles.prdLinkItem}>
+                AI Tools Directory
+              </Link>
+              <Link href="/ai-guides" className={styles.prdLinkItem}>
+                AI Guides
+              </Link>
+              <Link href="/ai-prompts" className={styles.prdLinkItem}>
+                AI Prompts
+              </Link>
+              <Link href="/blog" className={styles.prdLinkItem}>
+                AI Blog
+              </Link>
+            </div>
           </div>
           <div className={styles.heroStats}>
             <div className={styles.stat}>
