@@ -89,6 +89,38 @@
     justify-content: flex-end;
 }
 
+.audienceBadges {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.audienceBadge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+}
+
+.badgeStudent {
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.badgeCreator {
+    color: #3b82f6;
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.badgeBusiness {
+    color: #8b5cf6;
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
 .cardTitle {
     font-family: var(--font-heading);
     font-size: var(--text-lg);

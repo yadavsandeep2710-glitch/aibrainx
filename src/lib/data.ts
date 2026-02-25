@@ -1822,8 +1822,8 @@ export const blogPosts: BlogPost[] = [
         cover_image_url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=400&fit=crop',
         author: 'AIBrainX Team', category: 'Education', tags: ['students', 'free-tools', 'india', 'education'],
         published: true, published_at: '2025-01-15', read_time: 8,
-        meta_title: '10 Best Free AI Tools for Indian Students in 2025 | AIBrainX',
-        meta_description: 'Top 10 free AI tools for Indian students. From ChatGPT to Photomath — discover tools for JEE, NEET, UPSC prep and college assignments.',
+        meta_title: '10 Best FREE AI Tools for Students in India (2026) – No Credit Card',
+        meta_description: 'Updated list of free AI tools Indian students can use for study, exams, coding, content writing & productivity. No credit card needed.',
         created_at: '2025-01-15', updated_at: '2025-01-15'
     },
     {

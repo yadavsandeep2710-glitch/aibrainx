@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import ToolCard from '@/components/ToolCard';
 import { tools, categories } from '@/lib/data';
 import styles from './page.module.css';
@@ -176,9 +177,31 @@ export default function ToolsPage() {
                     </div>
                 )}
 
-                {/* Ad Slot */}
                 <div className="ad-slot" style={{ marginTop: '3rem' }}>
                     Advertisement Space
+                </div>
+
+                {/* Internal Links for SEO */}
+                <div className={styles.internalLinksSection}>
+                    <h2 className={styles.internalLinksTitle}>Featured AI Tool Reviews & Guides</h2>
+                    <div className={styles.linksGrid}>
+                        <Link href="/tools/murf-ai" className={styles.internalLink}>
+                            <span className={styles.linkTitle}>Murf AI Review</span>
+                            <span className={styles.linkDesc}>Studio-quality voice synthesis in India</span>
+                        </Link>
+                        <Link href="/tools/chatgpt" className={styles.internalLink}>
+                            <span className={styles.linkTitle}>ChatGPT Guide</span>
+                            <span className={styles.linkDesc}>Master the world's most popular AI</span>
+                        </Link>
+                        <Link href="/tools/elevenlabs" className={styles.internalLink}>
+                            <span className={styles.linkTitle}>ElevenLabs Indian Pricing</span>
+                            <span className={styles.linkDesc}>Hyper-realistic voice cloning</span>
+                        </Link>
+                        <Link href="/tools/grammarly" className={styles.internalLink}>
+                            <span className={styles.linkTitle}>Grammarly AI Review</span>
+                            <span className={styles.linkDesc}>Best AI writing assistant for students</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

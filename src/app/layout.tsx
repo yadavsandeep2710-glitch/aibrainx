@@ -7,10 +7,10 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: {
-    default: 'AIBrainX.in — Discover the Best AI Tools for India',
+    default: 'Best AI Tools in India (2026) – Compare Pricing, Reviews & Use Cases',
     template: '%s | AIBrainX.in',
   },
-  description: 'India\'s #1 AI tools directory. Discover, compare, and find the perfect AI tools with pricing in ₹, reviews from Indian users, and daily AI insights.',
+  description: 'Discover the best AI tools in India for students, creators & businesses. Compare features, pricing in ₹, free tools & expert guides.',
   keywords: ['AI tools', 'artificial intelligence', 'India', 'AI tools directory', 'best AI tools', 'AI tools India', 'free AI tools'],
   authors: [{ name: 'AIBrainX Team' }],
   openGraph: {
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: 'https://aibrainx.in',
     siteName: 'AIBrainX.in',
-    title: 'AIBrainX.in — Discover the Best AI Tools for India',
-    description: 'India\'s #1 AI tools directory. Discover, compare, and find the perfect AI tools.',
+    title: 'Best AI Tools in India (2026) – Compare Pricing, Reviews & Use Cases',
+    description: 'Discover the best AI tools in India for students, creators & businesses. Compare features, pricing in ₹, free tools & expert guides.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AIBrainX.in — Discover the Best AI Tools for India',
-    description: 'India\'s #1 AI tools directory with pricing in ₹ and Indian user reviews.',
+    title: 'Best AI Tools in India (2026) – Compare Pricing, Reviews & Use Cases',
+    description: 'Discover the best AI tools in India for students, creators & businesses. Compare features, pricing in ₹, free tools & expert guides.',
   },
   robots: {
     index: true,

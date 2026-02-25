@@ -19,9 +19,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const tool = tools.find(t => t.slug === slug);
     if (!tool) return { title: 'Tool Not Found' };
     const year = 2026;
+
+    // Custom SEO overrides for specific tools
+    const customMeta: Record<string, { title: string; description: string }> = {
+        'murf-ai': {
+            title: `Murf AI Review & Pricing in India (${year}) – Best AI Voice Tool?`,
+            description: 'Explore Murf AI features, pricing in India, use cases, pros & cons and alternatives like ElevenLabs.',
+        },
+    };
+
+    const custom = customMeta[slug];
+    const title = custom?.title || `${tool.name} Review (${year}): Pricing in India, Pros & Cons & Verdict`;
+    const description = custom?.description || `${tool.name} ${year} Review: Get the latest honest verdict on ${tool.name}. Explore features, pricing in Indian Rupees (₹), and how it helps Indian users.`;
+
     return {
-        title: `${tool.name} Review (${year}): Pricing in India, Pros & Cons & Verdict`,
-        description: `${tool.name} ${year} Review: Get the latest honest verdict on ${tool.name}. Explore features, pricing in Indian Rupees (₹), and how it helps Indian users.`,
+        title,
+        description,
         openGraph: {
             title: `${tool.name} Review (${year}) | AIBrainX.in`,
             description: `Read our comprehensive ${year} review of ${tool.name} including India-specific pricing and features.`,

@@ -146,6 +146,101 @@ function HomeContent() {
         </div>
       </section>
 
+      {/* Popular AI Tools in India */}
+      <section className={`section ${styles.popularToolsSection}`}>
+        <div className="container">
+          <div className="section-header">
+            <h2>🔥 Popular AI Tools in India</h2>
+            <p>Top-rated AI tools used by Indian students, creators, and professionals</p>
+          </div>
+          <div className={styles.popularToolsGrid}>
+            {tools
+              .filter(t => t.status === 'approved' && t.rating >= 4.5)
+              .slice(0, 6)
+              .map(tool => (
+                <Link href={`/tools/${tool.slug}`} key={tool.id} className={styles.popularToolCard}>
+                  <div className={styles.popularToolInfo}>
+                    <h3>{tool.name}</h3>
+                    <span className={styles.popularToolRating}>⭐ {tool.rating}</span>
+                  </div>
+                  <p className={styles.popularToolTagline}>{tool.tagline}</p>
+                  <div className={styles.popularToolMeta}>
+                    <span className={styles.pricingBadge}>{tool.pricing}</span>
+                    {tool.pricing_details && (
+                      <span className={styles.pricingDetail}>{tool.pricing_details.split('.')[0]}</span>
+                    )}
+                  </div>
+                </Link>
+              ))}
+          </div>
+          <div className={styles.seeAllWrap}>
+            <Link href="/tools" className="btn btn-secondary btn-lg">
+              View All {tools.length}+ AI Tools →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Best Free AI Tools for Students */}
+      <section className={`section ${styles.studentCtaSection}`}>
+        <div className="container">
+          <div className={styles.studentCtaCard}>
+            <div className={styles.studentCtaContent}>
+              <span className={styles.studentCtaBadge}>🎓 For Students</span>
+              <h2>Best Free AI Tools for Students in India</h2>
+              <p>
+                From JEE & NEET prep to coding and content writing — discover AI tools
+                Indian students use daily. No credit card required.
+              </p>
+              <div className={styles.flexCenter}>
+                <Link href="/blog/10-best-free-ai-tools-students-india" className="btn btn-primary btn-lg">
+                  Read the Full Guide →
+                </Link>
+                <Link href="/ai-prompts/ai-prompts-for-students" className="btn btn-secondary btn-lg">
+                  AI Prompts for Students
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Latest AI Guides & Prompts */}
+      <section className={`section ${styles.guidesPromptsSection}`}>
+        <div className="container">
+          <div className="section-header">
+            <h2>📚 AI Guides & Prompt Library</h2>
+            <p>Expert guides and ready-to-use prompts for every use case</p>
+          </div>
+          <div className={styles.guidesPromptsGrid}>
+            <Link href="/ai-guides" className={styles.guideCard}>
+              <span className={styles.guideIcon}>🧠</span>
+              <div>
+                <h3>Premium AI Guides</h3>
+                <p>India-focused buying guides with pricing in ₹, step-by-step comparisons & expert picks.</p>
+              </div>
+              <span className={styles.guideArrow}>→</span>
+            </Link>
+            <Link href="/ai-prompts" className={styles.guideCard}>
+              <span className={styles.guideIcon}>💡</span>
+              <div>
+                <h3>Free AI Prompt Library</h3>
+                <p>30+ curated prompts for marketing, HR, content writing, students & Indian business.</p>
+              </div>
+              <span className={styles.guideArrow}>→</span>
+            </Link>
+            <Link href="/blog" className={styles.guideCard}>
+              <span className={styles.guideIcon}>📰</span>
+              <div>
+                <h3>AI Blog & Insights</h3>
+                <p>Daily AI news, tutorials, tool reviews & comparisons for the Indian audience.</p>
+              </div>
+              <span className={styles.guideArrow}>→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Tools */}
       <section className={`section ${styles.featuredSection}`}>
         <div className="container">

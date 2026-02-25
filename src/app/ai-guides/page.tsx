@@ -5,9 +5,9 @@ import styles from './page.module.css';
 import { products } from '@/data/products';
 
 export const metadata: Metadata = {
-    title: 'Premium AI Guides',
-    description: 'Choose the right AI tools without wasting money. India-focused, practical guides updated yearly.',
-    keywords: ['AI guides', 'AI tools India', 'AI buying guide', 'best AI tools', 'AI comparison'],
+    title: 'Premium AI Guides – Best AI Tools India (2026)',
+    description: 'Choose the right AI tools without wasting money. India-focused, practical guides updated yearly with pricing in ₹.',
+    keywords: ['AI guides', 'AI tools India', 'AI buying guide', 'best AI tools', 'AI comparison', 'best AI tools India 2026'],
 };
 
 export default function AIGuidesPage() {

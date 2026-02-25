@@ -15,6 +15,12 @@ export default function ToolCard({ tool }: ToolCardProps) {
         paid: 'badge-paid',
     };
 
+    const audienceBadges = {
+        students: tool.tags.some(tag => ['students', 'education', 'learning', 'beginner', 'research'].includes(tag.toLowerCase())),
+        creators: tool.tags.some(tag => ['writing', 'creative', 'content', 'video', 'audio', 'design', 'narration', 'social', 'art'].includes(tag.toLowerCase())),
+        businesses: tool.tags.some(tag => ['corporate', 'training', 'enterprise', 'business', 'marketing', 'productivity', 'deployment', 'ide'].includes(tag.toLowerCase())),
+    };
+
     return (
         <Link href={`/tools/${tool.slug}`} className={styles.card}>
             <div className={styles.cardTop}>
@@ -25,6 +31,12 @@ export default function ToolCard({ tool }: ToolCardProps) {
                     <span className={`badge ${pricingBadge[tool.pricing]}`}>{tool.pricing}</span>
                     {tool.featured && <span className="badge badge-featured">⭐ Featured</span>}
                 </div>
+            </div>
+
+            <div className={styles.audienceBadges}>
+                {audienceBadges.students && <span className={`${styles.audienceBadge} ${styles.badgeStudent}`}>🎓 Student</span>}
+                {audienceBadges.creators && <span className={`${styles.audienceBadge} ${styles.badgeCreator}`}>🎨 Creator</span>}
+                {audienceBadges.businesses && <span className={`${styles.audienceBadge} ${styles.badgeBusiness}`}>💼 Business</span>}
             </div>
 
             <h3 className={styles.cardTitle}>{tool.name}</h3>
